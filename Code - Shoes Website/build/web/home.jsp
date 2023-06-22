@@ -1,15 +1,11 @@
-<%-- 
-    Document   : dmm
-    Created on : Jun 20, 2023, 10:23:28 AM
-    Author     : nhatm
---%>
+<%-- Created on : Jun 22, 2023, 7:47:26 AM --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Shoes Homepage</title>
     </head>
     <body>
         <h1>Hello World!</h1>
