@@ -1,4 +1,4 @@
-use StudentManagementDB
+﻿use StudentManagementDB
 go
 
 drop table Student
@@ -11,6 +11,10 @@ create table Student(
 	[email] varchar(100)
 	CONSTRAINT PK_Student PRIMARY KEY ([ID]),
 )
+INSERT INTO Student([ID], [name], [gender], [mark], [email])
+VALUES
+  ('A123',N'Đức Duy','M',10,'duyduc@fpt.edu.vn')
+
 
 INSERT INTO Student([ID], [name], [gender], [mark], [email])
 VALUES
