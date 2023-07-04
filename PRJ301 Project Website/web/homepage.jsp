@@ -28,13 +28,8 @@
     </head>
 
     <body>
-        <!-- HEADER -->
         <%@include file="templates/header.jsp" %>
-        <!-- /HEADER -->
-
-        <!-- NAVIGATION -->
         <%@include file="templates/navigation.jsp" %>
-        <!-- /NAVIGATION -->
 
         <%
             ProductDAO proDAO = new ProductDAO();
@@ -99,11 +94,11 @@
         </div>
         <!-- /COLLECTION -->
 
-        <!-- SECTION TOP SELLING (>10sold) -->
+        <!-- TOP SELLING TAB -->
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <!-- /title -->
+                    <!-- Title -->
                     <div class="col-md-12">
                         <div class="section-title">
                             <h3 class="title">Top Selling</h3>
@@ -117,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /title -->
+                    <!-- /Title -->
 
                     <!-- Products tab & slick -->
                     <div class="col-md-12">
@@ -132,7 +127,6 @@
                                     </div>
                                     <div id="slick-nav-1" class="products-slick-nav"></div>
                                 </div>
-                                <!-- /Laptop Tab -->
                                 <!-- Smartphone Tab -->
                                 <div id="SmartphoneTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-2">
@@ -142,7 +136,6 @@
                                     </div>
                                     <div id="slick-nav-2" class="products-slick-nav"></div>
                                 </div>
-                                <!-- /Smartphone Tab -->
                                 <!-- Tablet Tab -->
                                 <div id="TabletTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-3">
@@ -152,7 +145,6 @@
                                     </div>
                                     <div id="slick-nav-3" class="products-slick-nav"></div>
                                 </div>
-                                <!-- /Tablet Tab -->
                                 <!-- Accessory Tab -->
                                 <div id="AccessoryTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-4">
@@ -162,17 +154,14 @@
                                     </div>
                                     <div id="slick-nav-4" class="products-slick-nav"></div>
                                 </div>
-                                <!-- /Accessory Tab -->
                             </div>
                         </div>
                     </div>
-                    <!-- Products tab & slick -->
+                    <!-- /Products tab & slick -->
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /container -->
         </div>
-        <!-- /SECTION TOP SELLING -->
+        <!-- /TOP SELLING TAB -->
 
         <!-- HOT DEAL SECTION -->
         <div id="hot-deal" class="section">
@@ -193,11 +182,11 @@
         </div>
         <!-- /HOT DEAL SECTION -->
 
-        <!-- SECTION TOP-SELLING-COLUMN-->
+        <!-- TOP-SELLING-COLUMN-->
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <!-- TOP LAPTOP SELLING COLUMN -->
+                    <!-- Laptop Column -->
                     <div class="col-md-4 col-xs-6">
                         <!--Title-->
                         <div class="section-title">
@@ -224,8 +213,7 @@
                         </div>
                         <!--Content-->
                     </div>
-                    <!-- /TOP LAPTOP SELLING COLUMN -->
-                    <!--TOP SMARTPHONE SELLING COLUMN-->
+                    <!-- Smartphone Column -->
                     <div class="col-md-4 col-xs-6">
                         <div class="section-title">
                             <h4 class="title">Top Smartphone selling</h4>
@@ -249,10 +237,10 @@
                             </c:if>
                         </div>
                     </div>
-                    <!--TOP SMARTPHONE SELLING COLUMN-->
+                    
                     <div class="clearfix visible-sm visible-xs"></div>
 
-                    <!--TOP TABLET SELLING COLUMN-->
+                    <!-- Tablet Column -->
                     <div class="col-md-4 col-xs-6">
                         <div class="section-title">
                             <h4 class="title">Top Tablet selling</h4>
@@ -276,11 +264,10 @@
                             </c:if>
                         </div>
                     </div>
-                    <!--TOP TABLET SELLING COLUMN-->
                 </div>
             </div>
         </div>
-        <!-- /SECTION TOP-SELLING-COLUMN -->
+         <!-- /TOP-SELLING-COLUMN -->
 
         <!-- NEWSLETTER -->
         <div id="newsletter" class="section">

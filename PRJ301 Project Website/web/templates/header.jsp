@@ -26,12 +26,12 @@
                 <!--Nếu chưa có session đăng nhập-->
                 <c:if test="${sessionScope['user']==null}">
                     <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Sign in</a></li>
-                    <li><a href="#"><i class="fas fa-user-plus"></i>Sign up</a></li>
+                    <li><a href="register.jsp"><i class="fas fa-user-plus"></i>Sign up</a></li>
                 </c:if>
                 <!--Nếu đã có session đăng nhập-->
                 <c:if test="${sessionScope['user']!=null}">
                     <li><a href="account.jsp"><i class="fas fa-user"></i>My Account</a></li>
-                    <li><a href="#"><i class="fas fa-sign-out-alt"></i>Sign out</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i>Sign out</a></li>
                 </c:if>
             </ul>
         </div>

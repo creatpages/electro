@@ -31,8 +31,10 @@ public class User_AccountDAO extends DBContext {
                 String Email = rs.getString("Email");
                 return new User_Account(ID, Username, Password, Role, Status, Phone, Email);
             }
+            ps.close();
+            rs.close();
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -33,14 +33,18 @@ public class ProductDAO extends DBContext {
                 Product temp = new Product(ID, Name, Description, Image, Price, Sold, category.getName());
                 list.add(temp);
             }
+            ps.close();
+            rs.close();
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
+    //Return list of product of a category has sold > numberTopSell
     public List<Product> getTopSellProducts(String categoryName) {
         List<Product> list = new ArrayList<>();
+        int numberTopSell = 5;
         try {
             String SQL = "select * from Product where cateID = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -55,17 +59,20 @@ public class ProductDAO extends DBContext {
                 String Image = rs.getString("Image");
                 String Price = calculatePrice(ID);
                 int Sold = rs.getInt("Sold");
-                if (Sold > 5) {
+                if (Sold > numberTopSell) {
                     Product temp = new Product(ID, Name, Description, Image, Price, Sold, category.getName());
                     list.add(temp);
                 }
+                ps.close();
+                rs.close();
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
+    //Return the price range of a product
     public String calculatePrice(int ProID) {
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         List<Double> prices = proDetailDAO.getPrices(ProID);
