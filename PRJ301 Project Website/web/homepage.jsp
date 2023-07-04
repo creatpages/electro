@@ -26,6 +26,7 @@
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
         <title>Home Page</title>
     </head>
+    
     <body>
         <!-- HEADER: Khi include thì chỉ lấy code bên trong body của file -->
         <%@include file="templates/header.jsp" %>
@@ -37,7 +38,6 @@
 
         <!-- COLLECTION -->
         <div class="section">
-            <!-- container -->
             <div class="container">
                 <div class="row">
                     <!-- banner1 -->
@@ -72,7 +72,7 @@
                     <div class="col-md-4 col-xs-6">
                         <div class="shop">
                             <div class="shop-img">
-                                <img src="templates/img/phone-banner.png" alt="Smartphones">
+                                <img src="templates/img/smartphone-banner.png" alt="Smartphones">
                             </div>
                             <div class="shop-body">
                                 <h3>Smartphones<br>Collection</h3>
@@ -83,7 +83,6 @@
                     <!-- /banner3 -->
                 </div>
             </div>
-            <!-- /container -->
         </div>
         <!-- /COLLECTION -->
 
@@ -108,6 +107,10 @@
                     </div>
                     <!-- /title -->
 
+                    <%
+                        
+                    %>
+                    
                     <!-- Products tab & slick -->
                     <div class="col-md-12">
                         <div class="row">

@@ -1,4 +1,4 @@
-<%-- Created on : Jul 2, 2023, 2:25:06 PM by DuyDuc94--%>
+<%-- Created on : Jul 4, 2023, 11:23:29 AM by DuyDuc94--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,7 +24,7 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Login</title>
+        <title>Wishlist</title>
     </head>
     <body>
         <%@include file="templates/header.jsp" %>
@@ -35,10 +35,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--<h3 class="breadcrumb-header">Login</h3>-->
+                        <!--<h3 class="breadcrumb-header">Wishlist</h3>-->
                         <ul class="breadcrumb-tree">
                             <li><a href="homepage.jsp">Home</a></li>
-                            <li class="active">Login</li>
+                            <li class="active">Account</li>
                         </ul>
                     </div>
                 </div>
@@ -50,21 +50,14 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <form action="login" method="post">
-                        Username: <input type="type" name="username" required>   <br>
-                        Password: <input type="password" name="password" required>
-                        <button type="submit">Login</button>
-                        <c:if test="${requestScope['message']!=null}">
-                            <p>${requestScope['message']}</p>
-                        </c:if>
-                    </form>
+
                 </div>
             </div>
         </div>
         <!-- /SECTION -->
-        
+
         <%@include file="templates/footer.jsp" %>
-        
+
         <!-- jQuery Plugins -->
         <script src="templates/js/jquery.min.js"></script>
         <script src="templates/js/bootstrap.min.js"></script>

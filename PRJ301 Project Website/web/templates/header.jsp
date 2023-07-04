@@ -1,6 +1,7 @@
 <%-- Created on : Jul 2, 2023, 10:29:31 AM  by DuyDuc94--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- HEADER -->
 <header>
@@ -23,11 +24,15 @@
                     </div>
                 </li>
                 <!--Nếu chưa có session đăng nhập-->
-                <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Sign in</a></li>
-                <li><a href="#"><i class="fas fa-user-plus"></i>Sign up</a></li>
+                <c:if test="${sessionScope['user']==null}">
+                    <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Sign in</a></li>
+                    <li><a href="#"><i class="fas fa-user-plus"></i>Sign up</a></li>
+                </c:if>
                 <!--Nếu đã có session đăng nhập-->
-                <li><a href="#"><i class="fas fa-user"></i>My Account</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i>Sign out</a></li>
+                <c:if test="${sessionScope['user']!=null}">
+                    <li><a href="account.jsp"><i class="fas fa-user"></i>My Account</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i>Sign out</a></li>
+                </c:if>
             </ul>
         </div>
     </div>

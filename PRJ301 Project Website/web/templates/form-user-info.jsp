@@ -3,8 +3,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-
-
 <div class="form-group">
     <input class="input" type="text" name="name" placeholder="${requestScope['name']!=null?requestScope['name']:'Full Name'}" required>
 </div>
