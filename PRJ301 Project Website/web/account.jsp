@@ -25,6 +25,18 @@
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
         <title>Wishlist</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td{
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+        </style>
+        
     </head>
     <body>
         <%@include file="templates/header.jsp" %>
@@ -49,10 +61,74 @@
         <!-- SECTION -->
         <div class="section">
             <div class="container">
-                <div class="row">
 
+                <div class="row">
+                    
+                    <!-- Account- -->
+                    <div class="user-account main-nav">
+                <h3>ACCOUNT INFORMATION</h3>
+                    <div class="account-info">
+                        <!-- username - password -->
+                        <i class="fa fa-pen fa-xs edit " style="color: black"></i>
+                        <div class="username-pass">
+                            
+                            <table>
+                                <div class="user">
+                                    <td><h4>Username: </h4></td>
+                                    <td style="font-weight: bold">khai day</td>
+                                </div>
+                                <div class="password">
+                                    <td><h4>Password:</h4> </td>
+                                    <td style="font-weight: bold">**********</td>
+                                </div>
+                            </table>
+                        </div>
+                        <!-- info -->
+                        <div class="info">
+                            <table class="profile">
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>:</td>
+                                        <td>Phan Van Khai</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>:</td>
+                                        <td>13435</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>:</td>
+                                        <td>Bali, Indonesia</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone number</td>
+                                        <td>:</td>
+                                        <td>0394573844</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>:</td>
+                                        <td>phankhai@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>:</td>
+                                        <td>Active</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                <div class="change-pass">
+                    <a href="url"><p style="font-size: medium">Change password<p></a>
+                        </div>
                 </div>
             </div>
+                </div>
         </div>
         <!-- /SECTION -->
 
