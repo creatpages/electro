@@ -1,6 +1,0 @@
-link example: https://app.creately.com/d/Du7TwZ9wP5d/edit
-
-Mỗi người mua hàng trên trang web sẽ có thể có tài khoản
-Tài khoản bao gồm Username và Password (password lưu trong database dưới dạng hash varchar(32) dùng MD5)
-Tài khoản user có quyền xem sản phẩm, tạo đơn hàng, huỷ đơn hàng
-Sẽ có 1 tài khoản của admin, admin có thêm quyền thêm sản phẩm vào database, xem danh sách đơn hàng, huỷ đơn hàng
