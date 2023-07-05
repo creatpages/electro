@@ -51,7 +51,7 @@
                 </c:if>
                 <c:if test="${user!=null}">
                     <li>
-                        <a href="account"><i class="fas fa-user"></i>${user.getUsername()}</a>
+                        <a href="view-account"><i class="fas fa-user"></i>${user.getUsername()}</a>
                     </li>
                     <li>
                         <a href="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>

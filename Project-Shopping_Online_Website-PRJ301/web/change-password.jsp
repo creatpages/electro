@@ -1,4 +1,4 @@
-<%-- Created on : Jul 5, 2023, 5:14:21 PM by DuyDuc94--%>
+<%-- Created on : Jul 4, 2023, 11:23:29 AM by DuyDuc94--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -40,7 +40,7 @@
             
             
         </style>
-
+        
     </head>
     <body>
         <%@include file="templates/header.jsp" %>
