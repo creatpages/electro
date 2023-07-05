@@ -1,9 +1,11 @@
+package controller;
+
 /*
  *     DuyDuc94
  */
 
-package controller;
 
+import dal.WishlistDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,13 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User_Account;
 
 /**
  *
  * @author duy20
  */
 //@WebServlet(name = "", urlPatterns = {""})
-public class LogoutServlet extends HttpServlet {
+public class RemoveWishlistServlet extends HttpServlet {
    
 
     //response.setContentType("text/html;charset=UTF-8");
@@ -25,20 +28,20 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        if (session.getAttribute("user") == null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("user", null);
-            response.sendRedirect("homepage");
-        }
+        //processRequest(request, response);
+        response.sendRedirect("homepage");
     } 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-
+        HttpSession session = request.getSession();
+        User_Account user = (User_Account) session.getAttribute("user");
+        WishlistDAO wishlistDAO = new WishlistDAO();
+        int proID = Integer.parseInt(request.getParameter("proID"));
+        wishlistDAO.removeWishlist(user.getID(), proID);
+        response.sendRedirect("wishlist");
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,12 +51,13 @@ public class LogoutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");  
+            out.println("<title>Servlet RemoveWishlistServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RemoveWishlistServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
+
 }

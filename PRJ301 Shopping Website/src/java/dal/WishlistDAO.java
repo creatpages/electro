@@ -57,4 +57,17 @@ public class WishlistDAO extends DBContext {
         }
         return false;
     }
+    
+    public void removeWishlist(int userID, int proID){
+        try {
+            String SQL = "delete from Wishlist where UserID = ? and ProID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, userID);
+            ps.setInt(2, proID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WishlistDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

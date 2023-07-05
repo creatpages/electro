@@ -170,7 +170,10 @@
                                     </div>
                                     <div class="view-to-cart">
                                         <button onclick="window.location.href = 'homepage.jsp'" class="view-product-button">View Product</button>  
-                                        <button onclick="#" class="remove-product-button">Remove Product</button>
+                                        <form action="remove-wishlist" method="post">
+                                            <input type="hidden" name="proID" value="${product.getID()}">
+                                            <button type="submit" class="remove-product-button">Remove Product</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

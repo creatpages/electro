@@ -43,15 +43,15 @@
                 </li>
                 <c:if test="${user==null}">
                     <li>
-                        <a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Login</a>
+                        <a href="login"><i class="fas fa-sign-in-alt"></i>Login</a>
                     </li>
                     <li>
-                        <a href="register.jsp"><i class="fas fa-user-plus"></i>Register</a>
+                        <a href="register"><i class="fas fa-user-plus"></i>Register</a>
                     </li>
                 </c:if>
                 <c:if test="${user!=null}">
                     <li>
-                        <a href="account.jsp"><i class="fas fa-user"></i>${user.getUsername()}</a>
+                        <a href="account"><i class="fas fa-user"></i>${user.getUsername()}</a>
                     </li>
                     <li>
                         <a href="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -81,7 +81,7 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action="" method="GET">
+                        <form action="search" method="GET">
                             <select name="type" class="input-select">
                                 <option value="all">All Categories</option>
                                 <option value="lt">Laptops</option>
@@ -101,7 +101,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="wishlist.jsp">
+                            <a href="wishlist">
                                 <i class="fas fa-heart"></i>
                                 <span>Your Wishlist</span>
                                 <c:if test="${numberOfWishList>0}">

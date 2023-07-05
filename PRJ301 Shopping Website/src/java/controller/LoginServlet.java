@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         if (session.getAttribute("user") == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("homepage.jsp").forward(request, response);
+            response.sendRedirect("homepage");
         }
     } 
 
@@ -44,8 +44,6 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         User_AccountDAO user_AccountDAO = new User_AccountDAO();
         User_Account user = user_AccountDAO.checkLogin(username, password);
-        System.out.println(username + " " + password);
-        System.out.println(user);
         if (user == null) {
             request.setAttribute("message", "Username or Password is Incorrect!<br>Try again!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -60,25 +58,8 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     session.setAttribute("admin", user);
                 }
-                request.getRequestDispatcher("homepage.jsp").forward(request, response);
+                response.sendRedirect("homepage");
             }
         }
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
 }

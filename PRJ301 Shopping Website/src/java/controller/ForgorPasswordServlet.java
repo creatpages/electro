@@ -30,7 +30,7 @@ public class ForgorPasswordServlet extends HttpServlet {
         if (session.getAttribute("user") == null) {
             request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("homepage.jsp").forward(request, response);
+            response.sendRedirect("homepage");
         }
     }
 
@@ -53,21 +53,4 @@ public class ForgorPasswordServlet extends HttpServlet {
             request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
         }
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ForgorPasswordServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ForgorPasswordServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
 }

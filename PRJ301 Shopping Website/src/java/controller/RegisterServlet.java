@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
         if (session.getAttribute("user") == null) {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("homepage.jsp").forward(request, response);
+            response.sendRedirect("homepage");
         }
     }
 
@@ -49,15 +49,11 @@ public class RegisterServlet extends HttpServlet {
         boolean canRegister = true;
         User_AccountDAO userDAO = new User_AccountDAO();
         
-        
-        
-        
         //Check legit of name
         if (!MyValidated.isLegitName(name)) {
             request.setAttribute("usernameMessage", "Username has exist!");
             canRegister = false;
         }
-
         //Check exist of username
         if (userDAO.search(username) != null) {
             request.setAttribute("usernameMessage", "Username has exist!");
@@ -68,30 +64,27 @@ public class RegisterServlet extends HttpServlet {
                 canRegister = false;
             }
         }
-        
         //Check phone
         if (!MyValidated.isLegitPhone(phone)) {
             request.setAttribute("phoneMessage", "Phone only contain number!");
             canRegister = false;
         }
-        
         //Check email
         if (!MyValidated.isLegitEmail(email)) {
             request.setAttribute("emailMessage", "Email is not valid!");
             canRegister = false;
         }
-        
         //Check confirm password
         if (password.compareTo(confirmPassword) != 0) {
             request.setAttribute("comfirmPasswordMessage", "Password not match!");
             canRegister = false;
         }
-
+        
         if (canRegister) {
             HttpSession session = request.getSession(true);
             User_Account newUser = userDAO.registerAccount(username, password, name, phone, email);
             session.setAttribute("user", newUser);
-            request.getRequestDispatcher("homepage.jsp").forward(request, response);
+            response.sendRedirect("homepage");
         }
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }

@@ -36,7 +36,7 @@ public class WishlistServlet extends HttpServlet {
         User_AccountDAO userDAO = new User_AccountDAO();
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("login");
         }
         int proID = Integer.parseInt(request.getParameter("proID"));
         WishlistDAO wishlistDAO = new WishlistDAO();
