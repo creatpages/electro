@@ -34,10 +34,14 @@ public class SearchServlet extends HttpServlet {
         List<Brand> listBrands = new ArrayList<>();
         List<Product> listProducts = new ArrayList<>();
         if (category != null) {
-            listProducts = proDAO.getProductsByCategory(category);
-            listBrands = brandDAO.getBrandsByCategory(category);
-            if (brand != null) {
-                listProducts = proDAO.getProductsByCategoryAndBrand(category, brand);
+            if (category.compareTo("All") != 0) {
+                listProducts = proDAO.getProductsByCategory(category);
+                listBrands = brandDAO.getBrandsByCategory(category);
+                if (brand != null) {
+                    listProducts = proDAO.getProductsByCategoryAndBrand(category, brand);
+                }
+            }else{
+                listProducts = proDAO.getAllProducts();
             }
         }
         request.setAttribute("categoryChecked", category);

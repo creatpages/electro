@@ -11,7 +11,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="homepage">Home</a></li>
-                <li><a href="view-store">Categories</a></li>
+                <li><a href="search?category=All">Categories</a></li>
                 <li><a href="search?category=Laptop">Laptops</a></li>
                 <li><a href="search?category=Smartphone">Smartphones</a></li>
                 <li><a href="search?category=Tablet">Tablets</a></li>

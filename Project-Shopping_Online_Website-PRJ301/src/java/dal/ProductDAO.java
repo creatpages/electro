@@ -12,15 +12,43 @@ import java.util.logging.Logger;
 import model.*;
 
 public class ProductDAO extends DBContext {
+    
+    public List<Product> getAllProducts() {
+        List<Product> list = new ArrayList<>();
+        try {
+            String SQL = "select * from Product";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String Name = rs.getString("Name");
+                String Description = rs.getString("Description");
+                String Image = rs.getString("Image");
+                String Price = calculatePrice(ID);
+                int Sold = rs.getInt("Sold");
+                int CateID = rs.getInt("CateID");
+                int BrandID = rs.getInt("BrandID");
+                Product temp = new Product(ID, Name, Description, Image, Price, Sold, BrandID, CateID);
+                list.add(temp);
+            }
+            ps.close();
+            rs.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     //Return all product of selected Category
     public List<Product> getProductsByCategory(String categoryName) {
         List<Product> list = new ArrayList<>();
         try {
-            String SQL = "select * from Product where cateID = ?";
+            String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.[Description], p.[Image], p.Sold from Product p\n"
+                    + "join Category c on p.CateID = c.ID\n"
+                    + "where c.Name = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            CategoryDAO cateDAO = new CategoryDAO();
-            ps.setInt(1, cateDAO.getID(categoryName));
+            ps.setString(1, categoryName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ID = rs.getInt("ID");
@@ -44,7 +72,6 @@ public class ProductDAO extends DBContext {
     }
 
     public Product getProductsByProID(int ID) {
-        CategoryDAO cateDAO = new CategoryDAO();
         try {
             String SQL = "select * from Product where ID = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -71,10 +98,11 @@ public class ProductDAO extends DBContext {
     public List<Product> getProductsByBrand(String brandName) {
         List<Product> list = new ArrayList<>();
         try {
-            String SQL = "select * from Product where BrandID = ?";
+            String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.[Description], p.[Image], p.Sold from Product p\n"
+                    + "join Brand b on p.BrandID = b.ID\n"
+                    + "where b.Name = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            BrandDAO brandDAO = new BrandDAO();
-            ps.setInt(1, brandDAO.getID(brandName));
+            ps.setString(1, brandName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ID = rs.getInt("ID");
