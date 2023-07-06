@@ -25,10 +25,11 @@ public class Product_DetailDAO extends DBContext {
             }
             ps.close();
             rs.close();
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return null;
     }
 
 }

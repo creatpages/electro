@@ -34,9 +34,10 @@ public class Category {
         this.Name = Name;
     }
     
-    public int getQuantity(String name){
+    public int getQuantity(){
         ProductDAO proDAO = new ProductDAO();
-        return proDAO.getProducts(name).size();
+        System.out.println(proDAO.getProductsByCategory(this.Name));
+        return proDAO.getProductsByCategory(this.Name).size();
     }
 
     @Override

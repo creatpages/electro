@@ -13,6 +13,42 @@ import model.*;
 
 public class CategoryDAO extends DBContext {
 
+    public String getName(int cateID) {
+        try {
+            String SQL = "select * from Category where ID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, cateID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String Name = rs.getString("Name");
+                ps.close();
+                rs.close();
+                return Name;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Unknown";
+    }
+
+    public int getID(String categoryName) {
+        try {
+            String SQL = "select * from Category where Name = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, categoryName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int ID = rs.getInt("ID");
+                ps.close();
+                rs.close();
+                return ID;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
     public List<Category> getCategories() {
         List<Category> list = new ArrayList<>();
         try {
@@ -24,10 +60,13 @@ public class CategoryDAO extends DBContext {
                 String Name = rs.getString("Name");
                 list.add(new Category(ID, Name));
             }
+            ps.close();
+            rs.close();
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list.isEmpty() ? null : list;
+        return null;
     }
 
     //Search Category with Name
@@ -40,10 +79,10 @@ public class CategoryDAO extends DBContext {
             if (rs.next()) {
                 int ID = rs.getInt("ID");
                 String Name = rs.getString("Name");
+                ps.close();
+                rs.close();
                 return new Category(ID, Name);
             }
-            ps.close();
-            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,13 +98,14 @@ public class CategoryDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String Name = rs.getString("Name");
+                ps.close();
+                rs.close();
                 return new Category(ID, Name);
             }
-            ps.close();
-            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+
 }

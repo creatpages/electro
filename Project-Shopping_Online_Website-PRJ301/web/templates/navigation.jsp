@@ -11,11 +11,11 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="store.jsp">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Tablets</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li><a href="view-store">Categories</a></li>
+                <li><a href="search?category=Laptop">Laptops</a></li>
+                <li><a href="search?category=Smartphone">Smartphones</a></li>
+                <li><a href="search?category=Tablet">Tablets</a></li>
+                <li><a href="search?category=Accessory">Accessories</a></li>
             </ul>
             <!-- /NAV -->
         </div>

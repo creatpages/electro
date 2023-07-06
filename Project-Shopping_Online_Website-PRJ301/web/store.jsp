@@ -37,6 +37,14 @@
         %>
 
         <c:set var="listCategories" value="<%=categories%>"/>
+        <c:set var="listBrands" value="${requestScope['listBrands']}" />
+        <c:set var="listProducts" value="${requestScope['listProducts']}" />
+
+        <c:if test="${listProducts!=null}">
+            <c:forEach var="product" items="${listProducts}">
+                <p>${product.getName()}</p>
+            </c:forEach>
+        </c:if>
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -44,7 +52,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="homepage">Home</a></li>
                             <li class="active">All Categories</li>
                         </ul>
                     </div>
@@ -60,141 +68,70 @@
                 <!-- row -->
                 <div class="row">
                     <!-- ASIDE -->
-                    <div id="aside" class="col-md-3">
-                        <!-- aside Widget -->
-                        <div class="aside">
-                            <h3 class="aside-title">Categories</h3>
-                            <div class="checkbox-filter">
-                                <c:forEach var="category" items="${listCategories}">
-                                    <div class="input-checkbox">
-                                        <input type="checkbox" id="${category.getName()}">
-                                        <label for="${category.getName()}">
-                                            <span></span>
-                                            ${category.getName()}
-                                            <small>(${category.getQuantity()})</small>
-                                        </label>
+                    <form action="search" method="get" id="search">
+                        <div id="aside" class="col-md-3">
+                            <!-- Aside-widget List Categories-->
+                            <div class="aside">
+                                <h3 class="aside-title">Categories</h3>
+                                <div class="checkbox-filter">
+                                    <c:set var="categoryChecked" value="${requestScope['categoryChecked']}" />
+                                    <c:forEach var="category" items="${listCategories}">
+                                        <div class="input-checkbox">
+                                            <input type="radio" name="category" value="${category.getName()}" id="${category.getID()}" onclick="window.location.href = 'search?category=${category.getName()}'" ${category.getName()==categoryChecked?'checked':''}>
+                                            <label for="${category.getID()}">
+                                                <span></span>
+                                                ${category.getName()}
+                                                <small>(${category.getQuantity()})</small>
+                                            </label>
+                                        </div>
+                                    </c:forEach>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Aside-widget List Categories-->
+
+                            <div class="aside">
+                                <h3 class="aside-title">Price</h3>
+                                <div class="price-filter">
+                                    <div id="price-slider"></div>
+                                    <div class="input-number price-min">
+                                        <input id="price-min" type="number">
+                                        <span class="qty-up">+</span>
+                                        <span class="qty-down">-</span>
                                     </div>
-                                </c:forEach>
+                                    <span>-</span>
+                                    <div class="input-number price-max">
+                                        <input id="price-max" type="number">
+                                        <span class="qty-up">+</span>
+                                        <span class="qty-down">-</span>
+                                    </div>
+                                </div>
                             </div>
+
+                            
+                            <c:set var="brandChecked" value="${requestScope['brandChecked']}" />
+                            <c:if test="${listBrands!=null}">
+                                <!-- Aside-widget List Brand-->
+                                <div class="aside">
+                                    <h3 class="aside-title">Brand</h3>
+                                    <c:forEach var="brand" items="${listBrands}">
+                                        <div class="checkbox-filter">
+                                            <div class="input-checkbox">
+                                                <input name="brand" value="${brand.getName()}" type="radio" id="${brand.getID()}" onchange="$('#search').submit();" ${brand.getName()==brandChecked?'checked':''}>
+                                                <label for="${brand.getID()}">
+                                                    <span></span>
+                                                    ${brand.getName()}
+                                                    <small>(${brand.getQuantity()})</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <!-- Aside-widget List Brand-->
+                            </c:if>
                         </div>
-                        <!-- /aside Widget -->
-
-                        <!-- aside Widget -->
-                        <div class="aside">
-                            <h3 class="aside-title">Price</h3>
-                            <div class="price-filter">
-                                <div id="price-slider"></div>
-                                <div class="input-number price-min">
-                                    <input id="price-min" type="number">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                                <span>-</span>
-                                <div class="input-number price-max">
-                                    <input id="price-max" type="number">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /aside Widget -->
-
-                        <!-- aside Widget -->
-                        <div class="aside">
-                            <h3 class="aside-title">Brand</h3>
-                            <div class="checkbox-filter">
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
-                                        <span></span>
-                                        SAMSUNG
-                                        <small>(578)</small>
-                                    </label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-2">
-                                    <label for="brand-2">
-                                        <span></span>
-                                        LG
-                                        <small>(125)</small>
-                                    </label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-3">
-                                    <label for="brand-3">
-                                        <span></span>
-                                        SONY
-                                        <small>(755)</small>
-                                    </label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-4">
-                                    <label for="brand-4">
-                                        <span></span>
-                                        SAMSUNG
-                                        <small>(578)</small>
-                                    </label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-5">
-                                    <label for="brand-5">
-                                        <span></span>
-                                        LG
-                                        <small>(125)</small>
-                                    </label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-                                        <span></span>
-                                        SONY
-                                        <small>(755)</small>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /aside Widget -->
-
-                        <!-- aside Widget -->
-                        <div class="aside">
-                            <h3 class="aside-title">Top selling</h3>
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product01.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product02.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product03.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /aside Widget -->
-                    </div>
+                    </form>
                     <!-- /ASIDE -->
-
                     <!-- STORE -->
                     <div id="store" class="col-md-9">
                         <!-- store top filter -->

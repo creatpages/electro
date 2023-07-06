@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import model.*;
 
 public class User_AccountDAO extends DBContext {
-    
+
     //Search user account by Username
     public User_Account search(String username) {
         try {
@@ -29,6 +29,8 @@ public class User_AccountDAO extends DBContext {
                 String Name = rs.getString("name");
                 String Phone = rs.getString("phone");
                 String Email = rs.getString("Email");
+                ps.close();
+                rs.close();
                 return new User_Account(ID, username, Password, Role, Status, Name, Phone, Email);
             }
         } catch (SQLException ex) {
@@ -52,6 +54,8 @@ public class User_AccountDAO extends DBContext {
                 String Name = rs.getString("name");
                 String Phone = rs.getString("phone");
                 String Email = rs.getString("Email");
+                ps.close();
+                rs.close();
                 return new User_Account(ID, Username, Password, Role, Status, Name, Phone, Email);
             }
         } catch (SQLException ex) {
@@ -68,6 +72,8 @@ public class User_AccountDAO extends DBContext {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                ps.close();
+                rs.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -90,6 +96,8 @@ public class User_AccountDAO extends DBContext {
                 String Name = rs.getString("name");
                 String Phone = rs.getString("phone");
                 String Email = rs.getString("Email");
+                ps.close();
+                rs.close();
                 return new User_Account(ID, username, password, Role, Status, Name, Phone, Email);
             }
             ps.close();
@@ -104,13 +112,14 @@ public class User_AccountDAO extends DBContext {
     public User_Account registerAccount(String username, String password, String name, String phone, String email) {
         try {
             String SQL = "insert into User_Account(username, password, name, phone, email)"
-                       + " values(?, ?, N'" + name + "', ?, ?)";
+                    + " values(?, ?, N'" + name + "', ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setString(3, phone);
             ps.setString(4, email);
             ps.executeUpdate();
+            ps.close();
             return search(username);
         } catch (SQLException ex) {
             Logger.getLogger(User_AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

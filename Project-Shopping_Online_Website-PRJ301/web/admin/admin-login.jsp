@@ -106,9 +106,7 @@ button{
                         <input type="password" required >
                         <label for="">Password</label>
                     </div>
-                    
-                    <button>Log in</button>
-                    
+                    <button type="submit">Log in</button>
                 </form>
             </div>
         </div>

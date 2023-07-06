@@ -3,6 +3,8 @@
  */
 package model;
 
+import dal.ProductDAO;
+
 public class Brand {
 
     private int ID;
@@ -30,6 +32,11 @@ public class Brand {
 
     public void setName(String Name) {
         this.Name = Name;
+    }
+    
+    public int getQuantity(){
+        ProductDAO proDAO = new ProductDAO();
+        return proDAO.getProductsByBrand(this.Name).size();
     }
 
     @Override

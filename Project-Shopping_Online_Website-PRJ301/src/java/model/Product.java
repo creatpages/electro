@@ -3,6 +3,9 @@
  */
 package model;
 
+import dal.BrandDAO;
+import dal.CategoryDAO;
+
 public class Product {
 
     private int ID;
@@ -11,19 +14,21 @@ public class Product {
     private String Image;
     private String Price;
     private int Sold;
-    private String CategoryName;
+    private int BrandID;
+    private int CateID;
 
     public Product() {
     }
-
-    public Product(int ID, String Name, String Description, String Image, String Price, int Sold, String CategoryName) {
+    
+    public Product(int ID, String Name, String Description, String Image, String Price, int Sold, int BrandID, int CateID) {
         this.ID = ID;
         this.Name = Name;
         this.Description = Description;
         this.Image = Image;
         this.Price = Price;
         this.Sold = Sold;
-        this.CategoryName = CategoryName;
+        this.BrandID = BrandID;
+        this.CateID = CateID;
     }
 
     public int getID() {
@@ -32,14 +37,6 @@ public class Product {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public String getCategoryName() {
-        return CategoryName;
-    }
-
-    public void setCategoryName(String CategoryName) {
-        this.CategoryName = CategoryName;
     }
 
     public String getName() {
@@ -82,6 +79,32 @@ public class Product {
         this.Sold = Sold;
     }
 
+    public int getBrandID() {
+        return BrandID;
+    }
+
+    public void setBrandID(int BrandID) {
+        this.BrandID = BrandID;
+    }
+
+    public int getCateID() {
+        return CateID;
+    }
+
+    public void setCateID(int CateID) {
+        this.CateID = CateID;
+    }
+    
+    public String getBrandName() {
+        BrandDAO brandDAO = new BrandDAO();
+        return brandDAO.getName(this.BrandID);
+    }
+    
+    public String getCategoryName() {
+        CategoryDAO categoryDAO = new CategoryDAO();
+        return categoryDAO.getName(this.BrandID);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -92,9 +115,13 @@ public class Product {
         sb.append(", Image=").append(Image);
         sb.append(", Price=").append(Price);
         sb.append(", Sold=").append(Sold);
-        sb.append(", CategoryName=").append(CategoryName);
+        sb.append(", BrandID=").append(BrandID);
+        sb.append(", CateID=").append(CateID);
         sb.append('}');
         return sb.toString();
     }
-
+    
+    
+    
+    
 }

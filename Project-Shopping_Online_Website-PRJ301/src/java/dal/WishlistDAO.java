@@ -24,12 +24,15 @@ public class WishlistDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ProID = rs.getInt("ProID");
-                list.add(proDAO.getProducts(ProID));
+                list.add(proDAO.getProductsByProID(ProID));
             }
+            ps.close();
+            rs.close();
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(User_AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list.isEmpty() ? null : list;
+        return null;
     }
 
     //True if add to wishlist success
@@ -42,6 +45,8 @@ public class WishlistDAO extends DBContext {
             ps.setInt(2, proID);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                ps.close();
+                rs.close();
                 return false;
             } else {
                 //Add wishlist to database
@@ -50,6 +55,8 @@ public class WishlistDAO extends DBContext {
                 ps.setInt(1, userID);
                 ps.setInt(2, proID);
                 ps.executeUpdate();
+                ps.close();
+                rs.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -57,17 +64,18 @@ public class WishlistDAO extends DBContext {
         }
         return false;
     }
-    
-    public void removeWishlist(int userID, int proID){
+
+    public void removeWishlist(int userID, int proID) {
         try {
             String SQL = "delete from Wishlist where UserID = ? and ProID = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, userID);
             ps.setInt(2, proID);
             ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(WishlistDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }
