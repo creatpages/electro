@@ -221,12 +221,13 @@ public class ProductDAO extends DBContext {
     //Return list of product of a category has sold > numberTopSell
     public List<Product> getTopSellProducts(String categoryName) {
         List<Product> list = new ArrayList<>();
-        int numberTopSell = 1;
+        int numberTopSell = 5;
         try {
-            String SQL = "select * from Product where cateID = ?";
+            String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.Description, p.Image, p.Sold from Product p\n"
+                    + "join Category c on p.CateID = c.ID\n"
+                    + "where c.Name = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            CategoryDAO cateDAO = new CategoryDAO();
-            ps.setInt(1, cateDAO.getID(categoryName));
+            ps.setString(1, categoryName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ID = rs.getInt("ID");
@@ -257,7 +258,11 @@ public class ProductDAO extends DBContext {
         List<Double> prices = proDetailDAO.getPrices(ProID);
         if (!prices.isEmpty()) {
             Collections.sort(prices);
-            return prices.get(0) + "-" + prices.get(prices.size() - 1);
+            if (prices.get(0) == prices.get(prices.size() - 1)) {
+                return prices.get(0) + "";
+            } else {
+                return prices.get(0) + "-" + prices.get(prices.size() - 1);
+            }
         }
         return "Unknown";
     }
