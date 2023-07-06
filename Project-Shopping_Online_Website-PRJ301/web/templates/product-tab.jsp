@@ -26,7 +26,7 @@
         <!--Add to wishlist-->
     </div>
     <!--View product-->
-    <form action="#" method="get">
+    <form action="view-product" method="get">
         <div class="add-to-cart">
             <input type="hidden" name="proID" value="${product.getID()}">
             <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>View product</button>

@@ -102,7 +102,7 @@ public class Product {
     
     public String getCategoryName() {
         CategoryDAO categoryDAO = new CategoryDAO();
-        return categoryDAO.getName(this.BrandID);
+        return categoryDAO.getName(this.CateID);
     }
 
     @Override

@@ -56,7 +56,7 @@
                             </div>
                             <div class="shop-body">
                                 <h3>Laptop<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="search?category=Laptop" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="shop-body">
                                 <h3>Accessories<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="search?category=Accessory" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="shop-body">
                                 <h3>Smartphones<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="search?category=Smartphone" class="cta-btn">Shop now <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                             <p>At FPT University</p>
                             <p>On 20/7</p>
                             <p>Welcome</p>
-                            <a class="primary-btn cta-btn" href="#">Shop now</a>
+                            <a class="primary-btn cta-btn" href="search?category=All">Shop now</a>
                         </div>
                     </div>
                 </div>

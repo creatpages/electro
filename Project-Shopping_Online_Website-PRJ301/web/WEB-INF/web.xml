@@ -32,6 +32,10 @@
         <servlet-name>ViewAccountServlet</servlet-name>
         <servlet-class>controller.ViewAccountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProductServlet</servlet-name>
+        <servlet-class>controller.ViewProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ViewAccountServlet</servlet-name>
         <url-pattern>/view-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProductServlet</servlet-name>
+        <url-pattern>/view-product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

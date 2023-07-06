@@ -25,10 +25,10 @@
                     <div class="footer">
                         <h3 class="footer-title">Categories</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Smartphones</a></li>
-                            <li><a href="#">Tablets</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li><a href="search?category=Laptop">Laptops</a></li>
+                            <li><a href="search?category=Smartphone">Smartphones</a></li>
+                            <li><a href="search?category=Tablet">Tablets</a></li>
+                            <li><a href="search?category=Accessory">Accessories</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         <ul class="footer-links">
                             <li><a href="#">My Account</a></li>
                             <li><a href="#">View Cart</a></li>
-                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="wishlist">Wishlist</a></li>
                             <li><a href="#">Track My Order</a></li>
                             <li><a href="#">Help</a></li>
                         </ul>

@@ -46,7 +46,7 @@ public class WishlistServlet extends HttpServlet {
             request.getRequestDispatcher("wishlist.jsp").forward(request, response);
         } else {
             //Message that add to wishlist failed
-            request.getRequestDispatcher("homepage").forward(request, response);
+            response.sendRedirect("homepage");
         }
     }
 }

@@ -29,7 +29,6 @@
 
     <body>
         <%@include file="templates/header.jsp" %>
-        <%--<%@include file="templates/navigation.jsp" %>--%>
 
         <%
             CategoryDAO cateDAO = new CategoryDAO();
@@ -51,9 +50,11 @@
                         <ul class="breadcrumb-tree">
                             <h3 class="breadcrumb-header">Store</h3>
                             <li class="active"><a href="homepage">Home</a></li>
-                            <li><a href="view-store">All Categories</a></li>
+                                <c:if test="${categoryChecked!='All'}">
+                                    <li><a href="search?category=All">All Categories</a></li>
+                                </c:if>
                                 <c:if test="${categoryChecked!=null}">
-                                <li><a href="search?category=${categoryChecked}">${categoryChecked}</a></li>
+                                    <li><a href="search?category=${categoryChecked}">${categoryChecked}</a></li>
                                 </c:if>
                                 <c:if test="${brandChecked!=null}">
                                 <li class="active"><a href="#">${brandChecked}</a></li>
@@ -121,8 +122,8 @@
                                     <c:forEach var="brand" items="${listBrands}">
                                         <div class="checkbox-filter">
                                             <div class="input-checkbox">
-                                                <input name="brand" value="${brand.getName()}" type="radio" id="${brand.getID()}" onchange="$('#search').submit();" ${brand.getName()==brandChecked?'checked':''}>
-                                                <label for="${brand.getID()}">
+                                                <input name="brand" value="${brand.getName()}" type="radio" id="${brand.getName()}" onchange="$('#search').submit();" ${brand.getName()==brandChecked?'checked':''}>
+                                                <label for="${brand.getName()}">
                                                     <span></span>
                                                     ${brand.getName()}
                                                     <small>(${brand.getQuantity()})</small>
@@ -167,7 +168,9 @@
 
                         <!-- store products -->
                         <div class="row">
-                            <p class="text-center">${listProducts.size()} Products found</p>
+                            <c:if test="${listProducts.size()==0}">
+                                <p class="text-center" style="color: red">No products found</p>
+                            </c:if>
                             <!-- product -->
                             <c:forEach var="product" items="${listProducts}">
                                 <div class="col-md-4 col-xs-6">
@@ -181,16 +184,18 @@
                         <!-- /store products -->
 
                         <!-- store bottom filter -->
-                        <div class="store-filter clearfix">
-                            <!--<span class="store-qty">Showing ?-? products</span>-->
-                            <ul class="store-pagination">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
+                        <c:if test="${listProducts.size()>0}">
+                            <div class="store-filter clearfix">
+                                <span class="store-qty">Showing ${listProducts.size()} products</span>
+                                <ul class="store-pagination">
+                                    <li class="active">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </c:if>
                         <!-- /store bottom filter -->
                     </div>
                     <!-- /STORE -->
