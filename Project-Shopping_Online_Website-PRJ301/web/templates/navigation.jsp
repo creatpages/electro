@@ -10,7 +10,7 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="homepage">Home</a></li>
                 <li><a href="view-store">Categories</a></li>
                 <li><a href="search?category=Laptop">Laptops</a></li>
                 <li><a href="search?category=Smartphone">Smartphones</a></li>
