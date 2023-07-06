@@ -34,10 +34,10 @@ public class WishlistServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session = request.getSession(true);
-        User_AccountDAO userDAO = new User_AccountDAO();
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
             response.sendRedirect("login");
+            return;
         }
         int proID = Integer.parseInt(request.getParameter("proID"));
         WishlistDAO wishlistDAO = new WishlistDAO();
