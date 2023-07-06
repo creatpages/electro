@@ -253,12 +253,12 @@ public class ProductDAO extends DBContext {
     }
 
     //Return the price range of a product
-    public String calculatePrice(int ProID) {
+    public String calculatePrice(int proID) {
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
-        List<Double> prices = proDetailDAO.getPrices(ProID);
+        List<Double> prices = proDetailDAO.getPrices(proID);
         if (!prices.isEmpty()) {
             Collections.sort(prices);
-            if (prices.get(0) == prices.get(prices.size() - 1)) {
+            if (prices.get(0).compareTo(prices.get(prices.size() - 1)) == 0) {
                 return prices.get(0) + "";
             } else {
                 return prices.get(0) + "-" + prices.get(prices.size() - 1);
