@@ -167,6 +167,7 @@
 
                         <!-- store products -->
                         <div class="row">
+                            <p class="text-center">${listProducts.size()} Products found</p>
                             <!-- product -->
                             <c:forEach var="product" items="${listProducts}">
                                 <div class="col-md-4 col-xs-6">

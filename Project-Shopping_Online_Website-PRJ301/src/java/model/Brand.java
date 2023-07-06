@@ -36,7 +36,7 @@ public class Brand {
     
     public int getQuantity(){
         ProductDAO proDAO = new ProductDAO();
-        return proDAO.getProductsByBrand(this.Name).size();
+        return proDAO.getListProOfBrand(this.Name).size();
     }
 
     @Override

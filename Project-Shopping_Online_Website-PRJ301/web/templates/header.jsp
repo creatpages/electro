@@ -82,14 +82,14 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form action="search" method="GET">
-                            <select name="type" class="input-select">
-                                <option value="all">All Categories</option>
-                                <option value="lt">Laptops</option>
-                                <option value="sp">Smartphones</option>
-                                <option value="tb">Tablets</option>
-                                <option value="as">Accessories</option>
+                            <select name="category" class="input-select">
+                                <option value="All">All Categories</option>
+                                <option value="Laptop">Laptops</option>
+                                <option value="Smartphone">Smartphones</option>
+                                <option value="Tablet">Tablets</option>
+                                <option value="Accessory">Accessories</option>
                             </select>
-                            <input name="info" class="input" placeholder="Search here">
+                            <input name="info" class="input" placeholder="${param.info==null?'Search here':param.info}">
                             <button type="submit" class="search-btn"><i class="fas fa-search"></i>  Search</button>
                         </form>
                     </div>

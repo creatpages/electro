@@ -24,7 +24,7 @@ public class WishlistDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int ProID = rs.getInt("ProID");
-                list.add(proDAO.getProductsByProID(ProID));
+                list.add(proDAO.getProductsByID(ProID));
             }
             ps.close();
             rs.close();

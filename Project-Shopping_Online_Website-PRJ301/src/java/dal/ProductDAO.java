@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import model.*;
 
 public class ProductDAO extends DBContext {
-    
+
     public List<Product> getAllProducts() {
         List<Product> list = new ArrayList<>();
         try {
@@ -40,8 +40,70 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
+    public List<Product> search(String info) {
+        List<Product> list = new ArrayList<>();
+        try {
+            String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.Description, p.Image, p.Sold from Product p\n"
+                    + "join Brand b on p.BrandID = b.ID\n"
+                    + "where p.Name like ? or b.Name like ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, "%" + info + "%");
+            ps.setString(2, "%" + info + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String Name = rs.getString("Name");
+                String Description = rs.getString("Description");
+                String Image = rs.getString("Image");
+                String Price = calculatePrice(ID);
+                int Sold = rs.getInt("Sold");
+                int CateID = rs.getInt("CateID");
+                int BrandID = rs.getInt("BrandID");
+                Product temp = new Product(ID, Name, Description, Image, Price, Sold, BrandID, CateID);
+                list.add(temp);
+            }
+            ps.close();
+            rs.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<Product> searchProOfCate(String cateName, String info) {
+        List<Product> list = new ArrayList<>();
+        try {
+            String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.Description, p.Image, p.Sold from Product p\n"
+                    + "join Category c on p.CateID = c.ID\n"
+                    + "where p.Name like ? and c.Name = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, "%" + info + "%");
+            ps.setString(2, cateName);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String Name = rs.getString("Name");
+                String Description = rs.getString("Description");
+                String Image = rs.getString("Image");
+                String Price = calculatePrice(ID);
+                int Sold = rs.getInt("Sold");
+                int CateID = rs.getInt("CateID");
+                int BrandID = rs.getInt("BrandID");
+                Product temp = new Product(ID, Name, Description, Image, Price, Sold, BrandID, CateID);
+                list.add(temp);
+            }
+            ps.close();
+            rs.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     //Return all product of selected Category
-    public List<Product> getProductsByCategory(String categoryName) {
+    public List<Product> getListProOfCate(String categoryName) {
         List<Product> list = new ArrayList<>();
         try {
             String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.[Description], p.[Image], p.Sold from Product p\n"
@@ -71,7 +133,7 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
-    public Product getProductsByProID(int ID) {
+    public Product getProductsByID(int ID) {
         try {
             String SQL = "select * from Product where ID = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -95,7 +157,7 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
-    public List<Product> getProductsByBrand(String brandName) {
+    public List<Product> getListProOfBrand(String brandName) {
         List<Product> list = new ArrayList<>();
         try {
             String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.[Description], p.[Image], p.Sold from Product p\n"
@@ -125,7 +187,7 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
-    public List<Product> getProductsByCategoryAndBrand(String categoryName, String brandName) {
+    public List<Product> getListProOfBrandInCate(String categoryName, String brandName) {
         List<Product> list = new ArrayList<>();
         try {
             String SQL = "select * from Product where cateID = ? and brandID = ?";

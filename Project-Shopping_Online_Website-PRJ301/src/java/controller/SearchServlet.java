@@ -35,13 +35,21 @@ public class SearchServlet extends HttpServlet {
         List<Product> listProducts = new ArrayList<>();
         if (category != null) {
             if (category.compareTo("All") != 0) {
-                listProducts = proDAO.getProductsByCategory(category);
-                listBrands = brandDAO.getBrandsByCategory(category);
-                if (brand != null) {
-                    listProducts = proDAO.getProductsByCategoryAndBrand(category, brand);
+                if (info == null) {
+                    listProducts = proDAO.getListProOfCate(category);
+                    listBrands = brandDAO.getBrandsByCategory(category);
+                    if (brand != null) {
+                        listProducts = proDAO.getListProOfBrandInCate(category, brand);
+                    }
+                }else{
+                    listProducts = proDAO.searchProOfCate(category, info);
                 }
-            }else{
-                listProducts = proDAO.getAllProducts();
+            } else {
+                if (info == null) {
+                    listProducts = proDAO.getAllProducts();
+                } else {
+                    listProducts = proDAO.search(info);
+                }
             }
         }
         request.setAttribute("categoryChecked", category);

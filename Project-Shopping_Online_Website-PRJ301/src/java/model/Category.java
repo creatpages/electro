@@ -36,8 +36,8 @@ public class Category {
     
     public int getQuantity(){
         ProductDAO proDAO = new ProductDAO();
-        System.out.println(proDAO.getProductsByCategory(this.Name));
-        return proDAO.getProductsByCategory(this.Name).size();
+        System.out.println(proDAO.getListProOfCate(this.Name));
+        return proDAO.getListProOfCate(this.Name).size();
     }
 
     @Override
