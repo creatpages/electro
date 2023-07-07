@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.util.List;
+
 public class User_Account {
 
     private int ID;
@@ -90,6 +92,14 @@ public class User_Account {
 
     public void setEmail(String Email) {
         this.Email = Email;
+    }
+
+    public double getTotalPriceInCart(List<Cart_Item> list) {
+        double totalPriceInCart = 0;
+        for (Cart_Item cart_Item : list) {
+            totalPriceInCart += cart_Item.getPrice();
+        }
+        return totalPriceInCart;
     }
 
     @Override

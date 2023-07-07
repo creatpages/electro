@@ -39,7 +39,6 @@
         <c:set var="listRelatedProduct" value="${requestScope['listRelatedProduct']}"/>
 
         <c:set var="proDetail" value="${requestScope['proDetail']}"/>
-        <c:set var="quantityUserChoose" value="${requestScope['quantityUserChoose']}"/>
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -119,7 +118,7 @@
                                         </select>
                                     </form>
                                 </label>
-                                <p style="color: red">${requestScope['colorMessage']}</p>
+                                <p style="color: red; text-transform: capitalize">${requestScope['colorMessage']}</p>
                             </div>
                             <form action="add-to-cart" method="post">
                                 <input type="hidden" name="proID" value="${mainProduct.getID()}">
@@ -129,29 +128,42 @@
                                     <div class="qty-label">
                                         Qty
                                         <div class="input-number">
-                                            <input onchange="changPrice(this.value, ${proDetail.getPrice()})" name="quantity" type="number" value="${quantityUserChoose}" required>
+                                            <input onchange="changPrice(this.value, ${proDetail.getPrice()})" name="quantity" type="number" value="1" required>
                                             <span class="qty-up">+</span>
                                             <span class="qty-down">-</span>
                                         </div>
-                                        <p style="color: red; text-transform: lowercase">${requestScope['quantityMessage']}</p>
+                                        <p style="color: red; text-transform: capitalize">${requestScope['quantityMessage']}</p>
                                     </div>
                                     <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                 </div>
-                                <p style="color: red">${requestScope['addToCartMessage']}</p>
+                                <p style="color: red; text-transform: capitalize">${requestScope['addToCartMessage']}</p>
                             </form>
 
-                            <ul class="product-btns">
-                                <li>
-                                    <form action="wishlist" id="add-to-wishlist" method="post">
-                                        <input type="hidden" name="proID" value="${mainProduct.getID()}">
-                                        <a onclick="document.getElementById('add-to-wishlist').submit();"><i class="fa ${mainProduct.isInWishlist(user.getID())?'fa-heart':'fa-heart-o'}"></i> add to wishlist</a>
-                                    </form>
-                                </li>
-                            </ul>
 
-                            <ul class="product-links">
-                                <li>Category: <a href="search?category=${mainProduct.getCategoryName()}">${mainProduct.getCategoryName()}</a></li>
-                            </ul>
+                            <!--Add to wishlist-->
+                            <c:if test="${mainProduct.isInWishlist(user.getID())==true}">
+                                <form action="remove-wishlist" method="post" id="add-to-wishlist">
+                                    <input type="hidden" name="proID" value="${mainProduct.getID()}">
+                                </form>
+                                <ul class="product-btns">
+                                    <li>
+                                        <a onclick="document.getElementById('add-to-wishlist').submit();"><i class="fa fa-heart"></i> add to wishlist</a>
+                                    </li>
+                                </ul>
+                            </c:if>
+                            <!--Add to wishlist-->
+                            <!--Remove from wishlist-->
+                            <c:if test="${mainProduct.isInWishlist(user.getID())==false}">
+                                <form action="add-wishlist" method="post" id="add-to-wishlist">
+                                    <input type="hidden" name="proID" value="${mainProduct.getID()}">
+                                </form>
+                                <ul class="product-btns">
+                                    <li>
+                                        <a onclick="document.getElementById('add-to-wishlist').submit();"><i class="fa fa-heart-o"></i> add to wishlist</a>
+                                    </li>
+                                </ul>
+                            </c:if>
+                            <!--Remove from wishlist-->
                         </div>
                     </div>
                     <!-- /Product details -->
@@ -202,9 +214,7 @@
                     </div>
                     <!-- /product tab -->
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /container -->
         </div>
         <!-- /VIEW PRODUCT -->
 

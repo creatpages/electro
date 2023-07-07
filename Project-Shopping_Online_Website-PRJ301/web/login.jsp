@@ -151,14 +151,13 @@
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                             </div>
                             <p class="text-center" style="color: red;">${requestScope['message']}</p>
+                            <p>${requestScope['url-request']}</p>
+                            <input type="hidden" name="url-request" value="${requestScope['url-request']}">
                             <button type="submit" class="btn btn-primary">Login</button>
-                            <div class="social-login">
-                                <!--Underdeveloping-->
-                            </div>
-                            <div class="forgot-password">
-                                <a href="forgot-password.jsp">Forgot Password?</a>
-                            </div>
                         </form>
+                        <div class="forgot-password">
+                            <a href="forgot-password.jsp">Forgot Password?</a>
+                        </div>
                         <div class="register-link">
                             <p>Don't have an account? <a href="register.jsp">Register</a></p>
                         </div>

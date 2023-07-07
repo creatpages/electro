@@ -1,5 +1,5 @@
 /*
- *     DuyDuc94
+ * DuyDuc94
  */
 
 package controller;
@@ -15,21 +15,21 @@ import jakarta.servlet.http.HttpSession;
 /**
  * @author duy20
  */
+public class ViewCartServlet extends HttpServlet {
 
-public class LogoutServlet extends HttpServlet {
-   
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
-    
+    //PrintWriter out = response.getWriter();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        if (session.getAttribute("user") == null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("user", null);
-            response.sendRedirect(request.getHeader("referer"));
+        //processRequest(request, response);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")!=null){
+            request.getRequestDispatcher("view-cart.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("login");
         }
     } 
 
@@ -37,6 +37,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-
+        
     }
+
 }

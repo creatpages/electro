@@ -3,6 +3,7 @@
  */
 package model;
 
+import dal.CartDAO;
 import dal.Product_DetailDAO;
 
 public class Cart_Item {
@@ -59,9 +60,19 @@ public class Cart_Item {
         return proDetailDAO.getName(this.ProDetailID);
     }
     
+    public String getProductColor(){
+        Product_DetailDAO proDetailDAO = new Product_DetailDAO();
+        return proDetailDAO.getProductDetail(this.ProDetailID).getColor();
+    }
+    
     public double getPrice(){
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         return (double)this.Quantity * proDetailDAO.getProductDetail(ProDetailID).getPrice();
+    }
+    
+    public String getImage(){
+        CartDAO cartDAO = new CartDAO();
+        return cartDAO.getImage(this.ID);
     }
     
 }

@@ -9,11 +9,12 @@
     CartDAO cartDAO = new CartDAO();
     List<Product> wishlist = new ArrayList<>();
     List<Cart_Item> cart = new ArrayList<>();
-    double totalPriceInCart = 0.0;
+    double totalPriceInCart = 0.00;
     if (user != null) {
         //If the user is logged in, get infomation about wishlist and cart
         wishlist = wishlistDAO.getWishlist(user.getID());
         cart = cartDAO.getCart(user.getID());
+        totalPriceInCart = user.getTotalPriceInCart(cart);
     }
 %>
 
@@ -103,7 +104,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="wishlist">
+                            <a href="view-wishlist">
                                 <i class="fas fa-heart"></i>
                                 <span>Your Wishlist</span>
                                 <c:if test="${wishlist.size()>0}">
@@ -127,7 +128,7 @@
                                     <c:forEach var="cartItem" items="${cart}">
                                         <div class="product-widget">
                                             <div class="product-img">
-                                                <img src="templates/img/product01.png" alt="">
+                                                <img src="templates/img${cartItem.getImage()}" alt="${cartItem.getImage()}">
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a href="#">${cartItem.getProductName()}</a></h3>
@@ -142,7 +143,7 @@
                                     <h5>TOTAL: $${totalPriceInCart}</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#"><i class="fas fa-shopping-cart"></i>  View Cart</a>
+                                    <a href="view-cart"><i class="fas fa-shopping-cart"></i>  View Cart</a>
                                     <a href="checkout.jsp">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>

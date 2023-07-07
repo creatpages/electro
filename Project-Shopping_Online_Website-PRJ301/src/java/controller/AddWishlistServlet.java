@@ -1,7 +1,6 @@
 /*
  *     DuyDuc94
  */
-
 package controller;
 
 import dal.*;
@@ -17,12 +16,10 @@ import model.User_Account;
 /**
  * @author duy20
  */
-
 public class AddWishlistServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,14 +33,15 @@ public class AddWishlistServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
-            response.sendRedirect("login");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         int proID = Integer.parseInt(request.getParameter("proID"));
         WishlistDAO wishlistDAO = new WishlistDAO();
         boolean isAddToWishlist = wishlistDAO.addToWishlist(user.getID(), proID);
         if (isAddToWishlist) {
-            request.getRequestDispatcher("view-wishlist.jsp").forward(request, response);
+//            request.getRequestDispatcher("view-wishlist.jsp").forward(request, response);
+            response.sendRedirect(request.getHeader("referer"));
         } else {
             //Message that add to wishlist failed
             response.sendRedirect("homepage");

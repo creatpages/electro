@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
         User_Account user = user_AccountDAO.checkLogin(username, password);
         if (user == null) {
             request.setAttribute("message", "Username or Password is Incorrect!<br>Try again!");
+            request.setAttribute("url-request", (String)request.getParameter("url-request"));
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession(true);
@@ -57,7 +58,11 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     session.setAttribute("admin", user);
                 }
-                response.sendRedirect("homepage");
+                if(request.getParameter("url-request")!=null && !request.getParameter("url-request").isEmpty()){
+                    response.sendRedirect((String)request.getParameter("url-request"));
+                }else{
+                    response.sendRedirect("homepage");
+                }
             }
         }
     }

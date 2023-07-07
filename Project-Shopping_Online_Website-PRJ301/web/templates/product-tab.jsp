@@ -7,7 +7,6 @@
 <div class="product">
     <div class="product-img">
         <img src="templates/img${product.getImage()}" alt="">
-        <!--Sale or New-->
     </div>
     <div class="product-body">
         <p class="product-category">${product.getCategoryName()}</p>
@@ -17,15 +16,29 @@
             ${product.getSold()} SOLD
         </div>
         <!--Add to wishlist-->
-        <form action="wishlist" method="post">
-            <div class="product-btns">
-                <input type="hidden" name="proID" value="${product.getID()}">
-                <button type="submit" class="add-to-wishlist">
-                    <i class="fa ${product.isInWishlist(user.getID())?'fa-heart':'fa-heart-o'}"></i><span class="tooltipp">add to wishlist</span>
-                </button>
-            </div>
-        </form>
+        <c:if test="${product.isInWishlist(user.getID())==true}">
+            <form action="remove-wishlist" method="post">
+                <div class="product-btns">
+                    <input type="hidden" name="proID" value="${product.getID()}">
+                    <button type="submit" class="add-to-wishlist">
+                        <i class="fa fa-heart"></i><span class="tooltipp">add to wishlist</span>
+                    </button>
+                </div>
+            </form>
+        </c:if>
         <!--Add to wishlist-->
+        <!--Remove from wishlist-->
+        <c:if test="${product.isInWishlist(user.getID())==false}">
+            <form action="add-wishlist" method="post">
+                <div class="product-btns">
+                    <input type="hidden" name="proID" value="${product.getID()}">
+                    <button type="submit" class="add-to-wishlist">
+                        <i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                    </button>
+                </div>
+            </form>
+        </c:if>
+        <!--Remove from wishlist-->
     </div>
     <!--View product-->
     <form action="view-product" method="get">

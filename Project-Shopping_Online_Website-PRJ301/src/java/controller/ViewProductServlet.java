@@ -39,18 +39,11 @@ public class ViewProductServlet extends HttpServlet {
         if (color != null) {
             proDetail = proDetDAO.getColor(proID, color);
         }
-
-        String quantityString = request.getParameter("quantity");
-        int quantity = 1;
-        if (quantityString != null) {
-            quantity = Integer.parseInt(quantityString);
-        }
-
+        
         request.setAttribute("mainProduct", mainProduct);
         request.setAttribute("listProductDetail", listProductDetail);
         request.setAttribute("listRelatedProduct", listRelatedProduct);
         request.setAttribute("proDetail", proDetail);
-        request.setAttribute("quantityUserChoose", quantity);
         request.getRequestDispatcher("view-product.jsp").forward(request, response);
     }
 
@@ -68,13 +61,11 @@ public class ViewProductServlet extends HttpServlet {
         String color = (String) request.getAttribute("color");
         Product_Detail proDetail = proDetDAO.getColor(proID, color);
 
-        int quantity = (int) request.getAttribute("quantity");
 
         request.setAttribute("mainProduct", mainProduct);
         request.setAttribute("listProductDetail", listProductDetail);
         request.setAttribute("listRelatedProduct", listRelatedProduct);
         request.setAttribute("proDetail", proDetail);
-        request.setAttribute("quantityUserChoose", quantity);
         request.setAttribute("colorMessage", request.getAttribute("colorMessage"));
         request.setAttribute("quantityMessage", request.getAttribute("quantityMessage"));
         request.setAttribute("addToCartMessage", request.getAttribute("addToCartMessage"));

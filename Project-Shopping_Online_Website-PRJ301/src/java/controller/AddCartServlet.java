@@ -40,6 +40,7 @@ public class AddCartServlet extends HttpServlet {
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
             request.setAttribute("message", "Please login to add to cart");
+            request.setAttribute("url-request", request.getHeader("referer"));
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
@@ -65,23 +66,28 @@ public class AddCartServlet extends HttpServlet {
         String selectedColor = request.getParameter("color");
 
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        if (canAddToCart && quantity > proDetail.getQuantity()) {
-            request.setAttribute("quantityMessage", "We only have " + proDetail.getQuantity() + " products left");
+        if (quantity > 0) {
+            if (canAddToCart && quantity > proDetail.getQuantity()) {
+                request.setAttribute("quantityMessage", "We only have " + proDetail.getQuantity() + " products left");
+                canAddToCart = false;
+            }
+        } else {
+            request.setAttribute("quantityMessage", "Please choose quantity<br>greater than 0");
             canAddToCart = false;
         }
 
         if (canAddToCart) {
             if (cartDAO.isInCart(user.getID(), proDetailID)) {
-                request.setAttribute("addToCartMessage", "The product already exists in your cart");
-            } else {
-                cartDAO.addToCart(user.getID(), proDetailID, quantity);
-                request.setAttribute("addToCartMessage", "Add to cart successfully");
+                if (!cartDAO.canAddMore(user.getID(), proDetailID, quantity)) {
+                    request.setAttribute("quantityMessage", "There are " + cartDAO.getCartItem(user.getID(), proDetailID).getQuantity() + " products in your cart");
+                } else {
+                    cartDAO.addToCart(user.getID(), proDetailID, quantity);
+                    request.setAttribute("addToCartMessage", "Add to cart successfully");
+                }
             }
         }
-
         request.setAttribute("proID", proID);
         request.setAttribute("color", selectedColor);
-        request.setAttribute("quantity", quantity);
         dispatcher.forward(myRequest, response);
     }
 
