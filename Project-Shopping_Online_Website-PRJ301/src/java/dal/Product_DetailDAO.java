@@ -84,8 +84,8 @@ public class Product_DetailDAO extends DBContext {
     
     public String getName(int proDetailID) {
         try {
-            String SQL = "select p.Name from Product_Detail pdt"
-                    + "join Product p on pdt.ProID = p.ID"
+            String SQL = "select p.Name from Product_Detail pdt\n"
+                    + "join Product p on pdt.ProID = p.ID\n"
                     + "where pdt.ID=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, proDetailID);

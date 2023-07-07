@@ -107,7 +107,7 @@
                             <div class="product-options">
                                 <label>
                                     Color
-                                    <form action="#" method="get" id="getColor">
+                                    <form action="view-product" method="get" id="getColor">
                                         <input type="hidden" name="proID" value="${mainProduct.getID()}">
                                         <select onchange="getColor.submit()" style="text-transform: capitalize" name="color" class="input-select" required>
                                             <c:if test="${proDetail==null}">
@@ -119,11 +119,12 @@
                                         </select>
                                     </form>
                                 </label>
+                                <p style="color: red">${requestScope['colorMessage']}</p>
                             </div>
                             <form action="add-to-cart" method="post">
                                 <input type="hidden" name="proID" value="${mainProduct.getID()}">
                                 <input type="hidden" name="proDetailID" value="${proDetail.getID()}">
-                                <input type="hidden" name="color" value="${proDetail.getColor()}">
+                                <input type="hidden" name="color" value="${proDetail.getColor()==null?null:proDetail.getColor()}" required>
                                 <div class="add-to-cart">
                                     <div class="qty-label">
                                         Qty
@@ -132,10 +133,11 @@
                                             <span class="qty-up">+</span>
                                             <span class="qty-down">-</span>
                                         </div>
+                                        <p style="color: red; text-transform: lowercase">${requestScope['quantityMessage']}</p>
                                     </div>
                                     <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                 </div>
-                                <p style="color: red">${requestScope['message']}</p>
+                                <p style="color: red">${requestScope['addToCartMessage']}</p>
                             </form>
 
                             <ul class="product-btns">
@@ -171,7 +173,7 @@
                                 <div id="tab1" class="tab-pane fade in active">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>${product.getDescription()}</p>
+                                            <p>${mainProduct.getDescription()}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -150,7 +150,7 @@
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                             </div>
-                            <p class="text-center">${requestScope['message']}</p>
+                            <p class="text-center" style="color: red;">${requestScope['message']}</p>
                             <button type="submit" class="btn btn-primary">Login</button>
                             <div class="social-login">
                                 <!--Underdeveloping-->

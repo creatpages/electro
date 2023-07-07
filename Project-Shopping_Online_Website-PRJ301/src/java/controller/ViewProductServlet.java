@@ -47,7 +47,6 @@ public class ViewProductServlet extends HttpServlet {
         }
 
         request.setAttribute("mainProduct", mainProduct);
-        System.out.println(listProductDetail);
         request.setAttribute("listProductDetail", listProductDetail);
         request.setAttribute("listRelatedProduct", listRelatedProduct);
         request.setAttribute("proDetail", proDetail);
@@ -59,7 +58,27 @@ public class ViewProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        ProductDAO proDAO = new ProductDAO();
+        int proID =  (int) request.getAttribute("proID");
+        Product mainProduct = proDAO.getProductsByID(proID);
+        List<Product> listRelatedProduct = proDAO.getRelatedProduct(mainProduct.getBrandID());
+        Product_DetailDAO proDetDAO = new Product_DetailDAO();
+        List<Product_Detail> listProductDetail = proDetDAO.getListProduct(proID);
 
+        String color = (String) request.getAttribute("color");
+        Product_Detail proDetail = proDetDAO.getColor(proID, color);
+
+        int quantity = (int) request.getAttribute("quantity");
+
+        request.setAttribute("mainProduct", mainProduct);
+        request.setAttribute("listProductDetail", listProductDetail);
+        request.setAttribute("listRelatedProduct", listRelatedProduct);
+        request.setAttribute("proDetail", proDetail);
+        request.setAttribute("quantityUserChoose", quantity);
+        request.setAttribute("colorMessage", request.getAttribute("colorMessage"));
+        request.setAttribute("quantityMessage", request.getAttribute("quantityMessage"));
+        request.setAttribute("addToCartMessage", request.getAttribute("addToCartMessage"));
+        request.getRequestDispatcher("view-product.jsp").forward(request, response);
     }
 
 }

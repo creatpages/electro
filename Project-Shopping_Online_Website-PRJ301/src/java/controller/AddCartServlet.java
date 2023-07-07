@@ -5,6 +5,7 @@ package controller;
  */
 import dal.CartDAO;
 import dal.Product_DetailDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lib.MyHttpServletRequest;
 import model.Product_Detail;
 import model.User_Account;
 
@@ -36,59 +38,51 @@ public class AddCartServlet extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         User_Account user = (User_Account) session.getAttribute("user");
+        if (user == null) {
+            request.setAttribute("message", "Please login to add to cart");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view-product");
+        MyHttpServletRequest myRequest = new MyHttpServletRequest(request, "POST");
+
         int proID = Integer.parseInt(request.getParameter("proID"));
-        String color = request.getParameter("color");
-        int proDetailID = Integer.parseInt(request.getParameter("proDetailID")==null?"-1":request.getParameter("proDetailID"));
-        int quantity = Integer.parseInt(request.getParameter("quantity")==null?"-1":request.getParameter("quantity"));
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         CartDAO cartDAO = new CartDAO();
-        Product_Detail proDetail = proDetailDAO.getProductDetail(proDetailID);
-        String message = "";
-        if (user == null) {
-            request.setAttribute("message", color);
-            request.getRequestDispatcher("login").forward(request, response);
+        Product_Detail proDetail = new Product_Detail();
+        boolean canAddToCart = true;
+        int proDetailID = -1;
+        try {
+            proDetailID = Integer.parseInt(request.getParameter("proDetailID"));
+            proDetail = proDetailDAO.getProductDetail(proDetailID);
+        } catch (NumberFormatException e) {
         }
-        if (color == null) {
-            message += "Please select color!<br>";
+
+        if (proDetailID == -1) {
+            request.setAttribute("colorMessage", "Please select color!");
+            canAddToCart = false;
         }
-        if (quantity > proDetail.getQuantity()) {
-            message += "We only have " + proDetail.getQuantity() + " products left<br>";
+        String selectedColor = request.getParameter("color");
+
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        if (canAddToCart && quantity > proDetail.getQuantity()) {
+            request.setAttribute("quantityMessage", "We only have " + proDetail.getQuantity() + " products left");
+            canAddToCart = false;
         }
-        if(message.isEmpty()){
-            if(!cartDAO.isAddToCart(user.getID(), proDetailID)){
+
+        if (canAddToCart) {
+            if (cartDAO.isInCart(user.getID(), proDetailID)) {
+                request.setAttribute("addToCartMessage", "The product already exists in your cart");
+            } else {
                 cartDAO.addToCart(user.getID(), proDetailID, quantity);
-                message += "Add to cart successfully<br>";
-            }else{
-                message += "The product already exists in your cart<br>";
+                request.setAttribute("addToCartMessage", "Add to cart successfully");
             }
         }
+
         request.setAttribute("proID", proID);
-        request.setAttribute("color", color);
+        request.setAttribute("color", selectedColor);
         request.setAttribute("quantity", quantity);
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("view-product").forward(request, response);
+        dispatcher.forward(myRequest, response);
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddToCartServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddToCartServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

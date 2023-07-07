@@ -11,7 +11,7 @@
     </div>
     <div class="product-body">
         <p class="product-category">${product.getCategoryName()}</p>
-        <h3 class="product-name"><a href="#">${product.getName()}</a></h3>
+        <h3 class="product-name"><a href="view-product?proID=${product.getID()}">${product.getName()}</a></h3>
         <h4 class="product-price">$${product.getPrice()}</h4>
         <div class="text-center">
             ${product.getSold()} SOLD

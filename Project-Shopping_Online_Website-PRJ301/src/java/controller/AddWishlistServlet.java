@@ -26,7 +26,7 @@ public class AddWishlistServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("wishlist.jsp").forward(request, response);
+        request.getRequestDispatcher("view-wishlist.jsp").forward(request, response);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class AddWishlistServlet extends HttpServlet {
         WishlistDAO wishlistDAO = new WishlistDAO();
         boolean isAddToWishlist = wishlistDAO.addToWishlist(user.getID(), proID);
         if (isAddToWishlist) {
-            request.getRequestDispatcher("wishlist.jsp").forward(request, response);
+            request.getRequestDispatcher("view-wishlist.jsp").forward(request, response);
         } else {
             //Message that add to wishlist failed
             response.sendRedirect("homepage");

@@ -176,10 +176,10 @@
                                 <div class="col-md-4 col-xs-6">
                                     <%@include file="templates/product-tab.jsp" %>
                                 </div>
-                                <div class="clearfix visible-sm visible-xs"></div>
+                                <!--<div class="clearfix visible-sm visible-xs"></div>-->
                             </c:forEach>
                             <!-- /product -->
-                            <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
+                            <!--<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>-->
                         </div>
                         <!-- /store products -->
 

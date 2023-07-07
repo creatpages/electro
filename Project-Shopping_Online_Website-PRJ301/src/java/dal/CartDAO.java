@@ -55,7 +55,7 @@ public class CartDAO extends DBContext {
         return false;
     }
 
-    public boolean isAddToCart(int userID, int proDetailID) {
+    public boolean isInCart(int userID, int proDetailID) {
         try {
             String SQL = "select * from Cart_Item where UserID=? and ProDetailID=?";
             PreparedStatement ps = con.prepareStatement(SQL);

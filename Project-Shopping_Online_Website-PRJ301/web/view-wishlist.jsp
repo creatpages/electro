@@ -179,8 +179,8 @@
                             </div>
                         </c:forEach>
                     </c:if>
-                    <c:if test="${wishlist==null}">
-                        <p class="text-center">You haven't add wishlist produt</p>
+                    <c:if test="${wishlist.size()==0}">
+                        <p class="text-center">You haven't added the product to wishlist</p>
                     </c:if>
                 </c:if>
             </div>

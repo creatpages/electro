@@ -39,6 +39,6 @@ public class RemoveWishlistServlet extends HttpServlet {
         WishlistDAO wishlistDAO = new WishlistDAO();
         int proID = Integer.parseInt(request.getParameter("proID"));
         wishlistDAO.removeWishlist(user.getID(), proID);
-        response.sendRedirect("view-wishlist");
+        response.sendRedirect("wishlist");
     }
 }
