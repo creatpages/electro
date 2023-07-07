@@ -7,6 +7,7 @@ public class Product_Detail {
 
     private int ID;
     private int ProID;
+    private int BrandID;
     private int Quantity;
     private double Price;
     private String Image;
@@ -15,9 +16,10 @@ public class Product_Detail {
     public Product_Detail() {
     }
 
-    public Product_Detail(int ID, int ProID, int Quantity, double Price, String Image, String Color) {
+    public Product_Detail(int ID, int ProID, int BrandID, int Quantity, double Price, String Image, String Color) {
         this.ID = ID;
         this.ProID = ProID;
+        this.BrandID = BrandID;
         this.Quantity = Quantity;
         this.Price = Price;
         this.Image = Image;
@@ -38,6 +40,14 @@ public class Product_Detail {
 
     public void setProID(int ProID) {
         this.ProID = ProID;
+    }
+
+    public int getBrandID() {
+        return BrandID;
+    }
+
+    public void setBrandID(int BrandID) {
+        this.BrandID = BrandID;
     }
 
     public int getQuantity() {
@@ -78,6 +88,7 @@ public class Product_Detail {
         sb.append("Product_Detail{");
         sb.append("ID=").append(ID);
         sb.append(", ProID=").append(ProID);
+        sb.append(", BrandID=").append(BrandID);
         sb.append(", Quantity=").append(Quantity);
         sb.append(", Price=").append(Price);
         sb.append(", Image=").append(Image);

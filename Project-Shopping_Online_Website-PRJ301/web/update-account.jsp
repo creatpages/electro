@@ -66,37 +66,58 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="change-pass">
-                        <div class="changepass-titles">
+                    <div class="update-info">
+                        <div class="update-titles">
                             <p style="color: #15161D; text-align: left; font-weight: 700; font-family: inherit; font-size: 24px">
-                                CHANGE PASSWORD
+                                UPDATE INFOMATION
                             </p>
                         </div>
-                        <div class="changepass-table">
+                        <div class="update-table">
                             <table>
-                                <tr>
-                                    <td>Your password </td>
-                                    <td >:</td>
-                                    <td><input type="password" name="oldPassword" placeholder="Old password"></td>
-                                </tr>
-                                <tr>
-                                    <td>New password </td>
-                                    <td >:</td>
-                                    <td><input type="password" name="newPassword" placeholder="New password"></td>
-                                </tr>
-                                <tr>
-                                <td>Comfirm password </td>
-                                    <td >:</td>
-                                    <td><input type="password" name="comfirmPassword" placeholder="Comfirm password"></td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="name" placeholder="Your name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>:</td>
+                                        <td><input type="number" name="ID" placeholder="ID"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="address" placeholder="Your address"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone number</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="phonenumber" placeholder="Your phonenumber"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="email" placeholder="Your email"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="status" placeholder="Status"><td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="accept-change">
-                        <button type="button" class="accept" style="background: #2B2D42; height: 30px; width: 90px; margin-left: 470px;" name="acceptPass">
-                            <p style="color: #ddd; text-align: center">Change</p>
-                        </button>
+                    <div class="accept-button" >                       
+                            <button type="button" class="accept" style="background: #2B2D42; height: 30px; width: 90px; margin-left: 410px;" name="acceptPass">
+                                <p style="color: #ddd; text-align: center">Update</p>
+                            </button>
+                            <button type="button" class="accept" style="background: #2B2D42; height: 30px; width: 90px; margin-left: 20px;" name="cancelPass">
+                                <p style="color: #ddd; text-align: center">Cancel</p>
+                            </button>
                     </div>
+                    
                 </div>
             </div>
         </div>

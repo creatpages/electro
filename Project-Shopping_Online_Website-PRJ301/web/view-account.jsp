@@ -24,52 +24,13 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Account</title>
+        <title>Wishlist</title>
         <style>
-            .Account-info-container table{
-                max-width: 1000px;
-                margin: 0 auto;
-                margin-top: 10px;
-                margin-bottom: 50px;
-                background-color: #fff;
-                padding: 30px;
-                border-radius: 5px;
-                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                width: 800px;
-                height: 200px;
-            }
-            .Account-info-container .field{
-                max-width: 100%;
-                font-weight: 700;
-            }
-            .Account-info-container tr{
-                text-align: center;
-                margin-top: 20px;
-            }
-            .Account-info-container .option{
-                margin-top: 20px;
-            }
-            div.vertical-line{
-                width: 0px; /* Use only border style */
-                height: 100%;
-                float: left; 
-                border: 1px inset; /* This is default border style for <hr> tag */
-              }
-           
-              
-            .Account-info-container button{
-                        width: 25%;
-                        padding: 10px;
-                        background-color: #337ab7;
-                        border: 0;
-                        color: #fff;
-                        font-weight: bold;
-                        cursor: pointer;
-                }
-             
-            .Account-info-container .button{
-                  display: flex;
-                  flex-direction: row-reverse;
+
+            th, td{
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
             }
         </style>
         
@@ -100,86 +61,78 @@
 
                 <div class="row">
                     
-                    <!-- Options -->
-                    <div class="update-option-container col-md-3">
-                        <form ><h3 style="font-size: 18px; margin-bottom: 30px">UPDATE OPTIONS</h3></form>
-                        <div class="input-checkbox">
-                            <br>
-                            <div class="option">
-                            <a href="view-account.jsp">
-                                + ACCOUNT INFORMATION
-                            </a>
-                            </div>
-                            <br>
-                            <div class="option">
-                            <a href="view-addressKhai.jsp">
-                                +  ADDRESS
-                            </a>  
-                            </div>
-                            <br>
-                            <div class="option">
-                            <a href="change-password.jsp">
-                                + CHANGE PASSWORD
-                            </a>
-                            </div>
+                    <!-- Account- -->
+                    <div class="user-account main-nav">
+                <h3>ACCOUNT INFORMATION</h3>
+                    <div class="account-info">
+                        <!-- username - password -->
+                        <div class="update-button">
+                            <button type="button" class="accept" style="background: #2B2D42; height: 30px; width: 40px; margin-left: 470px" name="update">
+                                <i class="fa fa-pen fa-xs edit" style="color: #ddd"></i>
+                             </button>
                         </div>
-                    </div>
-                    <div class="vertical-line" style="height:10cm;"></div>
-                    
-                    <!-- Account info- -->
-                    <div class="Account-info-container col-md-8">
-                        <div>
-                            <h3>ACOUNT INFORMATION</h3>
+                       
+                        <div class="username-pass">
+                            
+                            <table style="border-collapse: collapse; width: 100%">
+                                <div class="user">
+                                    <td><h4>Username: </h4></td>
+                                    <td style="font-weight: bold">khai day</td>
+                                </div>
+                                <div class="password">
+                                    <td><h4>Password:</h4> </td>
+                                    <td style="font-weight: bold">**********</td>
+                                </div>
+                            </table>
                         </div>
-                               
-                        <form action="action">
-                            <div class="account-info-tbn">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="field">Username</td>
-                                                <td>:</td>
-                                                <td class="info">Khaihy</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="field">Name</td>
-                                                <td>:</td>
-                                                <td class="info">khai</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="field">ID</td>
-                                                <td>:</td>
-                                                <td class="info">19284</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="field">Email</td>
-                                                <td>:</td>
-                                                <td class="info">khai@gmail.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="field">Phone</td>
-                                                <td>:</td>
-                                                <td class="info">Diving, Reading Book</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="field">Status</td>
-                                                <td>:</td>
-                                                <td class="info">Web Developer</td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="button">
-                                    <button class="update-contact-button" type="submit">
-                                        <a href="update-accountKhai.jsp" style="font-weight: bold; color:#fff ">UPDATE</a>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <!-- info -->
+                        <div class="info">
+                            <table class="profile"  style="border-collapse: collapse; width: 100%">
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>:</td>
+                                        <td>Phan Van Khai</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>:</td>
+                                        <td>242422</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>:</td>
+                                        <td>Dubai</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone number</td>
+                                        <td>:</td>
+                                        <td>03483985394</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>:</td>
+                                        <td>phankhai@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>:</td>
+                                        <td>Active<td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
+                <div class="change-pass" >
+                    <button type="button" class="accept" style="background: #2B2D42; height: 50px; width: 150px;" name="changePass">
+                    <a href="change-password.jsp" ><i style="border: 1px"><p style="font-size: medium; color: #ddd">Change password<p></i></a>
+                        </div>
+                    </button>
                 </div>
             </div>
+                </div>
         </div>
         <!-- /SECTION -->
 

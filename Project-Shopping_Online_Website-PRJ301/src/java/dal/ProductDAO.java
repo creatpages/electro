@@ -186,38 +186,6 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-    
-    public List<Product> getRelatedProduct(int brandID) {
-        List<Product> list = new ArrayList<>();
-        int numberRelated = 4;
-        try {
-            String SQL = "select * from Product where BrandID = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, brandID);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int ID = rs.getInt("ID");
-                String Name = rs.getString("Name");
-                String Description = rs.getString("Description");
-                String Image = rs.getString("Image");
-                String Price = calculatePrice(ID);
-                int Sold = rs.getInt("Sold");
-                int CateID = rs.getInt("CateID");
-                int BrandID = rs.getInt("BrandID");
-                Product temp = new Product(ID, Name, Description, Image, Price, Sold, BrandID, CateID);
-                list.add(temp);
-                if(list.size()==numberRelated){
-                    return list;
-                }
-            }
-            ps.close();
-            rs.close();
-            return list;
-        } catch (SQLException ex) {
-            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 
     public List<Product> getListProOfBrandInCate(String categoryName, String brandName) {
         List<Product> list = new ArrayList<>();
@@ -253,7 +221,7 @@ public class ProductDAO extends DBContext {
     //Return list of product of a category has sold > numberTopSell
     public List<Product> getTopSellProducts(String categoryName) {
         List<Product> list = new ArrayList<>();
-        int numberTopSell = 10;
+        int numberTopSell = 5;
         try {
             String SQL = "select p.ID, p.CateID, p.BrandID, p.Name, p.Description, p.Image, p.Sold from Product p\n"
                     + "join Category c on p.CateID = c.ID\n"

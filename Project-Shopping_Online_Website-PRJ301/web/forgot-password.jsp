@@ -64,13 +64,6 @@
             .error-messsage{
                 color: red;
             }
-            
-            div.vertical-line{
-                width: 0px; /* Use only border style */
-                height: 100%;
-                float: left; 
-                border: 1px inset; /* This is default border style for <hr> tag */
-              }
 
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -114,35 +107,9 @@
         <!-- SECTION -->
         <div class="container">
             <div class="row">
-                <!-- Options -->
-                    <div class="update-option-container col-md-3">
-                        <form ><h3 style="font-size: 18px; margin-bottom: 30px">UPDATE OPTIONS</h3></form>
-                        <div class="input-checkbox">
-                            <div class="option">
-                            <a href="view-account.jsp">
-                                + ACCOUNT INFORMATION
-                            </a>
-                            </div>
-                            <br>
-                            <div class="option">
-                            <a href="view-addressKhai.jsp">
-                                +  ADDRESS
-                            </a>  
-                            </div>
-                            <br>
-                            <div class="option">
-                            <a href="change-password.jsp">
-                                + CHANGE PASSWORD
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="vertical-line" style="height:10cm;"></div>
-                    
-                
-                <div class="forgotpass-form col-md-8 ">
+                <div class="col-md-4 col-md-offset-4">
                     <div class="forgot-password-container">
-                        <div class="reserpass-title"><h3>RESET PASSWORD</h3></div>
+                        <!--<h2 class="text-center">Forgot Password</h2>-->
                         <form action="forgot-password" method="post">
                             <div class="form-group">
                                 <label for="email">Email:</label>

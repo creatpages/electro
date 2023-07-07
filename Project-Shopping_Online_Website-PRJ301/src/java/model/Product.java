@@ -5,8 +5,6 @@ package model;
 
 import dal.BrandDAO;
 import dal.CategoryDAO;
-import dal.Product_DetailDAO;
-import java.util.List;
 
 public class Product {
 
@@ -107,16 +105,6 @@ public class Product {
         return categoryDAO.getName(this.CateID);
     }
 
-    public int getQuantity(){
-        Product_DetailDAO proDetailDAO = new Product_DetailDAO();
-        List<Product_Detail> list = proDetailDAO.getListProduct(this.ID);
-        int Quantity = 0;
-        for (Product_Detail product_Detail : list) {
-            Quantity += product_Detail.getQuantity();
-        }
-        return Quantity;
-    }
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
