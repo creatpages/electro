@@ -88,6 +88,21 @@
             font-size: 20px;
         }
         
+        .product-color {
+            margin-bottom: 10px;
+        }
+
+        .product-color label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .product-color select {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
         .product-card .add-to-cart {
             text-align: right;
         }
@@ -246,6 +261,14 @@
             <div class="product-info">
                 <div class="product-name">Ipad Pro 2021</div>
                 <div class="product-price">$1500</div>
+            <div class="product-color">
+                    <label for="product-color">Color:</label>
+                    <select id="product-color">
+                        <option value="black">Black</option>
+                        <option value="grey">Grey</option>
+                        <option value="white">White</option>
+                        </select>
+            </div>
             </div>
              <div class="add-to-cart">
                 <div class="product-quantity">
@@ -268,6 +291,14 @@
             <div class="product-info">
                 <div class="product-name">Airpod Max</div>
                 <div class="product-price">$800</div>
+            <div class="product-color">
+                    <label for="product-color">Color:</label>
+                    <select id="product-color">
+                        <option value="black">Black</option>
+                        <option value="grey">Grey</option>
+                        <option value="white">White</option>
+                        </select>
+            </div>
             </div>
              <div class="add-to-cart">
                 <div class="product-quantity">
