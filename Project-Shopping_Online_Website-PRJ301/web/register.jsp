@@ -93,7 +93,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--<h3 class="breadcrumb-header">Login</h3>-->
                         <ul class="breadcrumb-tree">
                             <li><a href="homepage.jsp">Home</a></li>
                             <li class="active">Register</li>
@@ -113,31 +112,31 @@
                         <form action="register" method="post">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="${param.name!=null?param.name:'Enter your name'}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="${param.name!=null?param.name:'Enter your name'}" required>
                             </div>
                             <div class="form-group">
                                 <label for="username">Username:</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter a username">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter a username" required>
                                 <p class="error-messsage">${requestScope['usernameMessage']}</p>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number:</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="${param.phone!=null?param.phone:'Enter your phone number'}">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="${param.phone!=null?param.phone:'Enter your phone number'}" required>
                                 <p class="error-messsage">${requestScope['phoneMessage']}</p>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="${param.email!=null?param.email:'Enter your email address'}">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="${param.email!=null?param.email:'Enter your email address'}" required>
                                 <p class="error-messsage">${requestScope['emailMessage']}</p>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password" required>
                                 <p class="error-messsage">${requestScope['passwordMessage']}</p>
                             </div>
                             <div class="form-group">
                                 <label for="confirm-password">Confirm Password:</label>
-                                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirm your password">
+                                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
                                 <p class="error-messsage">${requestScope['comfirmPasswordMessage']}</p>
                             </div>
                             <button type="submit" class="btn btn-primary">Register</button>

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Login</title>
         <style>
             body {
                 background-color: #f5f5f5;
@@ -114,7 +115,6 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Login</title>
     </head>
     <body>
         <%@include file="templates/header.jsp" %>
@@ -125,9 +125,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--<h3 class="breadcrumb-header">Login</h3>-->
                         <ul class="breadcrumb-tree">
-                            <li><a href="homepage.jsp">Home</a></li>
+                            <li><a href="homepage">Home</a></li>
                             <li class="active">Login</li>
                         </ul>
                     </div>
@@ -154,8 +153,7 @@
                             <p class="text-center">${requestScope['message']}</p>
                             <button type="submit" class="btn btn-primary">Login</button>
                             <div class="social-login">
-                                <button class="btn btn-default"><img src="https://fftweb.b-cdn.net/sites/default/files/styles/1of1_square_sm/public/field_card_image/google-logo.jpg?h=cd2a7045&itok=sW3rEgzb" alt="Gmail"></button>
-                                <button class="btn btn-default"><img src="https://th.bing.com/th/id/R.4073836f2fdb4bcd7ec76a1ff2f08886?rik=nSKRykqkPd%2bZ7g&pid=ImgRaw&r=0" alt="Facebook"></button>
+                                <!--Underdeveloping-->
                             </div>
                             <div class="forgot-password">
                                 <a href="forgot-password.jsp">Forgot Password?</a>

@@ -20,7 +20,9 @@
         <form action="wishlist" method="post">
             <div class="product-btns">
                 <input type="hidden" name="proID" value="${product.getID()}">
-                <button type="submit" class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                <button type="submit" class="add-to-wishlist">
+                    <i class="fa ${product.isInWishlist(user.getID())?'fa-heart':'fa-heart-o'}"></i><span class="tooltipp">add to wishlist</span>
+                </button>
             </div>
         </form>
         <!--Add to wishlist-->

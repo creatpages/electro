@@ -139,7 +139,7 @@
                     <div class="col-md-12">
                         <h3 class="breadcrumb-header">Wishlist</h3>
                         <ul class="breadcrumb-tree">
-                            <li><a href="homepage.jsp">Home</a></li>
+                            <li><a href="homepage">Home</a></li>
                             <li class="active">Your Wishlist</li>
                         </ul>
                     </div>
@@ -153,7 +153,7 @@
             <div class="container">
                 <c:if test="${user==null}">
                     <div class="text-center">
-                        <p><a href="login.jsp">Login</a> to see your wishlist</p>
+                        <p><a href="login">Login</a> to see your wishlist</p>
                     </div>
                 </c:if>
                 <c:if test="${user!=null}">
@@ -169,7 +169,7 @@
                                         <div class="product-price">$${product.getPrice()}</div>
                                     </div>
                                     <div class="view-to-cart">
-                                        <button onclick="window.location.href = 'homepage.jsp'" class="view-product-button">View Product</button>  
+                                        <button onclick="window.location.href = 'view-product?proID=${product.getID()}'" class="view-product-button">View Product</button>  
                                         <form action="remove-wishlist" method="post">
                                             <input type="hidden" name="proID" value="${product.getID()}">
                                             <button type="submit" class="remove-product-button">Remove Product</button>

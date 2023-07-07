@@ -6,31 +6,36 @@
 <%
     User_Account user = (User_Account) session.getAttribute("user");
     WishlistDAO wishlistDAO = new WishlistDAO();
+    CartDAO cartDAO = new CartDAO();
     List<Product> wishlist = new ArrayList<>();
-    int numberWishlist = 0;
+    List<Product> cart = new ArrayList<>();
     if (user != null) {
-        //If the user is logged in, get infomation about wishlist
+        //If the user is logged in, get infomation about wishlist and cart
         wishlist = wishlistDAO.getWishlist(user.getID());
-        if(wishlist != null){
-            numberWishlist = wishlist.size();
-        }
+        cart = cartDAO.getCart(user.getID());
     }
 %>
 
 <c:set var="user" value="<%=user%>"/>
-<c:set var="numberOfWishList" value="<%=numberWishlist%>"/>
 <c:set var="wishlist" value="<%=wishlist%>"/>
+<c:set var="cart" value="<%=wishlist%>"/>
+<c:set var="numberOfWishList" value="${wishlist.size()}"/>
+<c:set var="numberOfCart" value="${cart.size()}"/>
+
 
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
+            <!--Left-header-->
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fas fa-phone-alt"></i>+84 912 312 312</a></li>
                 <li><a href="mailto:duyduc.luonghuu@gmail.com"><i class="fas fa-paper-plane"></i></i>duyduc.luonghuu@gmail.com</a></li>
                 <li><a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227384,105.8163641,14z/data=!4m6!3m5!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598!16zL20vMGZuZmY?hl=vi-VN&entry=ttu" target="_blank"><i class="fas fa-map-marker-alt"></i></i>HaNoi, VietNam</a></li>
             </ul>
+            <!--Left-header-->
+            <!--Right-header-->
             <ul class="header-links pull-right">
                 <li>
                     <div class="dropdown">
@@ -58,15 +63,14 @@
                     </li>
                 </c:if>
             </ul>
+            <!--Right-header-->
         </div>
     </div>
     <!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->
     <div id="header">
-        <!-- container -->
         <div class="container">
-            <!-- row -->
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-md-3">
@@ -157,9 +161,7 @@
                 </div>
                 <!-- /ACCOUNT -->
             </div>
-            <!-- row -->
         </div>
-        <!-- container -->
     </div>
     <!-- /MAIN HEADER -->
 </header>

@@ -6,6 +6,7 @@ package model;
 import dal.BrandDAO;
 import dal.CategoryDAO;
 import dal.Product_DetailDAO;
+import dal.WishlistDAO;
 import java.util.List;
 
 public class Product {
@@ -21,7 +22,7 @@ public class Product {
 
     public Product() {
     }
-    
+
     public Product(int ID, String Name, String Description, String Image, String Price, int Sold, int BrandID, int CateID) {
         this.ID = ID;
         this.Name = Name;
@@ -96,18 +97,18 @@ public class Product {
     public void setCateID(int CateID) {
         this.CateID = CateID;
     }
-    
+
     public String getBrandName() {
         BrandDAO brandDAO = new BrandDAO();
         return brandDAO.getName(this.BrandID);
     }
-    
+
     public String getCategoryName() {
         CategoryDAO categoryDAO = new CategoryDAO();
         return categoryDAO.getName(this.CateID);
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         List<Product_Detail> list = proDetailDAO.getListProduct(this.ID);
         int Quantity = 0;
@@ -116,7 +117,22 @@ public class Product {
         }
         return Quantity;
     }
-    
+
+    public boolean isInWishlist(int userID) {
+        if (userID < 0) {
+            return false;
+        } else {
+            WishlistDAO wishlistDAO = new WishlistDAO();
+            List<Product> wishlist = wishlistDAO.getWishlist(userID);
+            for (Product productWishlist : wishlist) {
+                if(this.ID==productWishlist.getID()){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,8 +148,5 @@ public class Product {
         sb.append('}');
         return sb.toString();
     }
-    
-    
-    
-    
+
 }

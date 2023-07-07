@@ -142,7 +142,7 @@
                 
                 <div class="forgotpass-form col-md-8 ">
                     <div class="forgot-password-container">
-                        <div class="reserpass-title"><h3>RESET PASSWORD</h3></div>
+                        <div class="reserpass-title text-center"><h3>RESET PASSWORD</h3></div>
                         <form action="forgot-password" method="post">
                             <div class="form-group">
                                 <label for="email">Email:</label>
