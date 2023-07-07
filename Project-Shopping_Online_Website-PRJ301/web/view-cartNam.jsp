@@ -9,70 +9,90 @@
 <html>
     <head>
         <title>View Cart</title>
-    
-     <script>
         
-        function increaseQuantity(button) {
-            var input = button.parentNode.querySelector('.quantity-input');
-            var quantity = parseInt(inputvalue);
-            quantity += 1;
-            input.value = quantity;
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        // Add Quantity Button Click Handler
+        $(document).on('click', '.quantity-button', function () {
+            var input = $(this).siblings('.quantity-input');
+            var value = parseInt(input.val());
 
-            updatePrice(button, quantity);
-        }
-
-        function decreaseQuantity(button) {
-            var input = button.parentNode.querySelector('.quantity-input');
-            var quantity = parseInt(input.value);
-            if (quantity > 1) {
-                quantity -= 1;
-                input.value = quantity;
-
-                updatePrice(button, quantity);
+            if ($(this).text() === '-') {
+                if (value > 1) {
+                    input.val(value - 1);
+                }
+            } else {
+                input.val(value + 1);
             }
-        }
-
-        function updatePrice(button, quantity) {
-            var productInfo = button.parentNode.parentNode.querySelector('.product-info');
-            var priceElement = productInfo.querySelector('.product-price');
-            var price = parseFloat(priceElement.innerHTML.replace('$', ''));
-            var totalPrice = price * quantity;
-
-            var newPriceElement = document.createElement('div');
-            newPriceElement.classList.add('product-price');
-            newPriceElement.innerHTML = '$' + totalPrice.toFixed(2);
-
-            productInfo.replaceChild(newPriceElement, priceElement);
-        }
+        });
     </script>
-    
-     <style>
-        
-        .product-quantity {
+
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0px auto;
+        }
+
+        .cart-title {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .quantity-button {
-            width: 30px;
-            height: 30px;
-            background-color: #eee;
-            border: none;
-            border-radius: 50%;
+        .product-card {
+            width: auto;
+            height: auto;
+            margin-right: 0px;
+            object-fit: contain;
+        }
+        
+        .product-image img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .product-card .product-info {
+            flex-grow: 0.6;
+        }
+
+        .product-card .product-info .product-name {
             font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            margin-bottom: 10px;
+             
         }
-
-        .quantity-button:hover {
-            background-color: #ddd;
+        
+        .product-name {
+            font-size: 25px;
         }
-
-        .remove-product-button,
-        .view-product-button,
-        .checkout-button {
+        
+        
+        .product-card .product-info .product-price {
+            color: #888;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .product-card .add-to-cart {
+            text-align: right;
+        }
+        
+        .add-to-cart-button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -87,13 +107,94 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        .remove-product-button:hover,
-        .view-product-button:hover,
-        .checkout-button:hover {
+        
+        .add-to-cart-button:hover {
             background-color: #23527c;
         }
         
+        .product-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-label {
+            margin-right: 5px;
+            font-weight: bold;
+        }
+        
+        .quantity-input{
+            width: 80px;
+        }
+        
+        .quantity-button {
+            width: 30px;
+            height: 26px;
+            border: none;
+            background-color: #eee;
+            color: #888;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .view-product-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 200px;
+                padding: 10px;
+                background-color: #337ab7;
+                color: #fff;
+                font-weight: bold;
+                text-align: center;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .view-product-button:hover {
+                background-color: #23527c;
+            }
+            
+            .remove-product-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 200px;
+                padding: 10px;
+                margin-top: 10px;
+                background-color: #d9534f;
+                color: #fff;
+                font-weight: bold;
+                text-align: center;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .remove-product-button:hover {
+                background-color: #c9302c;
+            }
+        
+
+        .checkout-button {
+            margin-top: 10px;
+            padding: 15px 30px;
+            background-color: #337ab7;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            float: right;
+        }
+
+        .checkout-button:hover {
+            background-color: #23527c;
+        }
     </style>
     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -136,50 +237,54 @@
         <!-- /BREADCRUMB -->
 
         <!-- SECTION -->
-       <div class="section">
-        <div class="container">
-            <c:if test="${user==null}">
-                <!-- Code for user not logged in -->
-            </c:if>
-            <c:if test="${user!=null}">
-                <c:if test="${cart!=null}">
-                    <c:forEach var="product" items="${cart}">
-                        <div class="row">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="templates/img/${product.getImage()}" alt="${product.getName()}">
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-name">${product.getName()}</div>
-                                    <div class="product-price">$${product.getPrice()}</div>
-                                    <div class="product-quantity">
-                                        <button class="quantity-button decrease-quantity-button" onclick="decreaseQuantity(this)">-</button>
-                                        <input class="quantity-input" type="number" value="1" min="1">
-                                        <button class="quantity-button increase-quantity-button" onclick="increaseQuantity(this)">+</button>
-                                    </div>
-                                </div>
-                                <div class="view-to-cart">
-                                    <button onclick="window.location.href = 'homepage.jsp'" class="view-product-button">View Product</button>  
-                                    <form action="remove-cart" method="post">
-                                        <input type="hidden" name="proID" value="${product.getID()}">
-                                        <button type="submit" class="remove-product-button">Remove Product</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <div class="row">
-                        <div class="col-md-12 text-right">
-                            <button onclick="window.location.href = 'checkout.jsp'" class="checkout-button">Proceed to Checkout</button>
-                        </div>
-                    </div>
-                </c:if>
-                <c:if test="${cart==null}">
-                    <p class="text-center">Your cart is empty</p>
-                </c:if>
-            </c:if>
+       <div class="container">
+        <h1 class="cart-title">View Cart</h1>
+        <div class="product-card">
+            <div class="product-image">
+                <img src="https://onewaymobile.vn/images/products/2021/05/30/original/ipad-pro-m1-11-_1622345251-copy-copy-copy.png" alt="Ipad Pro 2021">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Ipad Pro 2021</div>
+                <div class="product-price">$1500</div>
+            </div>
+             <div class="add-to-cart">
+                <div class="product-quantity">
+                    <div class="quantity-label">Quantity:</div>
+                    <button class="quantity-button">-</button>
+                    <input type="text" class="quantity-input" value="1" readonly>
+                    <button class="quantity-button">+</button>
+            </div>
+            </div>
+            <div class="action-buttons">
+                <button class="view-product-button">View Product</button>
+                <button class="remove-product-button">Remove Product</button>
+            </div>
+        </div> 
+        
+         <div class="product-card">
+            <div class="product-image">
+                <img src="https://help.apple.com/assets/6305096F029A2032C16D3326/63050972029A2032C16D332F/vi_VN/b9f519195f84950573eea5088a49b964.png" alt="Airpod Max">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Airpod Max</div>
+                <div class="product-price">$800</div>
+            </div>
+             <div class="add-to-cart">
+                <div class="product-quantity">
+                    <div class="quantity-label">Quantity:</div>
+                    <button class="quantity-button">-</button>
+                    <input type="text" class="quantity-input" value="1" readonly>
+                    <button class="quantity-button">+</button>
+            </div>
+            </div>
+            <div class="action-buttons">
+                <button class="view-product-button">View Product</button>
+                <button class="remove-product-button">Remove Product</button>
+            </div>
         </div>
-    </div>
+        <button class="checkout-button">Proceed to Checkout</button>
+        
+       </div>
         <!-- /SECTION -->
 
         <%@include file="templates/footer.jsp" %>
@@ -194,3 +299,6 @@
         <!-- /jQuery Plugins -->
     </body>
 </html>
+
+</html>
+
