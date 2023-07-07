@@ -28,31 +28,31 @@ public class ViewProductServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         int proID = Integer.parseInt(request.getParameter("proID"));
+        ProductDAO proDAO = new ProductDAO();
+        Product mainProduct = proDAO.getProductsByID(proID);
+        List<Product> listRelatedProduct = proDAO.getRelatedProduct(mainProduct.getBrandID());
+        Product_DetailDAO proDetDAO = new Product_DetailDAO();
+        List<Product_Detail> listProductDetail = proDetDAO.getListProduct(proID);
+        Product_Detail proDetail = null;
+
         String color = request.getParameter("color");
-        
+        if (color != null) {
+            proDetail = proDetDAO.getColor(proID, color);
+        }
+
         String quantityString = request.getParameter("quantity");
         int quantity = 1;
         if (quantityString != null) {
             quantity = Integer.parseInt(quantityString);
         }
-        
-        ProductDAO proDAO = new ProductDAO();
-        Product product = proDAO.getProductsByID(proID);
-        List<Product> listRelatedProduct = proDAO.getRelatedProduct(product.getBrandID());
-        Product_DetailDAO proDetDAO = new Product_DetailDAO();
-        List<Product_Detail> listProductDetail = proDetDAO.getListProduct(proID);
 
-        if (color != null) {
-            Product_Detail proDetail = proDetDAO.getColor(proID, color);
-            request.setAttribute("proDetail", proDetail);
-        }
-
-        request.setAttribute("product", product);
-        request.setAttribute("quantityUserChoose", quantity);
+        request.setAttribute("mainProduct", mainProduct);
+        System.out.println(listProductDetail);
         request.setAttribute("listProductDetail", listProductDetail);
         request.setAttribute("listRelatedProduct", listRelatedProduct);
+        request.setAttribute("proDetail", proDetail);
+        request.setAttribute("quantityUserChoose", quantity);
         request.getRequestDispatcher("view-product.jsp").forward(request, response);
-
     }
 
     @Override

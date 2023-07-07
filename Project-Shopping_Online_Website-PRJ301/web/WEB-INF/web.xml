@@ -10,11 +10,11 @@
     </servlet>
     <servlet>
         <servlet-name>ForgotPasswordServlet</servlet-name>
-        <servlet-class>controller.ForgotPasswordServlet</servlet-class>
+        <servlet-class>controller.GetPasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>controller.HomePageServlet</servlet-class>
+        <servlet-class>controller.ViewHomepageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveWishlistServlet</servlet-name>
@@ -22,7 +22,7 @@
     </servlet>
     <servlet>
         <servlet-name>WishlistServlet</servlet-name>
-        <servlet-class>controller.WishlistServlet</servlet-class>
+        <servlet-class>controller.AddWishlistServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
@@ -38,11 +38,11 @@
     </servlet>
     <servlet>
         <servlet-name>AddToCartServlet</servlet-name>
-        <servlet-class>controller.AddToCartServlet</servlet-class>
+        <servlet-class>controller.AddCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>controller.RegisterServlet</servlet-class>
+        <servlet-class>controller.AddUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

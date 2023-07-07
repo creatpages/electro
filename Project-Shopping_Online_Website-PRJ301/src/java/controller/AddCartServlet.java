@@ -18,7 +18,7 @@ import model.User_Account;
 /**
  * @author duy20
  */
-public class AddToCartServlet extends HttpServlet {
+public class AddCartServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
@@ -27,7 +27,7 @@ public class AddToCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-
+        response.sendRedirect("homepage");
     }
 
     @Override
@@ -36,17 +36,17 @@ public class AddToCartServlet extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         User_Account user = (User_Account) session.getAttribute("user");
-        String color = request.getParameter("color");
         int proID = Integer.parseInt(request.getParameter("proID"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        int proDetailID = Integer.parseInt(request.getParameter("proDetailID"));
+        String color = request.getParameter("color");
+        int proDetailID = Integer.parseInt(request.getParameter("proDetailID")==null?"-1":request.getParameter("proDetailID"));
+        int quantity = Integer.parseInt(request.getParameter("quantity")==null?"-1":request.getParameter("quantity"));
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         CartDAO cartDAO = new CartDAO();
         Product_Detail proDetail = proDetailDAO.getProductDetail(proDetailID);
         String message = "";
         if (user == null) {
-            response.sendRedirect("login");
-            return;
+            request.setAttribute("message", color);
+            request.getRequestDispatcher("login").forward(request, response);
         }
         if (color == null) {
             message += "Please select color!<br>";

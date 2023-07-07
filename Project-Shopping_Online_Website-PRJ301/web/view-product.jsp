@@ -34,10 +34,10 @@
     <body>
         <%@include file="templates/header.jsp" %>
 
-        <c:set var="mainProduct" value="${requestScope['product']}"/>
+        <c:set var="mainProduct" value="${requestScope['mainProduct']}"/>
         <c:set var="listProductDetail" value="${requestScope['listProductDetail']}"/>
         <c:set var="listRelatedProduct" value="${requestScope['listRelatedProduct']}"/>
-        
+
         <c:set var="proDetail" value="${requestScope['proDetail']}"/>
         <c:set var="quantityUserChoose" value="${requestScope['quantityUserChoose']}"/>
 
@@ -68,20 +68,13 @@
                     <div class="col-md-5 col-md-push-2">
                         <div id="product-main-img">
                             <div class="product-preview">
-                                <img src="templates/img/product01.png" alt="">
+                                <img src="templates/img${mainProduct.getImage()}" alt="${mainProduct.getName()}">
                             </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product03.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product04.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product06.png" alt="">
-                            </div>
+                            <c:forEach var="productImage1" items="${listProductDetail}">
+                                <div class="product-preview">
+                                    <img src="templates/img${productImage1.getImage()}" alt="${mainProduct.getName()}">
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <!-- /Product main img -->
@@ -90,20 +83,13 @@
                     <div class="col-md-2  col-md-pull-5">
                         <div id="product-imgs">
                             <div class="product-preview">
-                                <img src="templates/img/product01.png" alt="">
+                                <img src="templates/img${mainProduct.getImage()}" alt="${mainProduct.getName()}">
                             </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product03.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product04.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="templates/img/product05.png" alt="">
-                            </div>
+                            <c:forEach var="productImage2" items="${listProductDetail}">
+                                <div class="product-preview">
+                                    <img src="templates/img${productImage2.getImage()}" alt="${mainProduct.getName()}">
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <!-- /Product thumb imgs -->

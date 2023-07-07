@@ -4,9 +4,9 @@
 
 package controller;
 
+import dal.*;
 import dal.User_AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,11 +15,10 @@ import jakarta.servlet.http.HttpSession;
 import model.User_Account;
 
 /**
- *
  * @author duy20
  */
 
-public class HomePageServlet extends HttpServlet {
+public class AddWishlistServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
@@ -27,14 +26,27 @@ public class HomePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        request.getRequestDispatcher("wishlist.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-
+        HttpSession session = request.getSession(true);
+        User_Account user = (User_Account) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        int proID = Integer.parseInt(request.getParameter("proID"));
+        WishlistDAO wishlistDAO = new WishlistDAO();
+        boolean isAddToWishlist = wishlistDAO.addToWishlist(user.getID(), proID);
+        if (isAddToWishlist) {
+            request.getRequestDispatcher("wishlist.jsp").forward(request, response);
+        } else {
+            //Message that add to wishlist failed
+            response.sendRedirect("homepage");
+        }
     }
 }

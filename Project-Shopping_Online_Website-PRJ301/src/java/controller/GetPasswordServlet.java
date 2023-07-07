@@ -18,7 +18,7 @@ import lib.MyValidated;
  * @author duy20
  */
 
-public class ForgotPasswordServlet extends HttpServlet {
+public class GetPasswordServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");

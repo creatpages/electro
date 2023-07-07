@@ -20,7 +20,7 @@ import model.User_Account;
  * @author duy20
  */
 
-public class RegisterServlet extends HttpServlet {
+public class AddUserServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
@@ -95,21 +95,4 @@ public class RegisterServlet extends HttpServlet {
         
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
 }

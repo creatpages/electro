@@ -3,6 +3,8 @@
  */
 package model;
 
+import dal.Product_DetailDAO;
+
 public class Cart_Item {
 
     private int ID;
@@ -50,6 +52,16 @@ public class Cart_Item {
 
     public void setQuantity(int Quantity) {
         this.Quantity = Quantity;
+    }
+    
+    public String getProductName(){
+        Product_DetailDAO proDetailDAO = new Product_DetailDAO();
+        return proDetailDAO.getName(this.ProDetailID);
+    }
+    
+    public double getPrice(){
+        Product_DetailDAO proDetailDAO = new Product_DetailDAO();
+        return (double)this.Quantity * proDetailDAO.getProductDetail(ProDetailID).getPrice();
     }
     
 }

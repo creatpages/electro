@@ -9,6 +9,7 @@
     CartDAO cartDAO = new CartDAO();
     List<Product> wishlist = new ArrayList<>();
     List<Cart_Item> cart = new ArrayList<>();
+    double totalPriceInCart = 0.0;
     if (user != null) {
         //If the user is logged in, get infomation about wishlist and cart
         wishlist = wishlistDAO.getWishlist(user.getID());
@@ -18,11 +19,9 @@
 
 <c:set var="user" value="<%=user%>"/>
 <c:set var="wishlist" value="<%=wishlist%>"/>
-<c:set var="cart" value="<%=wishlist%>"/>
-<c:set var="numberOfWishList" value="${wishlist.size()}"/>
-<c:set var="numberOfCart" value="${cart.size()}"/>
+<c:set var="cart" value="<%=cart%>"/>
+<c:set var="totalPriceInCart" value="<%=totalPriceInCart%>" />
 
-<!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
     <div id="top-header">
@@ -107,8 +106,8 @@
                             <a href="wishlist">
                                 <i class="fas fa-heart"></i>
                                 <span>Your Wishlist</span>
-                                <c:if test="${numberOfWishList>0}">
-                                    <div class="qty">${numberOfWishList}</div>
+                                <c:if test="${wishlist.size()>0}">
+                                    <div class="qty">${wishlist.size()}</div>
                                 </c:if>
                             </a>
                         </div>
@@ -119,26 +118,28 @@
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <c:if test="${cart.size()>0}">
+                                    <div class="qty">${cart.size()}</div>
+                                </c:if>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-                                    <c:forEach var="product" items="">
+                                    <c:forEach var="cartItem" items="${cart}">
                                         <div class="product-widget">
                                             <div class="product-img">
                                                 <img src="templates/img/product01.png" alt="">
                                             </div>
                                             <div class="product-body">
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                                <h3 class="product-name"><a href="#">${cartItem.getProductName()}</a></h3>
+                                                <h4 class="product-price"><span class="qty">${cartItem.getQuantity()}x</span>$${cartItem.getPrice()}</h4>
                                             </div>
                                             <button class="delete"><i class="fa fa-close"></i></button>
                                         </div>
                                     </c:forEach>
                                 </div>
                                 <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <small>${cart.size()} Item(s) selected</small>
+                                    <h5>TOTAL: $${totalPriceInCart}</h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a href="#"><i class="fas fa-shopping-cart"></i>  View Cart</a>
@@ -164,4 +165,4 @@
     </div>
     <!-- /MAIN HEADER -->
 </header>
-<!-- /HEADER -->
+

@@ -81,6 +81,26 @@ public class Product_DetailDAO extends DBContext {
         }
         return null;
     }
+    
+    public String getName(int proDetailID) {
+        try {
+            String SQL = "select p.Name from Product_Detail pdt"
+                    + "join Product p on pdt.ProID = p.ID"
+                    + "where pdt.ID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, proDetailID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("Name");
+                ps.close();
+                rs.close();
+                return name;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Unknown";
+    }
 
     //Get list price of all option of a product
     public List<Double> getPrices(int ProID) {

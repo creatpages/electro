@@ -3,6 +3,8 @@
  */
 package model;
 
+import dal.Product_DetailDAO;
+
 public class Product_Detail {
 
     private int ID;
@@ -71,7 +73,7 @@ public class Product_Detail {
     public void setColor(String Color) {
         this.Color = Color;
     }
-
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

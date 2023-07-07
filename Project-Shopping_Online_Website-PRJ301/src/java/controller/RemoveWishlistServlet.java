@@ -39,23 +39,6 @@ public class RemoveWishlistServlet extends HttpServlet {
         WishlistDAO wishlistDAO = new WishlistDAO();
         int proID = Integer.parseInt(request.getParameter("proID"));
         wishlistDAO.removeWishlist(user.getID(), proID);
-        response.sendRedirect("wishlist");
+        response.sendRedirect("view-wishlist");
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RemoveWishlistServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RemoveWishlistServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
 }

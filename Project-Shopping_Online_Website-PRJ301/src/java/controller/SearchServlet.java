@@ -29,8 +29,8 @@ public class SearchServlet extends HttpServlet {
         String category = request.getParameter("category");
         String brand = request.getParameter("brand");
         String info = request.getParameter("info");
-        ProductDAO proDAO = new ProductDAO();
         BrandDAO brandDAO = new BrandDAO();
+        ProductDAO proDAO = new ProductDAO();
         List<Brand> listBrands = new ArrayList<>();
         List<Product> listProducts = new ArrayList<>();
         if (category != null) {
@@ -51,12 +51,15 @@ public class SearchServlet extends HttpServlet {
                     listProducts = proDAO.search(info);
                 }
             }
+        }else{
+            response.sendRedirect("homepage");
+            return;
         }
         request.setAttribute("categoryChecked", category);
         request.setAttribute("brandChecked", brand);
         request.setAttribute("listBrands", listBrands);
         request.setAttribute("listProducts", listProducts);
-        request.getRequestDispatcher("store.jsp").forward(request, response);
+        request.getRequestDispatcher("view-store.jsp").forward(request, response);
     }
 
     @Override
@@ -65,21 +68,4 @@ public class SearchServlet extends HttpServlet {
         //processRequest(request, response);
 
     }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SeachServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SeachServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
 }
