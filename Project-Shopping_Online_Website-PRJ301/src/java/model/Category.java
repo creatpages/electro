@@ -36,7 +36,6 @@ public class Category {
     
     public int getQuantity(){
         ProductDAO proDAO = new ProductDAO();
-        System.out.println(proDAO.getListProOfCate(this.Name));
         return proDAO.getListProOfCate(this.Name).size();
     }
 

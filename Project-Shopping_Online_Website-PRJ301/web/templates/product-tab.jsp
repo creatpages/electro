@@ -14,7 +14,7 @@
         <h3 class="product-name"><a href="#">${product.getName()}</a></h3>
         <h4 class="product-price">$${product.getPrice()}</h4>
         <div class="text-center">
-            ${product.getSold()} sold
+            ${product.getSold()} SOLD
         </div>
         <!--Add to wishlist-->
         <form action="wishlist" method="post">
