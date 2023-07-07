@@ -8,7 +8,7 @@
     WishlistDAO wishlistDAO = new WishlistDAO();
     CartDAO cartDAO = new CartDAO();
     List<Product> wishlist = new ArrayList<>();
-    List<Product> cart = new ArrayList<>();
+    List<Cart_Item> cart = new ArrayList<>();
     if (user != null) {
         //If the user is logged in, get infomation about wishlist and cart
         wishlist = wishlistDAO.getWishlist(user.getID());
@@ -21,7 +21,6 @@
 <c:set var="cart" value="<%=wishlist%>"/>
 <c:set var="numberOfWishList" value="${wishlist.size()}"/>
 <c:set var="numberOfCart" value="${cart.size()}"/>
-
 
 <!-- HEADER -->
 <header>
