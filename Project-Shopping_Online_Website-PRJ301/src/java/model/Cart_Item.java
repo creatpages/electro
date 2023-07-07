@@ -6,20 +6,18 @@ package model;
 public class Cart_Item {
 
     private int ID;
-    private int CartID;
+    private int UserID;
     private int ProDetailID;
     private int Quantity;
-    private double Price;
 
     public Cart_Item() {
     }
 
-    public Cart_Item(int ID, int CartID, int ProDetailID, int Quantity, double Price) {
+    public Cart_Item(int ID, int CartID, int ProDetailID, int Quantity) {
         this.ID = ID;
-        this.CartID = CartID;
+        this.UserID = CartID;
         this.ProDetailID = ProDetailID;
         this.Quantity = Quantity;
-        this.Price = Price;
     }
 
     public int getID() {
@@ -31,11 +29,11 @@ public class Cart_Item {
     }
 
     public int getCartID() {
-        return CartID;
+        return UserID;
     }
 
     public void setCartID(int CartID) {
-        this.CartID = CartID;
+        this.UserID = CartID;
     }
 
     public int getProDetailID() {
@@ -53,26 +51,5 @@ public class Cart_Item {
     public void setQuantity(int Quantity) {
         this.Quantity = Quantity;
     }
-
-    public double getPrice() {
-        return Price;
-    }
-
-    public void setPrice(double Price) {
-        this.Price = Price;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cart_Item{");
-        sb.append("ID=").append(ID);
-        sb.append(", CartID=").append(CartID);
-        sb.append(", ProDetailID=").append(ProDetailID);
-        sb.append(", Quantity=").append(Quantity);
-        sb.append(", Price=").append(Price);
-        sb.append('}');
-        return sb.toString();
-    }
-
+    
 }
