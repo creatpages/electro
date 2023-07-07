@@ -34,8 +34,10 @@
     <body>
         <%@include file="templates/header.jsp" %>
 
-        <c:set var="product" value="${requestScope['product']}"/>
+        <c:set var="mainProduct" value="${requestScope['product']}"/>
         <c:set var="listProductDetail" value="${requestScope['listProductDetail']}"/>
+        <c:set var="listRelatedProduct" value="${requestScope['listRelatedProduct']}"/>
+        <c:set var="proDetail" value="${requestScope['proDetail']}"/>
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -46,9 +48,9 @@
                             <h3 class="breadcrumb-header">Store</h3>
                             <li class="active"><a href="homepage">Home</a></li>
                             <li><a href="search?category=All">All Categories</a></li>
-                            <li><a href="search?category=${product.getCategoryName()}">${product.getCategoryName()}</a></li>
-                            <li><a href="search?category=${product.getCategoryName()}&brand=${product.getBrandName()}">${product.getBrandName()}</a></li>
-                            <li>${product.getName()}</li>
+                            <li><a href="search?category=${mainProduct.getCategoryName()}">${mainProduct.getCategoryName()}</a></li>
+                            <li><a href="search?category=${mainProduct.getCategoryName()}&brand=${mainProduct.getBrandName()}">${mainProduct.getBrandName()}</a></li>
+                            <li>${mainProduct.getName()}</li>
                         </ul>
                     </div>
                 </div>
@@ -108,7 +110,66 @@
                     <!-- Product details -->
                     <div class="col-md-5">
                         <div class="product-details">
-                            <h2 class="product-name">product name goes here</h2>
+                            <h2 class="product-name">${mainProduct.getName()}</h2>
+                            <div>
+                                <h3 class="product-price">$${proDetail!=null?proDetail.getPrice():mainProduct.getPrice()}
+                                    <span class="product-available">Remain: ${proDetail!=null?proDetail.getQuantity():mainProduct.getQuantity()}</span>
+                            </div>
+                            <p>${mainProduct.getDescription()}</p>
+
+                            <div class="product-options">
+                                <label>
+                                    Color
+                                    <form action="#" method="get" id="getColor">
+                                        <input type="hidden" name="proID" value="${mainProduct.getID()}">
+                                        <select onchange="getColor.submit()" style="text-transform: capitalize" name="color" class="input-select" required>
+                                            <c:if test="${proDetail==null}">
+                                                <option selected></option>
+                                            </c:if>
+                                            <c:forEach var="productDetail" items="${listProductDetail}">
+                                                <option value="${productDetail.getColor()}" ${proDetail.getColor()==productDetail.getColor()?'selected':''}>${productDetail.getColor()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </form>
+                                </label>
+                            </div>
+                            <form action="add-to-cart" method="post">
+                                <input type="hidden" name="proDetailID" value="${proDetail.getID()}">
+                                <input type="hidden" name="color" value="${proDetail.getColor()}">
+                                <div class="add-to-cart">
+                                    <div class="qty-label">
+                                        Qty
+                                        <div class="input-number">
+                                            <input name="quantity" type="number" required>
+                                            <span class="qty-up">+</span>
+                                            <span class="qty-down">-</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                </div>
+                                <p>${requestScope['message']}</p>
+                            </form>
+
+                            <ul class="product-btns">
+                                <li>
+                                    <form action="wishlist" id="add-to-wishlist" method="post">
+                                        <input type="hidden" name="proID" value="${mainProduct.getID()}">
+                                        <a onclick="document.getElementById('add-to-wishlist').submit();"><i class="fa fa-heart-o"></i> add to wishlist</a>
+                                    </form>
+                                </li>
+                            </ul>
+
+                            <ul class="product-links">
+                                <li>Category:</li>
+                                <li><a href="search?category=${mainProduct.getCategoryName()}">${mainProduct.getCategoryName()}</a></li>
+                            </ul>
+                            <ul class="product-links">
+                                <li>Share:</li>
+                                <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                            </ul>
                             <div>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -119,55 +180,6 @@
                                 </div>
                                 <a class="review-link" href="#">10 Review(s) | Add your review</a>
                             </div>
-                            <div>
-                                <h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-                                <span class="product-available">In Stock: 80</span>
-                            </div>
-                            <p>Desrcription of product</p>
-
-                            <form action="#" method="get">
-                                <div class="product-options">
-                                    <label>
-                                        Color
-                                        <select name="color" class="input-select">
-                                            <option value="0">Red</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="add-to-cart">
-                                    <div class="qty-label">
-                                        Qty
-                                        <div class="input-number">
-                                            <input name="quantity" type="number">
-                                            <span class="qty-up">+</span>
-                                            <span class="qty-down">-</span>
-                                        </div>
-                                    </div>
-                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                </div>
-                            </form>
-
-                            <ul class="product-btns">
-                                <li>
-                                    <form action="wishlist" id="add-to-wishlist" method="post">
-                                        <input type="hidden" name="proID" value="${product.getID()}">
-                                        <a onclick="document.getElementById('add-to-wishlist').submit();"><i class="fa fa-heart-o"></i> add to wishlist</a>
-                                    </form>
-                                </li>
-                            </ul>
-
-                            <ul class="product-links">
-                                <li>Category:</li>
-                                <li><a href="search?category=${product.getCategoryName()}">${product.getCategoryName()}</a></li>
-                            </ul>
-
-                            <ul class="product-links">
-                                <li>Share:</li>
-                                <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                            </ul>
 
                         </div>
                     </div>
@@ -190,7 +202,7 @@
                                 <div id="tab1" class="tab-pane fade in active">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p>${product.getDescription()}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +212,7 @@
                                 <div id="tab2" class="tab-pane fade in">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <h1 class="text-center">Underdeveloping</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -210,6 +222,7 @@
                                 <div id="tab3" class="tab-pane fade in">
                                     <div class="row">
                                         <!-- Rating -->
+                                        <h1 class="text-center">Underdeveloping</h1>
                                         <div class="col-md-3">
                                             <div id="rating">
                                                 <div class="rating-avg">
@@ -396,9 +409,7 @@
 
         <!-- Section -->
         <div class="section">
-            <!-- container -->
             <div class="container">
-                <!-- row -->
                 <div class="row">
 
                     <div class="col-md-12">
@@ -407,128 +418,16 @@
                         </div>
                     </div>
 
-                    <!-- product -->
-                    <div class="col-md-3 col-xs-6">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="./img/product01.png" alt="">
-                                <div class="product-label">
-                                    <span class="sale">-30%</span>
-                                </div>
+                    <c:forEach var="product" items="${listRelatedProduct}">
+                        <c:if test="${product.getID()!=mainProduct.getID()}">
+                            <div class="col-md-3 col-xs-6">
+                                <%@include file="templates/product-tab.jsp" %>
                             </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                <div class="product-rating">
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-
-                    <!-- product -->
-                    <div class="col-md-3 col-xs-6">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="./img/product02.png" alt="">
-                                <div class="product-label">
-                                    <span class="new">NEW</span>
-                                </div>
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-
-                    <div class="clearfix visible-sm visible-xs"></div>
-
-                    <!-- product -->
-                    <div class="col-md-3 col-xs-6">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="./img/product03.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-
-                    <!-- product -->
-                    <div class="col-md-3 col-xs-6">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="./img/product04.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                <div class="product-rating">
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
+                        </c:if>
+                    </c:forEach>
 
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /container -->
         </div>
         <!-- /Section -->
 

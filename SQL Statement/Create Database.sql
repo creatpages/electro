@@ -1,5 +1,15 @@
-/****** Object:  Database [PRJ_ShoppingOnlineWebsite]    Script Date: 7/6/2023 4:13:20 PM ******/
-DROP DATABASE [PRJ_ShoppingOnlineWebsite]
+USE [master]
+GO
+/*******************************************************************************
+   Drop database if it exists
+********************************************************************************/
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = 'PRJ_ShoppingOnlineWebsite')
+BEGIN
+	ALTER DATABASE PRJ_ShoppingOnlineWebsite SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE PRJ_ShoppingOnlineWebsite SET ONLINE;
+	DROP DATABASE PRJ_ShoppingOnlineWebsite;
+END
+
 GO
 /****** Object:  Database [PRJ_ShoppingOnlineWebsite]    Script Date: 7/6/2023 4:13:20 PM ******/
 CREATE DATABASE [PRJ_ShoppingOnlineWebsite]
