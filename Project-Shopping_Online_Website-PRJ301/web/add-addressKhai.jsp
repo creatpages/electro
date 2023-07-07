@@ -24,9 +24,9 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Change Password</title>
+        <title>Add address</title>
         <style>
-            .register-container{
+            .update-container{
                 max-width: 400px;
                 margin: 0 auto;
                 margin-top: 10px;
@@ -35,9 +35,8 @@
                 padding: 30px;
                 border-radius: 5px;
                 box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                align-items: center;
             }
-            .register-container .field{
+            .update-container .field{
                 margin-bottom: 20px
             }
             
@@ -48,7 +47,7 @@
                 font-weight: 700;
             }
             
-            .register-container input{
+            .update-container input{
                 width: 100%;
                 padding: 10px;
                 border-radius: 3px;
@@ -100,7 +99,7 @@
                     background-color: #337ab7;
                     border-color: #2e6da4;
                 }
-                .register-container button{
+                .update-container button{
                         width: 100%;
                         padding: 10px;
                         background-color: #337ab7;
@@ -108,11 +107,13 @@
                         color: #fff;
                         font-weight: bold;
                         cursor: pointer;
-                 }
-                 .changepass-title{
-                     text-align: center;
-                 }
-                 div.vertical-line{
+                }
+                
+                .update-title{
+                    text-align: center  ;
+                } 
+                 
+                div.vertical-line{
                 width: 0px; /* Use only border style */
                 height: 100%;
                 float: left; 
@@ -134,7 +135,7 @@
                         <ul class="breadcrumb-tree">
                             <li><a href="homepage.jsp">Home</a></li>
                             <li><a href="account.jsp">Account</a></li>
-                            <li class="active">Change password</li>
+                            <li class="active">Update Information</li>
                         </ul>
                     </div>
                 </div>
@@ -146,11 +147,11 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <!-- Options -->
+                     <!-- Options -->
                     <div class="update-option-container col-md-3">
                         <form ><h3 style="font-size: 18px; margin-bottom: 30px">UPDATE OPTIONS</h3></form>
                         <div class="input-checkbox">
-                            <br>
+                            
                             <div class="option">
                             <a href="view-account.jsp">
                                 + ACCOUNT INFORMATION
@@ -159,7 +160,7 @@
                             <br>
                             <div class="option">
                             <a href="view-addressKhai.jsp">
-                                +  ADDRESS
+                                + ADDRESS
                             </a>  
                             </div>
                             <br>
@@ -171,31 +172,40 @@
                         </div>
                     </div>
                     <div class="vertical-line" style="height:10cm;"></div>
+                    <div class="update-address-form col-md-8">
                     
-                    
-                     <div class="changepass-form col-md-8">
-                        <div class="register-container ">
-                            <div class="changepass-title"><h3>CHANGE PASSWORD</h3></div>
-                            <form style="align-items: center" data-v-15e3e196>
-                                <div class="field required">
-                                    <label for="password">Your password:</label>
-                                    <input class="input-form" type="password" placeholder="Your password", data-v-15e3e196><!-- comment -->
-                                </div>
-                                <div class="field required" data-v-15e3e196>
-                                    <label for="password">New password:</label>
-                                    <input class="input-form" type="password" placeholder="New password", data-v-15e3e196>
-                                </div>
-                                <div class="field required" data-v-15e3e196>
-                                    <label for="password">Comfirm password:</label>
-                                    <input class="input-form"  type="password" placeholder="Comfirm password", data-v-15e3e196>    
-                                </div>
-                                <button class="primary primary-btn" type="submit" data-v-15e3e196>
-                                     Change
-                                </button>
-                                </form>
+                    <form data-v-15e3e196>
+                        <div class="update-container">
+                            <div class="update-title">
+                                <h3>ADD ADDRESS</h3>
+                            </div>
+                        <div class="field required">
+                            <label for="text">City:</label>
+                            <input class="input-form" type="text" placeholder="Your city", data-v-15e3e196><!-- comment -->
                         </div>
-                    </div>
+                        <div class="field required" data-v-15e3e196>
+                             <label for="text">District:</label>
+                            <input class="input-form" type="text" placeholder="Your district", data-v-15e3e196><!-- comment -->
+                        </div><!-- comment -->
+                        <div class="field required" data-v-15e3e196>
+                             <label for="text">Street:</label>
+                            <input class="input-form" type="text" placeholder="Your street", data-v-15e3e196><!-- comment -->
+                        </div>
+                        
+                        <div class="field required" data-v-15e3e196>
+                             <label for="text">Others:</label>
+                            <input class="input-form" type="text" placeholder="More information about your address", data-v-15e3e196><!-- comment -->
+                        </div>
+                        
+                        <div class="field" data-v-15e3e196>
+                            <button class="primary primary-btn" type="submit" data-v-15e3e196>
+                                Add
+                            </button>
+                        </div>
+                        </div>
+                    </form>
                 </div>
+                    </div>
             </div>
         </div>
         <!-- /SECTION -->
