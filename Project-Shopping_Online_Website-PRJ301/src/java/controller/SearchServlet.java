@@ -33,6 +33,7 @@ public class SearchServlet extends HttpServlet {
         ProductDAO proDAO = new ProductDAO();
         List<Brand> listBrands = new ArrayList<>();
         List<Product> listProducts = new ArrayList<>();
+        List<Product> showListProducts = new ArrayList<>();
         if (category != null) {
             if (category.compareTo("All") != 0) {
                 if (info == null) {
@@ -41,7 +42,7 @@ public class SearchServlet extends HttpServlet {
                     if (brand != null) {
                         listProducts = proDAO.getListProOfBrandInCate(category, brand);
                     }
-                }else{
+                } else {
                     listProducts = proDAO.searchProOfCate(category, info);
                 }
             } else {
@@ -51,14 +52,34 @@ public class SearchServlet extends HttpServlet {
                     listProducts = proDAO.search(info);
                 }
             }
-        }else{
+        } else {
             response.sendRedirect("homepage");
             return;
         }
+
+        //Paging
+        int productPerPage = 6;
+        int numOfPage = listProducts.size() / productPerPage + (listProducts.size() % productPerPage == 0 ? 0 : 1);
+        int currPage = 1;
+        try {
+            currPage = Integer.parseInt(request.getParameter("page"));
+        } catch (Exception e) {
+        }
+
+        int start = productPerPage * currPage - productPerPage, end = productPerPage * currPage;
+        for (int i = start; i < end; i++) {
+            if (i == listProducts.size()-1) {
+                break;
+            }
+            showListProducts.add(listProducts.get(i));
+        }
+
         request.setAttribute("categoryChecked", category);
         request.setAttribute("brandChecked", brand);
         request.setAttribute("listBrands", listBrands);
-        request.setAttribute("listProducts", listProducts);
+        request.setAttribute("listProducts", showListProducts);
+        request.setAttribute("currPage", currPage);
+        request.setAttribute("numOfPage", numOfPage);
         request.getRequestDispatcher("view-store.jsp").forward(request, response);
     }
 

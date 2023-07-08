@@ -51,10 +51,10 @@
                             <h3 class="breadcrumb-header">Store</h3>
                             <li class="active"><a href="homepage">Home</a></li>
                                 <c:if test="${categoryChecked!='All'}">
-                                    <li><a href="search?category=All">All Categories</a></li>
+                                <li><a href="search?category=All">All Categories</a></li>
                                 </c:if>
                                 <c:if test="${categoryChecked!=null}">
-                                    <li><a href="search?category=${categoryChecked}">${categoryChecked}</a></li>
+                                <li><a href="search?category=${categoryChecked}">${categoryChecked}</a></li>
                                 </c:if>
                                 <c:if test="${brandChecked!=null}">
                                 <li class="active"><a href="#">${brandChecked}</a></li>
@@ -95,28 +95,8 @@
                             </div>
                             <!-- Aside-widget List Categories-->
 
-                            <!--Price-->
-                            <div class="aside">
-                                <h3 class="aside-title">Price</h3>
-                                <div class="price-filter">
-                                    <div id="price-slider"></div>
-                                    <div class="input-number price-min">
-                                        <input id="price-min" type="number">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
-                                    </div>
-                                    <span>-</span>
-                                    <div class="input-number price-max">
-                                        <input id="price-max" type="number">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Price-->
-
                             <!-- Aside-widget List Brand-->
-                            <c:if test="${listBrands!=null}">
+                            <c:if test="${listBrands.size()!=0}">
                                 <div class="aside">
                                     <h3 class="aside-title">Brand</h3>
                                     <c:forEach var="brand" items="${listBrands}">
@@ -145,24 +125,17 @@
                             <div class="store-sort">
                                 <label>
                                     Sort By:
-                                    <select class="input-select">
-                                        <option value="0">Name</option>
-                                        <option value="1">Price</option>
+                                    <select name="type" class="input-select">
+                                        <option value="name">Name</option>
+                                        <option value="price">Price</option>
+                                        <option value="sold">Sold</option>
                                     </select>
                                 </label>
-
-                                <label>
-                                    Show:
-                                    <select class="input-select">
-                                        <option value="0">20</option>
-                                        <option value="1">50</option>
-                                    </select>
-                                </label>
+                                <input type="radio" name="sortType" value="ascending" id="ascending">
+                                <label for="ascending">Ascending</label>
+                                <input type="radio" name="sortType" value="descending" id="descending">
+                                <label for="descending">Descending</label>
                             </div>
-                            <ul class="store-grid">
-                                <li class="active"><i class="fa fa-th"></i></li>
-                                <li><a href="#"><i class="fa fa-th-list"></i></a></li>
-                            </ul>
                         </div>
                         <!-- /store top filter -->
 
@@ -183,20 +156,41 @@
                         </div>
                         <!-- /store products -->
 
-                        <!-- store bottom filter -->
+                        <!-- store paging -->
                         <c:if test="${listProducts.size()>0}">
                             <div class="store-filter clearfix">
                                 <span class="store-qty">Showing ${listProducts.size()} products</span>
                                 <ul class="store-pagination">
-                                    <li class="active">1</li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                    <c:set var="numOfPage" value="${requestScope['numOfPage']}"/>
+                                    <c:set var="currPage" value="${requestScope['currPage']}"/>
+                                    <c:forEach var="i" begin="1" end="${numOfPage}">
+                                        <c:if test="${brandChecked!=null}">
+                                            <li class="${currPage==i?'active':''}">
+                                                <a href="search?category=${categoryChecked}&brand=${brandChecked}&page=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${brandChecked==null}">
+                                            <li class="${currPage==i?'active':''}">
+                                                <a href="search?category=${categoryChecked}&page=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:if test="${currPage!=numOfPage}">
+                                        <c:if test="${brandChecked!=null}">
+                                            <li>
+                                                <a href="search?category=${categoryChecked}&brand=${brandChecked}&page=${currPage+1}"><i class="fa fa-angle-right"></i></a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${brandChecked==null}">
+                                            <li>
+                                                <a href="search?category=${categoryChecked}&page=${currPage+1}"><i class="fa fa-angle-right"></i></a>
+                                            </li>
+                                        </c:if>
+                                    </c:if>
                                 </ul>
                             </div>
                         </c:if>
-                        <!-- /store bottom filter -->
+                        <!-- /store paging -->
                     </div>
                     <!-- /STORE -->
                 </div>
