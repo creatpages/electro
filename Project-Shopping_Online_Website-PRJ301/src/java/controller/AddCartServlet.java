@@ -78,14 +78,19 @@ public class AddCartServlet extends HttpServlet {
 
         if (canAddToCart) {
             if (cartDAO.isInCart(user.getID(), proDetailID)) {
-                if (!cartDAO.canAddMore(user.getID(), proDetailID, quantity)) {
-                    request.setAttribute("quantityMessage", "There are " + cartDAO.getCartItem(user.getID(), proDetailID).getQuantity() + " products in your cart");
-                } else {
-                    cartDAO.addToCart(user.getID(), proDetailID, quantity);
+                int newQuantity = cartDAO.canAddMore(user.getID(), proDetailID, quantity);
+                if (newQuantity > 0) {
+                    cartDAO.updateToCart(user.getID(), proDetailID, newQuantity);
                     request.setAttribute("addToCartMessage", "Add to cart successfully");
+                } else {
+                    request.setAttribute("quantityMessage", "There are " + cartDAO.getCartItem(user.getID(), proDetailID).getQuantity() + " products in your cart");
                 }
+            } else {
+                cartDAO.addToCart(user.getID(), proDetailID, quantity);
+                request.setAttribute("addToCartMessage", "Add to cart successfully");
             }
         }
+        
         request.setAttribute("proID", proID);
         request.setAttribute("color", selectedColor);
         dispatcher.forward(myRequest, response);

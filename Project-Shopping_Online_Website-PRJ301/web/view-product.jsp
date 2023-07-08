@@ -101,7 +101,7 @@
                                 <h3 id="price" class="product-price">$${proDetail!=null?proDetail.getPrice():mainProduct.getPrice()}</h3>
                                 <span class="product-available">Remain: ${proDetail!=null?proDetail.getQuantity():mainProduct.getQuantity()}</span>
                             </div>
-                            <p>${mainProduct.getDescription()}</p>
+                            <p>${mainProduct.getDescription()} <br> ${proDetail.getID()}</p>
 
                             <div class="product-options">
                                 <label>

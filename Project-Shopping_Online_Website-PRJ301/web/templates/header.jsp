@@ -116,7 +116,7 @@
 
                         <!-- Cart -->
                         <div class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a href="view-cart" ${cart.size()==0?'':'class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"'}>
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>Your Cart</span>
                                 <c:if test="${cart.size()>0}">
@@ -131,7 +131,8 @@
                                                 <img src="templates/img${cartItem.getImage()}" alt="${cartItem.getImage()}">
                                             </div>
                                             <div class="product-body">
-                                                <h3 class="product-name"><a href="#">${cartItem.getProductName()}</a></h3>
+                                                <h3 class="product-name"><a href="view-product?proID=${cartItem.getProductID()}&color=${cartItem.getProductColor()}">${cartItem.getProductName()}</a></h3>
+                                                <h4 class="product-price" ><span class="qty" style="text-transform: capitalize">${cartItem.getProductColor()}</span></h4>
                                                 <h4 class="product-price"><span class="qty">${cartItem.getQuantity()}x</span>$${cartItem.getPrice()}</h4>
                                             </div>
                                             <button class="delete"><i class="fa fa-close"></i></button>

@@ -7,13 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<form action="#" method="get" id="product-card-form">
+<form action="remove-cart" method="post" id="product-card-form">
     <div class="product-card">
         <div class="product-image">
             <img src="templates/img${product.getImage()}" alt="Airpod Max">
         </div>
         <div class="product-info">
-            <div class="product-name">${product.getProductName()}</div>
+            <h3 class="product-name"><a href="view-product?proID=${product.getProductID()}&color=${product.getProductColor()}">${product.getProductName()}</a></h3>
             <div class="product-price">$${product.getPrice()}</div>
             <div class="product-color">
                 <label for="product-color">Color:</label> 
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="action-buttons">
-            <button type="submit" class="view-product-button">View Product</button>
+            <input type="hidden" name="cartID" value="${product.getID()}">
             <button type="submit" class="remove-product-button">Remove Product</button>
         </div>
     </div>

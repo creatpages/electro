@@ -75,7 +75,24 @@ public class CartDAO extends DBContext {
         return false;
     }
 
-    public boolean canAddMore(int userID, int proDetailID, int quantity) {
+    public boolean updateToCart(int userID, int proDetailID, int quantity) {
+        try {
+            String SQL = "update Cart_Item set Quantity = ?\n"
+                       + "where UserID = ? and ProDetailID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, quantity);
+            ps.setInt(2, userID);
+            ps.setInt(3, proDetailID);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public int canAddMore(int userID, int proDetailID, int quantity) {
         try {
             String SQL = "select ci.Quantity as 'quanInCart', pdt.Quantity as 'quanRemain' from Cart_Item ci\n"
                     + "join Product_Detail pdt on ci.ProDetailID = pdt.ID\n"
@@ -90,13 +107,15 @@ public class CartDAO extends DBContext {
                 if ((quanRemain - quanInCart) >= quantity) {
                     ps.close();
                     rs.close();
-                    return true;
+                    return quanInCart + quantity;   //New quantity
+                }else{
+                    return -1;
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return -1;
     }
 
     public boolean isInCart(int userID, int proDetailID) {
@@ -115,6 +134,17 @@ public class CartDAO extends DBContext {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public void removeCart(int cartID){
+        try {
+            String SQL = "delete from Cart_Item where ID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, cartID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getImage(int cartID) {

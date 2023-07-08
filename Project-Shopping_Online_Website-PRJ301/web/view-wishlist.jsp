@@ -90,7 +90,7 @@
             .view-product-button:hover {
                 background-color: #23527c;
             }
-            
+
             .remove-product-button {
                 display: flex;
                 align-items: center;
@@ -155,6 +155,9 @@
                     <div class="text-center">
                         <p><a href="login">Login</a> to see your wishlist</p>
                     </div>
+                    <br>
+                    <br>
+                    <br>
                 </c:if>
                 <c:if test="${user!=null}">
                     <c:if test="${wishlist!=null}">
@@ -180,7 +183,13 @@
                         </c:forEach>
                     </c:if>
                     <c:if test="${wishlist.size()==0}">
-                        <p class="text-center">You haven't added the product to wishlist</p>
+                        <div class="text-center">
+                            <p>You haven't added any products to wishlist</p>
+                            <p>Go to <a href="search?category=All">store</a></p>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
                     </c:if>
                 </c:if>
             </div>

@@ -55,6 +55,11 @@ public class Cart_Item {
         this.Quantity = Quantity;
     }
     
+    public int getProductID(){
+        Product_DetailDAO proDetailDAO = new Product_DetailDAO();
+        return proDetailDAO.getProductDetail(ProDetailID).getProID();
+    }
+    
     public String getProductName(){
         Product_DetailDAO proDetailDAO = new Product_DetailDAO();
         return proDetailDAO.getName(this.ProDetailID);

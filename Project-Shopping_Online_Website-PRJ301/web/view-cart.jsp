@@ -233,12 +233,25 @@
         <!-- /BREADCRUMB -->
 
         <!-- SECTION -->
-        <div class="container">
-            <div class="row">
-                <c:forEach var="product" items="${cart}">
-                    <%@include file="templates/product-card.jsp" %>
-                </c:forEach>
-                <button class="checkout-button">Proceed to Checkout</button>
+        <div class="section">
+            <div class="container">
+                <c:if test="${cart.size()==0}">
+                    <div class="text-center">
+                        <p>You haven't added any products to your cart</p>
+                        <p>Go to <a href="search?category=All">store</a></p>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                </c:if>
+                <div class="row">
+                    <c:forEach var="product" items="${cart}">
+                        <%@include file="templates/product-card.jsp" %>
+                    </c:forEach>
+                    <c:if test="${cart.size()!=0}">
+                        <button class="checkout-button">Proceed to Checkout</button>
+                    </c:if>
+                </div>
             </div>
         </div>
         <!-- /SECTION -->
