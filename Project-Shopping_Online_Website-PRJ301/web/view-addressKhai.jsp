@@ -83,7 +83,6 @@
                     margin-top: 10px;
                     margin-bottom: 0;
                     background-color: #fff;
-                    padding: 30px;
                     display: flex;
                     align-items: center;
                 }
@@ -153,6 +152,12 @@
                                 + CHANGE PASSWORD
                             </a>
                             </div>
+                            <br>
+                            <div class="option">
+                                <a href="view-orderKhai.jsp">
+                                    + MY ORDER
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="vertical-line" style="height:10cm;"></div>
@@ -171,7 +176,7 @@
                                         xa Dan Tien , Huyen Khoai Chau, tinh Hung Yen
                                     </div>
                                     <div class="update-pen">
-                                         <i class="fa fa-pen fa-xs edit"></i>
+                                         <a href="update-addressKhai.jsp"><i class="fa fa-pen fa-xs edit"></i></a>
                                     </div>
                                 </div>
                                 <div class="address">
@@ -182,7 +187,7 @@
                                         xa Dan Tien , Huyen Khoai Chau, tinh Hung Yenaslkdjaskldjasdkajsldsdkfskdjfskdfksdfjsldfjdskfjsdlkfjsdlfksdjfklsdddddddddddddd
                                     </div>
                                     <div class="update-pen">
-                                         <i class="fa fa-pen fa-xs edit"></i>
+                                        <a href="update-addressKhai.jsp"><i class="fa fa-pen fa-xs edit"></i></a>
                                     </div>
                                 </div>
                                 <div class="button">

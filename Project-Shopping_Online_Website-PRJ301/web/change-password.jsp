@@ -168,6 +168,12 @@
                                 + CHANGE PASSWORD
                             </a>
                             </div>
+                            <br>
+                            <div class="option">
+                                <a href="view-orderKhai.jsp">
+                                    + MY ORDER
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="vertical-line" style="height:10cm;"></div>

@@ -119,7 +119,6 @@
                 border: 1px inset; /* This is default border style for <hr> tag */
               }
               
-                 
         </style>
         
     </head>
@@ -154,29 +153,33 @@
                         <div class="input-checkbox">
                             
                             <div class="option">
-                            <a href="view-account.jsp">
-                                + ACCOUNT INFORMATION
-                            </a>
+                                <a href="view-account.jsp">
+                                    + ACCOUNT INFORMATION
+                                </a>
                             </div>
                             <br>
                             <div class="option">
-                            <a href="view-addressKhai.jsp">
-                                +  ADDRESS
-                            </a>  
+                                <a href="view-addressKhai.jsp">
+                                    +  ADDRESS
+                                </a>  
                             </div>
                             <br>
                             <div class="option">
-                            <a href="change-password.jsp">
-                                + CHANGE PASSWORD
-                            </a>
+                                <a href="change-password.jsp">
+                                    + CHANGE PASSWORD
+                                </a>
+                            </div>
+                            <br>
+                            <div class="option">
+                                <a href="view-orderKhai.jsp">
+                                    + MY ORDER
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="vertical-line" style="height:10cm;"></div>
                     
                     <div class="update-form col-md-8">
-                        
-                     
                                 <div class="update-container">
                                      <div class="update-title">
                                         <h3>UPDATE INFOMATION</h3>
@@ -198,9 +201,7 @@
                                             Update
                                         </button>
                                     </form>
-                                  
                             </div>
-                            
                         </div>
                 </div>
             </div>
