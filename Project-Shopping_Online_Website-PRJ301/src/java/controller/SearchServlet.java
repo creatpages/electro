@@ -56,7 +56,11 @@ public class SearchServlet extends HttpServlet {
             response.sendRedirect("homepage");
             return;
         }
-
+        
+        //Sort
+        String sortBy = request.getParameter("sortBy")!=null?request.getParameter("sortBy"):"name";
+        String sortType = request.getParameter("sortType")!=null?request.getParameter("sortType"):"ascending";
+        listProducts = proDAO.sort(listProducts, sortBy, sortType);
         //Paging
         int productPerPage = 6;
         int numOfPage = listProducts.size() / productPerPage + (listProducts.size() % productPerPage == 0 ? 0 : 1);
@@ -68,16 +72,18 @@ public class SearchServlet extends HttpServlet {
 
         int start = productPerPage * currPage - productPerPage, end = productPerPage * currPage;
         for (int i = start; i < end; i++) {
-            if (i == listProducts.size()-1) {
+            if (i==listProducts.size()) {
                 break;
             }
             showListProducts.add(listProducts.get(i));
         }
-
         request.setAttribute("categoryChecked", category);
         request.setAttribute("brandChecked", brand);
         request.setAttribute("listBrands", listBrands);
+        request.setAttribute("allProductsSize", listProducts.size());
         request.setAttribute("listProducts", showListProducts);
+        request.setAttribute("sortBy", sortBy);
+        request.setAttribute("sortType", sortType);
         request.setAttribute("currPage", currPage);
         request.setAttribute("numOfPage", numOfPage);
         request.getRequestDispatcher("view-store.jsp").forward(request, response);

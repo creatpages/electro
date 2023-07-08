@@ -186,7 +186,7 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Product> getRelatedProduct(int brandID) {
         List<Product> list = new ArrayList<>();
         int numberRelated = 4;
@@ -206,7 +206,7 @@ public class ProductDAO extends DBContext {
                 int BrandID = rs.getInt("BrandID");
                 Product temp = new Product(ID, Name, Description, Image, Price, Sold, BrandID, CateID);
                 list.add(temp);
-                if(list.size()==numberRelated){
+                if (list.size() == numberRelated) {
                     return list;
                 }
             }
@@ -282,6 +282,45 @@ public class ProductDAO extends DBContext {
             Logger.getLogger(Product_DetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public List<Product> sort(List<Product> list, String sortBy, String sortType) {
+        if (sortType.compareTo("ascending") == 0) {
+            Collections.sort(list, new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+                    switch (sortBy) {
+                        case "name":
+                            return o1.getName().compareTo(o2.getName());
+                        case "price":
+                            double o1Price = Double.parseDouble(o1.getPrice().split("-")[0]);
+                            double o2Price = Double.parseDouble(o2.getPrice().split("-")[0]);
+                            return o1Price < o2Price ? -1 : 1;
+                        case "sold":
+                            return o1.getSold() < o2.getSold() ? -1 : 1;
+                    }
+                    return 0;
+                }
+            });
+        } else {
+            Collections.sort(list, new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+                    switch (sortBy) {
+                        case "name":
+                            return o2.getName().compareTo(o1.getName());
+                        case "price":
+                            double o1Price = Double.parseDouble(o1.getPrice().split("-")[0]);
+                            double o2Price = Double.parseDouble(o2.getPrice().split("-")[0]);
+                            return o2Price < o1Price ? -1 : 1;
+                        case "sold":
+                            return o2.getSold() < o1.getSold() ? -1 : 0;
+                    }
+                    return 0;
+                }
+            });
+        }
+        return list;
     }
 
     //Return the price range of a product

@@ -121,19 +121,22 @@
                     <!-- STORE -->
                     <div id="store" class="col-md-9">
                         <!-- store top filter -->
+
+                        <c:set var="sortBy" value="${requestScope['sortBy']}" />
+                        <c:set var="sortType" value="${requestScope['sortType']}" />
                         <div class="store-filter clearfix">
                             <div class="store-sort">
                                 <label>
                                     Sort By:
-                                    <select name="type" class="input-select">
-                                        <option value="name">Name</option>
-                                        <option value="price">Price</option>
-                                        <option value="sold">Sold</option>
+                                    <select onchange="sort('${categoryChecked}', '${brandChecked}', this.value, '${sortType}')" name="sortBy" class="input-select">
+                                        <option ${sortBy=='name'?'selected':''} value="name">Name</option>
+                                        <option ${sortBy=='price'?'selected':''} value="price">Price</option>
+                                        <option ${sortBy=='sold'?'selected':''} value="sold">Sold</option>
                                     </select>
                                 </label>
-                                <input type="radio" name="sortType" value="ascending" id="ascending">
+                                <input onchange="sort('${categoryChecked}', '${brandChecked}', '${sortBy}', this.value)" ${sortType=='ascending'?'checked':''} type="radio" name="sortType" value="ascending" id="ascending">
                                 <label for="ascending">Ascending</label>
-                                <input type="radio" name="sortType" value="descending" id="descending">
+                                <input onchange="sort('${categoryChecked}', '${brandChecked}', '${sortBy}', this.value)" ${sortType=='descending'?'checked':''} type="radio" name="sortType" value="descending" id="descending">
                                 <label for="descending">Descending</label>
                             </div>
                         </div>
@@ -159,33 +162,19 @@
                         <!-- store paging -->
                         <c:if test="${listProducts.size()>0}">
                             <div class="store-filter clearfix">
-                                <span class="store-qty">Showing ${listProducts.size()} products</span>
+                                <span class="store-qty">Showing ${listProducts.size()} in ${requestScope['allProductsSize']} products</span>
                                 <ul class="store-pagination">
                                     <c:set var="numOfPage" value="${requestScope['numOfPage']}"/>
                                     <c:set var="currPage" value="${requestScope['currPage']}"/>
                                     <c:forEach var="i" begin="1" end="${numOfPage}">
-                                        <c:if test="${brandChecked!=null}">
-                                            <li class="${currPage==i?'active':''}">
-                                                <a href="search?category=${categoryChecked}&brand=${brandChecked}&page=${i}">${i}</a>
-                                            </li>
-                                        </c:if>
-                                        <c:if test="${brandChecked==null}">
-                                            <li class="${currPage==i?'active':''}">
-                                                <a href="search?category=${categoryChecked}&page=${i}">${i}</a>
-                                            </li>
-                                        </c:if>
+                                        <li class="${currPage==i?'active':''}">
+                                            <a onclick="paging('${categoryChecked}', '${brandChecked}', '${sortBy}', '${sortType}', '${i}')">${i}</a>
+                                        </li>
                                     </c:forEach>
                                     <c:if test="${currPage!=numOfPage}">
-                                        <c:if test="${brandChecked!=null}">
-                                            <li>
-                                                <a href="search?category=${categoryChecked}&brand=${brandChecked}&page=${currPage+1}"><i class="fa fa-angle-right"></i></a>
-                                            </li>
-                                        </c:if>
-                                        <c:if test="${brandChecked==null}">
-                                            <li>
-                                                <a href="search?category=${categoryChecked}&page=${currPage+1}"><i class="fa fa-angle-right"></i></a>
-                                            </li>
-                                        </c:if>
+                                        <li>
+                                            <a onclick="paging('${categoryChecked}', '${brandChecked}', '${sortBy}', '${sortType}', '${currPage+1}')"><i class="fa fa-angle-right"></i></a>
+                                        </li>
                                     </c:if>
                                 </ul>
                             </div>
@@ -201,6 +190,25 @@
         <!-- FOOTER -->
         <%@include file="templates/footer.jsp" %>
         <!-- /FOOTER -->
+
+        <script>
+            function sort(categoryChecked, brandChecked, sortBy, sortType) {
+                if (brandChecked == '') {
+                    window.location.href = 'search?category=' + categoryChecked + '&sortBy=' + sortBy + '&sortType=' + sortType;
+                } else {
+                    window.location.href = 'search?category=' + categoryChecked + '&brand=' + brandChecked + '&sortBy=' + sortBy + '&sortType=' + sortType;
+                }
+            }
+
+            function paging(categoryChecked, brandChecked, sortBy, sortType, page) {
+                console.log(categoryChecked, brandChecked, sortBy, sortType, page);
+                if (brandChecked == '') {
+                    window.location.href = 'search?category=' + categoryChecked + '&sortBy=' + sortBy + '&sortType=' + sortType + '&page=' + page;
+                } else {
+                    window.location.href = 'search?category=' + categoryChecked + '&brand=' + brandChecked + '&sortBy=' + sortBy + '&sortType=' + sortType + '&page=' + page;
+                }
+            }
+        </script>
 
         <!-- jQuery Plugins -->
         <script src="templates/js/jquery.min.js"></script>
