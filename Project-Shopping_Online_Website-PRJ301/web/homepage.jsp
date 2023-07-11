@@ -1,11 +1,13 @@
-<%-- Created on : Jul 2, 2023, 10:28:28 AM by DuyDuc94--%>
+<%-- Created on : Jul 2, 2023, 10:28:28 AM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.*" %>
 <%@page import = "dal.*" %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -28,26 +30,29 @@
     </head>
 
     <body>
+        
         <%@include file="templates/header.jsp" %>
         <%@include file="templates/navigation.jsp" %>
 
         <%
+            //load the list of best-selling products
             ProductDAO proDAO = new ProductDAO();
-            List<Product> listLaptops = proDAO.getTopSellProducts("Laptop");
-            List<Product> listSmartphones = proDAO.getTopSellProducts("Smartphone");
-            List<Product> listTablets = proDAO.getTopSellProducts("Tablet");
-            List<Product> listAccessories = proDAO.getTopSellProducts("Accessory");
+            List<Product> listBestSellLaptops = proDAO.getBestSellProducts("Laptop");
+            List<Product> listBestSellSmartphones = proDAO.getBestSellProducts("Smartphone");
+            List<Product> listBestSellTablets = proDAO.getBestSellProducts("Tablet");
+            List<Product> listBestSellAccessories = proDAO.getBestSellProducts("Accessory");
         %>
 
-        <c:set var="listLaptops" value="<%=listLaptops%>" />
-        <c:set var="listSmartphones" value="<%=listSmartphones%>" />
-        <c:set var="listTablets" value="<%=listTablets%>" />
-        <c:set var="listAccessories" value="<%=listAccessories%>" />
+        <c:set var="listBestSellLaptops" value="<%=listBestSellLaptops%>" />
+        <c:set var="listBestSellSmartphones" value="<%=listBestSellSmartphones%>" />
+        <c:set var="listBestSellTablets" value="<%=listBestSellTablets%>" />
+        <c:set var="listBestSellAccessories" value="<%=listBestSellAccessories%>" />
 
         <!-- COLLECTION -->
         <div class="section">
             <div class="container">
                 <div class="row">
+                    
                     <!-- banner1 -->
                     <div class="col-md-4 col-xs-6">
                         <div class="shop">
@@ -101,7 +106,7 @@
                     <!-- Title -->
                     <div class="col-md-12">
                         <div class="section-title">
-                            <h3 class="title">Top Selling</h3>
+                            <h3 class="title">Top Best Seller</h3>
                             <div class="section-nav">
                                 <ul class="section-tab-nav tab-nav">
                                     <li class="active"><a data-toggle="tab" href="#LaptopTab">Laptops</a></li>
@@ -121,7 +126,7 @@
                                 <!-- Laptop Tab -->
                                 <div id="LaptopTab" class="tab-pane active">
                                     <div class="products-slick" data-nav="#slick-nav-1">
-                                        <c:forEach var="product" items="${listLaptops}">
+                                        <c:forEach var="product" items="${listBestSellLaptops}">
                                             <%@include file="templates/product-tab.jsp" %>
                                         </c:forEach>
                                     </div>
@@ -130,7 +135,7 @@
                                 <!-- Smartphone Tab -->
                                 <div id="SmartphoneTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-2">
-                                        <c:forEach var="product" items="${listSmartphones}">
+                                        <c:forEach var="product" items="${listBestSellSmartphones}">
                                             <%@include file="templates/product-tab.jsp" %>
                                         </c:forEach>
                                     </div>
@@ -139,7 +144,7 @@
                                 <!-- Tablet Tab -->
                                 <div id="TabletTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-3">
-                                        <c:forEach var="product" items="${listTablets}">
+                                        <c:forEach var="product" items="${listBestSellTablets}">
                                             <%@include file="templates/product-tab.jsp" %>
                                         </c:forEach>
                                     </div>
@@ -148,7 +153,7 @@
                                 <!-- Accessory Tab -->
                                 <div id="AccessoryTab" class="tab-pane">
                                     <div class="products-slick" data-nav="#slick-nav-4">
-                                        <c:forEach var="product" items="${listAccessories}">
+                                        <c:forEach var="product" items="${listBestSellAccessories}">
                                             <%@include file="templates/product-tab.jsp" %>
                                         </c:forEach>
                                     </div>
@@ -169,9 +174,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="hot-deal">
-                            <h2 class="text-uppercase">PRJ WEBSITE PROJECT</h2>
-                            <p>Grand Opening</p>
-                            <p>At FPT University</p>
+                            <h2 class="text-uppercase">Shopping Online Website</h2>
+                            <p>PRJ301 Project</p>
+                            <p>In FPT University</p>
                             <p>On 20/7</p>
                             <p>Welcome</p>
                             <a class="primary-btn cta-btn" href="search?category=All">Shop now</a>
@@ -186,51 +191,48 @@
         <div class="section">
             <div class="container">
                 <div class="row">
+                    
                     <!-- Laptop Column -->
                     <div class="col-md-4 col-xs-6">
-                        <!--Title-->
                         <div class="section-title">
-                            <h4 class="title">Top Laptop Selling</h4>
+                            <h4 class="title">Top Laptop Best Seller</h4>
                             <div class="section-nav">
                                 <div id="slick-nav-5" class="products-slick-nav"></div>
                             </div>
                         </div>
-                        <!--Title-->
-                        <!--Content-->
                         <div class="products-widget-slick" data-nav="#slick-nav-5">
-                            <c:if test="${listLaptops != null}">
+                            <c:if test="${listBestSellLaptops.size()>0}">
                                 <div>
-                                    <c:forEach items="${listLaptops}" var="product" varStatus="status" begin="0" end="2">
+                                    <c:forEach items="${listBestSellLaptops}" var="product" varStatus="status" begin="0" end="2">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
                                 <div>
-                                    <c:forEach items="${listLaptops}" var="product" varStatus="status" begin="3" end="5">
+                                    <c:forEach items="${listBestSellLaptops}" var="product" varStatus="status" begin="3" end="5">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
                             </c:if>
                         </div>
-                        <!--Content-->
                     </div>
+                    
                     <!-- Smartphone Column -->
                     <div class="col-md-4 col-xs-6">
                         <div class="section-title">
-                            <h4 class="title">Top Smartphone selling</h4>
+                            <h4 class="title">Top Smartphone Best Seller</h4>
                             <div class="section-nav">
                                 <div id="slick-nav-6" class="products-slick-nav"></div>
                             </div>
                         </div>
-
                         <div class="products-widget-slick" data-nav="#slick-nav-6">
-                            <c:if test="${listSmartphones != null}">
+                            <c:if test="${listBestSellSmartphones.size()>0}">
                                 <div>
-                                    <c:forEach items="${listSmartphones}" var="product" varStatus="status" begin="0" end="2">
+                                    <c:forEach items="${listBestSellSmartphones}" var="product" varStatus="status" begin="0" end="2">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
                                 <div>
-                                    <c:forEach items="${listSmartphones}" var="product" varStatus="status" begin="3" end="5">
+                                    <c:forEach items="${listBestSellSmartphones}" var="product" varStatus="status" begin="3" end="5">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
@@ -243,27 +245,28 @@
                     <!-- Tablet Column -->
                     <div class="col-md-4 col-xs-6">
                         <div class="section-title">
-                            <h4 class="title">Top Tablet selling</h4>
+                            <h4 class="title">Top Tablet Best Seller</h4>
                             <div class="section-nav">
                                 <div id="slick-nav-7" class="products-slick-nav"></div>
                             </div>
                         </div>
 
                         <div class="products-widget-slick" data-nav="#slick-nav-7">
-                            <c:if test="${listTablets != null}">
+                            <c:if test="${listBestSellTablets.size()>0}">
                                 <div>
-                                    <c:forEach items="${listTablets}" var="product" varStatus="status" begin="0" end="2">
+                                    <c:forEach items="${listBestSellTablets}" var="product" varStatus="status" begin="0" end="2">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
                                 <div>
-                                    <c:forEach items="${listTablets}" var="product" varStatus="status" begin="3" end="5">
+                                    <c:forEach items="${listBestSellTablets}" var="product" varStatus="status" begin="3" end="5">
                                         <%@include file="templates/product-widget.jsp" %>
                                     </c:forEach>
                                 </div>
                             </c:if>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -271,9 +274,7 @@
 
         <!-- NEWSLETTER -->
         <div id="newsletter" class="section">
-            <!-- container -->
             <div class="container">
-                <!-- row -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newsletter">
@@ -284,27 +285,29 @@
                             </form>
                             <ul class="newsletter-follow">
                                 <li>
-                                    <a href="https://www.facebook.com/ducduylh"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://www.facebook.com/ducduylh" target="_blank">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/DuyDuc94" title="DucDuyLH"><i class="fa fa-github"></i></a>
+                                    <a href="https://github.com/DuyDuc94" target="_blank">
+                                        <i class="fa fa-github"></i>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:duyduc.luonghuu@gmail.com"><i class="fa fa-envelope"></i></a>
+                                    <a href="#">
+                                        <i class="fa fa-envelope"></i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /container -->
         </div>
         <!-- /NEWSLETTER -->        
 
-        <!-- FOOTER -->
         <%@include file="templates/footer.jsp" %>
-        <!-- /FOOTER -->
 
         <!-- jQuery Plugins -->
         <script src="templates/js/jquery.min.js"></script>

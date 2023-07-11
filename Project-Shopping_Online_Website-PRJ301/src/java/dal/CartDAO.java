@@ -136,6 +136,20 @@ public class CartDAO extends DBContext {
         return false;
     }
     
+    public boolean removeAllCart(int userID){
+        try {
+            String SQL = "delete from Cart_Item where UserID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Failed at remove all cart of UsedID = "+userID);
+        return false;
+    }
+    
     public void removeCart(int cartID){
         try {
             String SQL = "delete from Cart_Item where ID=?";

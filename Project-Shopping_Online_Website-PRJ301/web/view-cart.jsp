@@ -1,11 +1,13 @@
-<%-- Created on : Jul 3, 2023, 4:26:22 PM by DuyDuc94--%>
+<%-- Created on : Jul 3, 2023, 4:26:22 PM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.*" %>
 <%@page import = "dal.*" %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <title>Your Cart</title>
@@ -223,7 +225,7 @@
                     <div class="col-md-12">
                         <h3 class="breadcrumb-header">Cart</h3>
                         <ul class="breadcrumb-tree">
-                            <li><a href="homepage.jsp">Home</a></li>
+                            <li><a href="homepage">Home</a></li>
                             <li class="active">Your Cart</li>
                         </ul>
                     </div>
@@ -249,7 +251,7 @@
                         <%@include file="templates/product-card.jsp" %>
                     </c:forEach>
                     <c:if test="${cart.size()!=0}">
-                        <button class="checkout-button">Proceed to Checkout</button>
+                        <button onclick="window.location.href='view-checkout'" class="checkout-button">Proceed to Checkout</button>
                     </c:if>
                 </div>
             </div>

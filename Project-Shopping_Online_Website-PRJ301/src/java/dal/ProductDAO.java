@@ -251,7 +251,7 @@ public class ProductDAO extends DBContext {
     }
 
     //Return list of product of a category has sold > numberTopSell
-    public List<Product> getTopSellProducts(String categoryName) {
+    public List<Product> getBestSellProducts(String categoryName) {
         List<Product> list = new ArrayList<>();
         int numberTopSell = 10;
         try {

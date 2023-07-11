@@ -1,22 +1,21 @@
-<%-- Created on : Jul 2, 2023, 2:25:06 PM by DuyDuc94--%>
+<%-- Created on : Jul 2, 2023, 2:25:06 PM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.*" %>
 <%@page import = "dal.*" %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <title>Login</title>
         <style>
-            body {
-                background-color: #f5f5f5;
-            }
 
             .login-container {
                 max-width: 400px;
-                margin:  auto;
+                margin: auto;
                 margin-top: 10px;
                 margin-bottom: 50px;
                 background-color: #fff;
@@ -33,8 +32,7 @@
                 font-weight: bold;
             }
 
-            .login-container input[type="text"],
-            .login-container input[type="password"] {
+            .login-container input[type="text"], .login-container input[type="password"] {
                 width: 100%;
                 padding: 10px;
                 border-radius: 3px;
@@ -51,30 +49,13 @@
                 cursor: pointer;
             }
 
-            .login-container .social-login {
-                margin-top: 20px;
-                text-align: center;
-            }
-
-            .login-container .social-login .btn {
-                display: inline-block;
-                margin-right: 10px;
-            }
-
-            .login-container .social-login .btn img {
-                width: 30px;
-                height: 30px;
-            }
-
             .login-container .forgot-password {
                 text-align: center;
                 margin-top: 20px;
             }
 
             .login-container .forgot-password a {
-                color: #337ab7;
                 position: relative;
-                text-decoration: none;
                 font-weight: bold;
             }
 
@@ -94,10 +75,14 @@
             }
 
             .login-container .register-link a {
-                color: #337ab7;
-                text-decoration: none;
                 font-weight: bold;
             }
+            
+            .error-messsage{
+                text-align: center;
+                color: red;
+            }
+          
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -150,16 +135,16 @@
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                             </div>
-                            <p class="text-center" style="color: red;">${requestScope['message']}</p>
-                            <p>${requestScope['url-request']}</p>
+                            <p class="error-messsage">${requestScope['message']}</p>
+                            <!--Use to get back where it need user to login-->
                             <input type="hidden" name="url-request" value="${requestScope['url-request']}">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                         <div class="forgot-password">
-                            <a href="forgot-password.jsp">Forgot Password?</a>
+                            <a href="forgot-password">Forgot Password?</a>
                         </div>
                         <div class="register-link">
-                            <p>Don't have an account? <a href="register.jsp">Register</a></p>
+                            <p>Don't have an account? <a href="register">Register</a></p>
                         </div>
                     </div>
                 </div>

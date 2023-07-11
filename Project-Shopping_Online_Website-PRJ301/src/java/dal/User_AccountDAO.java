@@ -81,7 +81,7 @@ public class User_AccountDAO extends DBContext {
         }
         return false;
     }
-
+    
     public User_Account checkLogin(String username, String password) {
         try {
             String SQL = "Select * from User_Account where username=? and password=?";
@@ -107,17 +107,50 @@ public class User_AccountDAO extends DBContext {
         }
         return null;
     }
+    
+    public User_Account update(int id, String name, String phone, String email) {
+        try {
+            String SQL = "update User_Account set Name = ?, Phone = ?, Email = ?\n"
+                    + "where ID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setNString(1, name);
+            ps.setString(2, phone);
+            ps.setString(3, email);
+            ps.setInt(4, id);
+            ps.executeUpdate();
+            return search(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(User_AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public User_Account changePassword(int id, String newPassword) {
+        try {
+            String SQL = "update User_Account set Password = ?\n"
+                    + "where ID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, newPassword);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            return search(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(User_AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     //Add new user to Database
     public User_Account registerAccount(String username, String password, String name, String phone, String email) {
         try {
             String SQL = "insert into User_Account(username, password, name, phone, email)"
-                    + " values(?, ?, N'" + name + "', ?, ?)";
+                    + " values(?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, username);
             ps.setString(2, password);
-            ps.setString(3, phone);
-            ps.setString(4, email);
+            ps.setNString(3, name);
+            ps.setString(4, phone);
+            ps.setString(5, email);
             ps.executeUpdate();
             ps.close();
             return search(username);
@@ -126,5 +159,5 @@ public class User_AccountDAO extends DBContext {
         }
         return null;
     }
-
+    
 }

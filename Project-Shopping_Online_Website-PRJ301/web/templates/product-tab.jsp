@@ -1,4 +1,4 @@
-<%-- Created on : Jul 4, 2023, 4:41:55 PM by DuyDuc94--%>
+<%-- Created on : Jul 4, 2023, 4:41:55 PM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,7 +6,7 @@
 <!-- product tab -->
 <div class="product">
     <div class="product-img">
-        <img src="templates/img${product.getImage()}" alt="">
+        <img src="templates/img${product.getImage()}" alt="${product.getImage()}">
     </div>
     <div class="product-body">
         <p class="product-category">${product.getCategoryName()}</p>
@@ -15,6 +15,7 @@
         <div class="text-center">
             ${product.getSold()} SOLD
         </div>
+        
         <!--Add to wishlist-->
         <c:if test="${product.isInWishlist(user.getID())==true}">
             <form action="remove-wishlist" method="post">
@@ -27,6 +28,7 @@
             </form>
         </c:if>
         <!--Add to wishlist-->
+        
         <!--Remove from wishlist-->
         <c:if test="${product.isInWishlist(user.getID())==false}">
             <form action="add-wishlist" method="post">
@@ -39,7 +41,9 @@
             </form>
         </c:if>
         <!--Remove from wishlist-->
+        
     </div>
+        
     <!--View product-->
     <form action="view-product" method="get">
         <div class="add-to-cart">
@@ -48,5 +52,6 @@
         </div>
     </form>
     <!--View product-->
+    
 </div>
 <!-- /product tab -->

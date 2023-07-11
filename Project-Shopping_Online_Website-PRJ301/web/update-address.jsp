@@ -1,11 +1,13 @@
-<%-- Created on : Jul 4, 2023, 11:23:29 AM by DuyDuc94--%>
+<%-- Created on : Jul 4, 2023, 11:23:29 AM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.*" %>
 <%@page import = "dal.*" %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -24,9 +26,9 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Change Password</title>
+        <title>Update address</title>
         <style>
-            .register-container{
+            .update-container{
                 max-width: 400px;
                 margin: 0 auto;
                 margin-top: 10px;
@@ -35,9 +37,8 @@
                 padding: 30px;
                 border-radius: 5px;
                 box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                align-items: center;
             }
-            .register-container .field{
+            .update-container .field{
                 margin-bottom: 20px
             }
 
@@ -48,7 +49,7 @@
                 font-weight: 700;
             }
 
-            .register-container input{
+            .update-container input{
                 width: 100%;
                 padding: 10px;
                 border-radius: 3px;
@@ -100,7 +101,7 @@
                 background-color: #337ab7;
                 border-color: #2e6da4;
             }
-            .register-container button{
+            .update-container button{
                 width: 100%;
                 padding: 10px;
                 background-color: #337ab7;
@@ -109,9 +110,11 @@
                 font-weight: bold;
                 cursor: pointer;
             }
-            .changepass-title{
-                text-align: center;
+
+            .update-title{
+                text-align: center  ;
             }
+
             div.vertical-line{
                 width: 0px; /* Use only border style */
                 height: 100%;
@@ -130,11 +133,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="breadcrumb-header">My Account</h3>
+                        <!--<h3 class="breadcrumb-header">Wishlist</h3>-->
                         <ul class="breadcrumb-tree">
                             <li><a href="homepage">Home</a></li>
-                            <li><a href="view-account">Account</a></li>
-                            <li class="active">Change My Password</li>
+                            <li><a href="view-address">Address</a></li>
+                            <li class="active">Update Address</li>
                         </ul>
                     </div>
                 </div>
@@ -148,7 +151,7 @@
                 <div class="row">
                     <!-- Options -->
                     <div class="update-option-container col-md-3">
-                        <h3 style="font-size: 18px; margin-bottom: 30px">${user.getUsername()}</h3></form>
+                        <form ><h3 style="font-size: 18px; margin-bottom: 30px">${user.getUsername()}</h3></form>
                         <div class="input-checkbox">
                             <br>
                             <div class="option">
@@ -176,38 +179,53 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="vertical-line" style="height:10cm;"></div>
 
-
-                    <div class="changepass-form col-md-8">
-                        <div class="register-container ">
-                            <div class="changepass-title"><h3>CHANGE PASSWORD</h3></div>
-                            <form action="update-password" method="post" style="align-items: center">
-                                <div class="field required">
-                                    <label for="oldPassword">Your password:</label>
-                                    <input class="input-form" name="oldPassword" type="password" placeholder="Your password" required>
-                                    <p style="color: red">${requestScope['oldPasswordMessage']}</p>
+                    <c:set var="fullAddress" value="${requestScope['fullAddress']}" />
+                    
+                    <div class="update-address-form col-md-8">
+                        <form action="update-address" method="post">
+                            <input type="hidden" name="addressID" value="${fullAddress.getID()}">
+                            <div class="update-container">
+                                <div class="update-title">
+                                    <h3>UPDATE ADDRESS</h3>
+                                </div>
+                                <div class="field required" >
+                                    <label for="address">Address:</label>
+                                    <input class="input-form" name="address" type="text" value="${fullAddress.getAddress()}" id="address" required>
                                 </div>
                                 <div class="field required">
-                                    <label for="newPassword">New password:</label>
-                                    <input class="input-form" name="newPassword" type="password" placeholder="New password" required>
+                                    <label for="city">City:</label>
+                                    <input class="input-form" name="city" type="text" value="${fullAddress.getCity()}" id="city" required>
                                 </div>
-                                <div class="field required">
-                                    <label for="confirmNewPassword">Comfirm password:</label>
-                                    <input class="input-form" name="confirmNewPassword" type="password" placeholder="Comfirm password" required>    
-                                    <p style="color: red">${requestScope['confirmPasswordMessage']}</p>
-                                </div>
-                                <button class="primary primary-btn" type="submit">
-                                    Change
-                                </button>
-                            </form>
-                        </div>
+                                <button style="display: none" type="submit" class="btn btn-primary" id="change">Change</button>
+                                <button onclick="window.location.href = 'view-address'" type="button" class="btn btn-primary" id="cancel">Cancel</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /SECTION -->
+
+        <<script>
+            let addressInput = document.getElementById('address');
+            let cityInput = document.getElementById('city');
+
+            let changeButton = document.getElementById('change');
+            let cancelButton = document.getElementById('cancel');
+            function update() {
+                if (addressInput.value || cityInput.value) {
+                    cancelButton.style.display = 'none';
+                    changeButton.style.display = 'block';
+                } else {
+                    cancelButton.style.display = 'block';
+                    changeButton.style.display = 'none';
+                }
+            }
+            addressInput.addEventListener('input', update);
+            cityInput.addEventListener('input', update);
+        </script>
 
         <%@include file="templates/footer.jsp" %>
 

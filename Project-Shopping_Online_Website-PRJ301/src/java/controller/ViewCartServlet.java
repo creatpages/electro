@@ -1,7 +1,6 @@
 /*
  * DuyDuc94
  */
-
 package controller;
 
 import java.io.IOException;
@@ -20,24 +19,23 @@ public class ViewCartServlet extends HttpServlet {
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
     //PrintWriter out = response.getWriter();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session = request.getSession();
-        if(session.getAttribute("user")!=null){
+        if (session.getAttribute("user") != null) {
             request.getRequestDispatcher("view-cart.jsp").forward(request, response);
-        }else{
-            response.sendRedirect("login");
+        } else {
+            response.sendRedirect("homepage");
         }
-    } 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         //processRequest(request, response);
-        
+
     }
 
 }

@@ -1,8 +1,9 @@
-package controller;
-
 /*
  * DuyDuc94
  */
+
+package controller;
+
 import dal.CartDAO;
 import dal.Product_DetailDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -39,7 +40,7 @@ public class AddCartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
-            request.setAttribute("message", "Please login to add to cart");
+            request.setAttribute("message", "Login to add products to your cart");
             request.setAttribute("url-request", request.getHeader("referer"));
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

@@ -6,7 +6,6 @@ package controller;
 
 import dal.User_AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,8 +26,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-        HttpSession session = request.getSession(true);
-        if (session.getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             response.sendRedirect("homepage");

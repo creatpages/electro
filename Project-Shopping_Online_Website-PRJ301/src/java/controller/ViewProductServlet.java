@@ -61,7 +61,6 @@ public class ViewProductServlet extends HttpServlet {
         String color = (String) request.getAttribute("color");
         Product_Detail proDetail = proDetDAO.getColor(proID, color);
 
-
         request.setAttribute("mainProduct", mainProduct);
         request.setAttribute("listProductDetail", listProductDetail);
         request.setAttribute("listRelatedProduct", listRelatedProduct);

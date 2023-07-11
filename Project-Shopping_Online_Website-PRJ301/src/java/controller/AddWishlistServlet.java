@@ -1,6 +1,7 @@
 /*
  *     DuyDuc94
  */
+
 package controller;
 
 import dal.*;
@@ -33,6 +34,7 @@ public class AddWishlistServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         User_Account user = (User_Account) session.getAttribute("user");
         if (user == null) {
+            request.setAttribute("message", "Login to add your favorite products");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }

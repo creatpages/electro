@@ -7,7 +7,6 @@ package controller;
 
 import dal.User_AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,8 +28,7 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        HttpSession session = request.getSession(true);
-        if (session.getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
             response.sendRedirect("homepage");
@@ -52,7 +50,7 @@ public class AddUserServlet extends HttpServlet {
         
         //Check legit of name
         if (!MyValidated.isLegitName(name)) {
-            request.setAttribute("usernameMessage", "Username has exist!");
+            request.setAttribute("nameMessage", "Name not valid!");
             canRegister = false;
         }
 

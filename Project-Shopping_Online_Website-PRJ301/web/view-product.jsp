@@ -1,15 +1,13 @@
-<%-- 
-    Document   : view-product
-    Created on : Jul 6, 2023, 3:48:56 PM
-    Author     : duy20
---%>
+<%-- Created on : Jul 6, 2023, 3:48:56 PM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.*" %>
 <%@page import = "dal.*" %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -139,7 +137,6 @@
                                 <p style="color: red; text-transform: capitalize">${requestScope['addToCartMessage']}</p>
                             </form>
 
-
                             <!--Add to wishlist-->
                             <c:if test="${mainProduct.isInWishlist(user.getID())==true}">
                                 <form action="remove-wishlist" method="post" id="add-to-wishlist">
@@ -152,6 +149,7 @@
                                 </ul>
                             </c:if>
                             <!--Add to wishlist-->
+                            
                             <!--Remove from wishlist-->
                             <c:if test="${mainProduct.isInWishlist(user.getID())==false}">
                                 <form action="add-wishlist" method="post" id="add-to-wishlist">
@@ -181,6 +179,7 @@
 
                             <!-- product tab content -->
                             <div class="tab-content">
+                                
                                 <!-- tab1  -->
                                 <div id="tab1" class="tab-pane fade in active">
                                     <div class="row">
@@ -239,9 +238,7 @@
         </div>
         <!-- /RELATED PRODUCT -->
 
-        <!-- FOOTER -->
         <%@include file="templates/footer.jsp" %>
-        <!-- /FOOTER -->
 
         <script>
             function changPrice(quantity, basePrice) {

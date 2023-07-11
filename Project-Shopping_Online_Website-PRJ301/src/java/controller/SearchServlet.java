@@ -1,12 +1,12 @@
 /*
  *     DuyDuc94
  */
+
 package controller;
 
 import dal.BrandDAO;
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +34,7 @@ public class SearchServlet extends HttpServlet {
         List<Brand> listBrands = new ArrayList<>();
         List<Product> listProducts = new ArrayList<>();
         List<Product> showListProducts = new ArrayList<>();
+        
         if (category != null) {
             if (category.compareTo("All") != 0) {
                 if (info == null) {
@@ -77,6 +78,7 @@ public class SearchServlet extends HttpServlet {
             }
             showListProducts.add(listProducts.get(i));
         }
+        
         request.setAttribute("categoryChecked", category);
         request.setAttribute("brandChecked", brand);
         request.setAttribute("listBrands", listBrands);

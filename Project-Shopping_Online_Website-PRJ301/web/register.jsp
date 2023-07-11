@@ -57,8 +57,6 @@
             }
 
             .register-container .login-link a {
-                color: #337ab7;
-                text-decoration: none;
                 font-weight: bold;
             }
 
@@ -94,7 +92,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a href="homepage.jsp">Home</a></li>
+                            <li><a href="homepage">Home</a></li>
                             <li class="active">Register</li>
                         </ul>
                     </div>
@@ -113,6 +111,7 @@
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="${param.name!=null?param.name:'Enter your name'}" required>
+                                <p class="error-messsage">${requestScope['nameMessage']}</p>
                             </div>
                             <div class="form-group">
                                 <label for="username">Username:</label>
@@ -142,7 +141,7 @@
                             <button type="submit" class="btn btn-primary">Register</button>
                         </form>
                         <div class="login-link">
-                            <p>Already have an account? <a href="login.jsp">Login</a></p>
+                            <p>Already have an account? <a href="login">Login</a></p>
                         </div>
                     </div>
                 </div>

@@ -1,13 +1,11 @@
-<%-- Created on : Jul 2, 2023, 10:26:44 AM by DuyDuc94--%>
+<%-- Created on : Jul 2, 2023, 10:26:44 AM by DuyDuc94 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- FOOTER -->
 <footer id="footer">
     <div class="section">
-        <!-- container -->
         <div class="container">
-            <!-- row -->
             <div class="row">
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
@@ -54,16 +52,14 @@
                         <ul class="footer-links">
                             <li><a href="#">My Account</a></li>
                             <li><a href="#">View Cart</a></li>
-                            <li><a href="wishlist">Wishlist</a></li>
+                            <li><a href="#">Wishlist</a></li>
                             <li><a href="#">Track My Order</a></li>
                             <li><a href="#">Help</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- /row -->
         </div>
-        <!-- /container -->
     </div>
 </footer>
 <!-- /FOOTER -->

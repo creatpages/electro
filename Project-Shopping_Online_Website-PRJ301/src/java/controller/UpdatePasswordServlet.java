@@ -3,28 +3,29 @@
  */
 package controller;
 
+import dal.User_AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.User_Account;
 
 /**
  * @author duy20
  */
-public class ViewAccountServlet extends HttpServlet {
+public class UpdatePasswordServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
+    //PrintWriter out = response.getWriter();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
         if (request.getSession().getAttribute("user") != null) {
-            request.getRequestDispatcher("view-account.jsp").forward(request, response);
+            request.getRequestDispatcher("change-password.jsp").forward(request, response);
         } else {
             response.sendRedirect("homepage");
         }
@@ -34,7 +35,27 @@ public class ViewAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        User_Account user = (User_Account) request.getSession().getAttribute("user");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmNewPassword = request.getParameter("confirmNewPassword");
+        boolean canChange = true;
 
+        if (user.getPassword().compareTo(oldPassword) != 0) {
+            request.setAttribute("oldPasswordMessage", "Old password is not correct!");
+            canChange = false;
+        }
+        if (newPassword.compareTo(confirmNewPassword) != 0) {
+            request.setAttribute("confirmPasswordMessage", "Password is not match!");
+            canChange = false;
+        }
+        if(canChange){
+            User_AccountDAO accountDAO = new User_AccountDAO();
+            request.getSession().setAttribute("user", accountDAO.changePassword(user.getID(), newPassword));
+            response.sendRedirect("view-account");
+        }else{
+            request.getRequestDispatcher("change-password.jsp").forward(request, response);
+        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -45,10 +66,10 @@ public class ViewAccountServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAccountServlet</title>");
+            out.println("<title>Servlet UpdatePasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewAccountServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdatePasswordServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

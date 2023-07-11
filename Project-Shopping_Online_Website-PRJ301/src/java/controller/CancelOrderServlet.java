@@ -4,7 +4,7 @@
 
 package controller;
 
-import dal.CartDAO;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * @author duy20
  */
-public class RemoveCartServlet extends HttpServlet {
+public class CancelOrderServlet extends HttpServlet {
 
     //response.setContentType("text/html;charset=UTF-8");
     //request.setCharacterEncoding("UTF-8");
@@ -25,17 +25,20 @@ public class RemoveCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-        response.sendRedirect("homepage");
+        int orderID = Integer.parseInt(request.getParameter("orderID"));
+        OrderDAO orderDAO = new OrderDAO();
+        if(orderDAO.cancelOrder(orderID)){
+            response.sendRedirect("view-order");
+        }else{
+            response.sendRedirect("homepage");
+        }
     } 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-        int cartID = Integer.parseInt(request.getParameter("cartID"));
-        CartDAO cartDAO = new CartDAO();
-        cartDAO.removeCart(cartID);
-        response.sendRedirect("view-cart");
+        
     }
 
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -46,10 +49,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RemoveCartServlet</title>");  
+            out.println("<title>Servlet CancelOrderServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RemoveCartServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CancelOrderServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

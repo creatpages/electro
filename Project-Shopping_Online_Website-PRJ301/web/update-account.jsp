@@ -26,10 +26,10 @@
         <script src="https://kit.fontawesome.com/db3e6c46fb.js" crossorigin="anonymous"></script>
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="templates/css/style.css" />
-        <title>Account</title>
+        <title>Update account</title>
         <style>
-            .Account-info-container table{
-                max-width: 1000px;
+            .update-container{
+                max-width: 400px;
                 margin: 0 auto;
                 margin-top: 10px;
                 margin-bottom: 50px;
@@ -37,30 +37,44 @@
                 padding: 30px;
                 border-radius: 5px;
                 box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                width: 800px;
-                height: 200px;
             }
-            .Account-info-container .field{
+            .update-container .field{
+                margin-bottom: 20px
+            }
+
+            label {
+                display: inline-block;
                 max-width: 100%;
+                margin-bottom: 5px;
                 font-weight: 700;
             }
-            .Account-info-container tr{
-                text-align: center;
-                margin-top: 20px;
-            }
-            .Account-info-container .option{
-                margin-top: 20px;
-            }
-            div.vertical-line{
-                width: 0px; /* Use only border style */
-                height: 100%;
-                float: left;
-                border: 1px inset; /* This is default border style for <hr> tag */
-            }
 
-
-            .Account-info-container button{
-                width: 25%;
+            .update-container input{
+                width: 100%;
+                padding: 10px;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+            }
+            .input-form{
+                display: block;
+                width: 100%;
+                height: 34px;
+                padding: 6px 12px;
+                font-size: 14px;
+                line-height: 1.42857143;
+                color: #555;
+                background-color: #fff;
+                background-image: none;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            }
+            .update-container button{
+                width: 100%;
                 padding: 10px;
                 background-color: #337ab7;
                 border: 0;
@@ -69,10 +83,17 @@
                 cursor: pointer;
             }
 
-            .Account-info-container .button{
-                display: flex;
-                flex-direction: row-reverse;
+            .update-title{
+                text-align: center  ;
             }
+            
+            div.vertical-line{
+                width: 0px; /* Use only border style */
+                height: 100%;
+                float: left;
+                border: 1px inset; /* This is default border style for <hr> tag */
+            }
+
         </style>
 
     </head>
@@ -88,7 +109,8 @@
                         <h3 class="breadcrumb-header">My Account</h3>
                         <ul class="breadcrumb-tree">
                             <li><a href="homepage">Home</a></li>
-                            <li class="active">My Account</li>
+                            <li><a href="view-account">My Account</a></li>
+                            <li class="active">Update Account</li>
                         </ul>
                     </div>
                 </div>
@@ -132,47 +154,58 @@
                     </div>
                     <div class="vertical-line" style="height:10cm;"></div>
 
-                    <!-- Account info- -->
-                    <div class="Account-info-container col-md-8">
-                        <div>
-                            <h3>ACOUNT INFORMATION</h3>
+                    <div class="update-form col-md-8">
+                        <div class="update-container">
+                            <div class="update-title">
+                                <h3>UPDATE INFOMATION</h3>
+                            </div>
+                            <form action="update-account" method="post">
+                                <div class="field required">
+                                    <label for="name" >Name:</label>
+                                    <input class="input-form" type="text" name="name" value="${user.getName()}" id="name" required>
+                                    <p style="color: red">${requestScope['nameMessage']}</p>
+                                </div>
+                                <div class="field required">
+                                    <label for="phone">Phone number:</label>
+                                    <input class="input-form" type="text" name="phone" value="${user.getPhone()}" id="phone" required>
+                                    <p style="color: red">${requestScope['phoneMessage']}</p>
+                                </div>
+                                <div class="field required">
+                                    <label for="email">Email:</label>
+                                    <input class="input-form" type="email" name="email" value="${user.getEmail()}" id="email" required>
+                                    <p style="color: red">${requestScope['emailMessage']}</p>
+                                </div>
+                                <button style="display: none" type="submit" class="btn btn-primary" id="change">Change</button>
+                                <button onclick="window.location.href ='view-account'" type="button" class="btn btn-primary" id="cancel">Cancel</button>
                         </div>
-
-                        <div class="account-info-tbn">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="field">Username</td>
-                                        <td>:</td>
-                                        <td class="info">${user.getUsername()}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="field">Name</td>
-                                        <td>:</td>
-                                        <td class="info">${user.getName()}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="field">Email</td>
-                                        <td>:</td>
-                                        <td class="info">${user.getEmail()}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="field">Phone</td>
-                                        <td>:</td>
-                                        <td class="info">${user.getPhone()}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="button text-center">
-                            <button onclick="window.location.href='update-account'" class="btn btn-primary" type="button">Update</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- /SECTION -->
+
+    <script>
+        let nameInput = document.getElementById('name');
+        let phoneInput = document.getElementById('phone');
+        let emailInput = document.getElementById('email');
+
+        let changeButton = document.getElementById('change');
+        let cancelButton = document.getElementById('cancel');
+        function update() {
+            if (nameInput.value || phoneInput.value || emailInput.value) {
+                cancelButton.style.display = 'none';
+                changeButton.style.display = 'block';
+            } else {
+                cancelButton.style.display = 'block';
+                changeButton.style.display = 'none';
+            }
+        }
+        nameInput.addEventListener('input', update);
+        phoneInput.addEventListener('input', update);
+        emailInput.addEventListener('input', update);
+    </script>
 
     <%@include file="templates/footer.jsp" %>
 

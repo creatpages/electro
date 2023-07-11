@@ -56,7 +56,6 @@
             }
 
             .forgot-password-container .login-link a {
-                color: #337ab7;
                 text-decoration: none;
                 font-weight: bold;
             }
@@ -95,8 +94,8 @@
                     <div class="col-md-12">
                         <!--<h3 class="breadcrumb-header">Forgot Password</h3>-->
                         <ul class="breadcrumb-tree">
-                            <li><a href="homepage.jsp">Home</a></li>
-                            <li><a href="login.jsp">Login</a></li>
+                            <li><a href="homepage">Home</a></li>
+                            <li><a href="login">Login</a></li>
                             <li class="active">Forgot Password</li>
                         </ul>
                     </div>
@@ -108,7 +107,6 @@
         <!-- SECTION -->
         <div class="container">
             <div class="row">
-      
                     <div class="forgot-password-container">
                         <form action="forgot-password" method="post">
                             <div class="form-group">
