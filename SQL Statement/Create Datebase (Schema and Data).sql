@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [PRJ_ShoppingOnlineWebsite]    Script Date: 7/8/2023 6:18:48 PM ******/
+/****** Object:  Database [PRJ_ShoppingOnlineWebsite]    Script Date: 7/11/2023 11:04:35 AM ******/
 CREATE DATABASE [PRJ_ShoppingOnlineWebsite]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [PRJ_ShoppingOnlineWebsite] SET QUERY_STORE = OFF
 GO
 USE [PRJ_ShoppingOnlineWebsite]
 GO
-/****** Object:  Table [dbo].[Address]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Address]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -95,7 +95,7 @@ CREATE TABLE [dbo].[Address](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Brand]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Brand]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[Brand](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Cart_Item]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Cart_Item]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,7 +126,7 @@ CREATE TABLE [dbo].[Cart_Item](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Category]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Category]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ CREATE TABLE [dbo].[Category](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Order]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,25 +148,26 @@ GO
 CREATE TABLE [dbo].[Order](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[UserID] [int] NULL,
-	[Date] [date] NULL,
-	[TotalAmount] [float] NULL,
+	[DateOrder] [date] NULL,
 	[Status] [int] NULL,
-	[ShippingAddress] [int] NULL,
-	[ShippingMethod] [bit] NULL,
+	[ShippingAddress] [nvarchar](250) NULL,
+	[PaymentMethod] [varchar](50) NULL,
  CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order_Detail]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Order_Detail]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Order_Detail](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[CartItemID] [int] NULL,
+	[ProDetailID] [int] NULL,
+	[Quantity] [int] NULL,
+	[Price] [float] NULL,
 	[OrderID] [int] NULL,
  CONSTRAINT [PK_Order_Detail] PRIMARY KEY CLUSTERED 
 (
@@ -174,7 +175,7 @@ CREATE TABLE [dbo].[Order_Detail](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order_Status]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Order_Status]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +189,7 @@ CREATE TABLE [dbo].[Order_Status](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +208,7 @@ CREATE TABLE [dbo].[Product](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product_Detail]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Product_Detail]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +226,7 @@ CREATE TABLE [dbo].[Product_Detail](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User_Account]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[User_Account]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,18 +246,23 @@ CREATE TABLE [dbo].[User_Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User_Address]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[User_Address]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[User_Address](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[UserID] [int] NULL,
 	[AddressID] [int] NULL,
-	[IsDefault] [bit] NULL
+	[IsDefault] [bit] NULL,
+ CONSTRAINT [PK_User_Address_1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Wishlist]    Script Date: 7/8/2023 6:18:49 PM ******/
+/****** Object:  Table [dbo].[Wishlist]    Script Date: 7/11/2023 11:04:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,6 +276,16 @@ CREATE TABLE [dbo].[Wishlist](
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Address] ON 
+GO
+INSERT [dbo].[Address] ([ID], [Address], [City]) VALUES (39, N'1', N'1')
+GO
+INSERT [dbo].[Address] ([ID], [Address], [City]) VALUES (41, N'2', N'2')
+GO
+INSERT [dbo].[Address] ([ID], [Address], [City]) VALUES (42, N'3', N'3')
+GO
+SET IDENTITY_INSERT [dbo].[Address] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Brand] ON 
 GO
@@ -319,6 +335,10 @@ SET IDENTITY_INSERT [dbo].[Cart_Item] ON
 GO
 INSERT [dbo].[Cart_Item] ([ID], [UserID], [ProDetailID], [Quantity]) VALUES (1, 6, 40, 2)
 GO
+INSERT [dbo].[Cart_Item] ([ID], [UserID], [ProDetailID], [Quantity]) VALUES (8, 6, 41, 10)
+GO
+INSERT [dbo].[Cart_Item] ([ID], [UserID], [ProDetailID], [Quantity]) VALUES (12, 5, 40, 3)
+GO
 SET IDENTITY_INSERT [dbo].[Cart_Item] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Category] ON 
@@ -333,19 +353,37 @@ INSERT [dbo].[Category] ([ID], [Name]) VALUES (4, N'Accessory')
 GO
 SET IDENTITY_INSERT [dbo].[Category] OFF
 GO
+SET IDENTITY_INSERT [dbo].[Order] ON 
+GO
+INSERT [dbo].[Order] ([ID], [UserID], [DateOrder], [Status], [ShippingAddress], [PaymentMethod]) VALUES (1, 8, CAST(N'2023-07-11' AS Date), 2, N'2, 2 City', N'Cash On Delivery')
+GO
+INSERT [dbo].[Order] ([ID], [UserID], [DateOrder], [Status], [ShippingAddress], [PaymentMethod]) VALUES (2, 8, CAST(N'2023-07-11' AS Date), 2, N'3, 3 City', N'Cash On Delivery')
+GO
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Order_Detail] ON 
+GO
+INSERT [dbo].[Order_Detail] ([ID], [ProDetailID], [Quantity], [Price], [OrderID]) VALUES (10, 64, 1, 670, 1)
+GO
+INSERT [dbo].[Order_Detail] ([ID], [ProDetailID], [Quantity], [Price], [OrderID]) VALUES (11, 127, 1, 600, 2)
+GO
+SET IDENTITY_INSERT [dbo].[Order_Detail] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Order_Status] ON 
 GO
 INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (1, N'Canceled')
 GO
-INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (2, N'Delivering')
+INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (2, N'Preparing')
 GO
-INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (3, N'Delivered ')
+INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (3, N'Delivering ')
+GO
+INSERT [dbo].[Order_Status] ([ID], [Status]) VALUES (4, N'Delivered ')
 GO
 SET IDENTITY_INSERT [dbo].[Order_Status] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Product] ON 
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (1, 1, 1, N'Dell Inspiron 1410', N'Description of Dell Inspiron 1410', N'/laptops/Dell-Inspiron-1410.png', 15)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (1, 1, 1, N'Dell Inspiron 1410', N'Description of Dell Inspiron 1410', N'/laptops/Dell-Inspiron-1410.png', 8)
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (2, 1, 3, N'Acer Nitro 5', N'Description of Acer Nitro 5', N'/laptops/Acer-Nitro-5.png', 10)
 GO
@@ -357,11 +395,11 @@ INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (6, 2, 4, N'Samsung Galaxy S22 Ultra', N'Description of Samsung Galaxy S22 Ultra 12GB/256GB', N'/smartphones/Samsung-Galaxy-S22-Ultra.png', 0)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (7, 3, 7, N'iPad Pro 2021', N'Description of iPad Pro 11 Inch 2021', N'/tablets/iPad-Pro-2021.png', 13)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (7, 3, 7, N'iPad Pro 2021', N'Description of iPad Pro 11 Inch 2021', N'/tablets/iPad-Pro-2021.png', 9)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (8, 3, 8, N'Microsoft Surface Pro 4', N'Description of Microsoft Surface Pro 4', N'/tablets/Microsoft-Surface-Pro-4.png', 11)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (8, 3, 8, N'Microsoft Surface Pro 4', N'Description of Microsoft Surface Pro 4', N'/tablets/Microsoft-Surface-Pro-4.png', 7)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (10, 4, 11, N'Razer Kraken V3 Pro', N'Description of Razer Kraken V3 Pro', N'/accessories/Razer-Kraken-V3-Pro.png', 12)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (10, 4, 11, N'Razer Kraken V3 Pro', N'Description of Razer Kraken V3 Pro', N'/accessories/Razer-Kraken-V3-Pro.png', 5)
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (11, 4, 10, N'Logitech Headphone G335', N'Description of Logitech Headphone G335', N'/accessories/Logitech-Headphone-G335.png', 10)
 GO
@@ -429,13 +467,11 @@ INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (50, 3, 17, N'Samsung Galaxy Tab S8', N'Description of Samsung Galaxy Tab S8 Ultra 5G', N'/tablets/Samsung-Galaxy-Tab-S8-Ultra-5G.png', 10)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (51, 3, 17, N'Samsung Galaxy Tab A8', N'Description of Samsung Galaxy Tab A8', N'/tablets/Samsung-Galaxy-Tab-A8.png', 15)
-GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (52, 3, 17, N'Samsung Galaxy Tab A7 Lite', N'Description of Samsung Galaxy Tab A7 Lite LTE', N'/tablets/Samsung-Galaxy-Tab-A7-Lite-LTE.png', 12)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (52, 3, 17, N'Samsung Galaxy Tab A7 Lite', N'Description of Samsung Galaxy Tab A7 Lite LTE', N'/tablets/Samsung-Galaxy-Tab-A7-Lite-LTE.png', 3)
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (53, 3, 18, N'Xiaomi Pad 6', N'Description of Xiaomi Pad 6', N'/tablets/Xiaomi-Pad-6.png', 10)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (54, 3, 18, N'Xiaomi Redmi Pad', N'Description of Xiaomi Redmi Pad', N'/tablets/Xiaomi-Redmi-Pad.png', 15)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (54, 3, 18, N'Xiaomi Redmi Pad', N'Description of Xiaomi Redmi Pad', N'/tablets/Xiaomi-Redmi-Pad.png', 2)
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (55, 3, 18, N'Xiaomi Mi Pad 5 Pro', N'Description of Xiaomi Mi Pad 5 Pro', N'/tablets/Xiaomi-Mi-Pad-5-Pro.png', 13)
 GO
@@ -453,7 +489,7 @@ INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (62, 4, 12, N'Corsair Virtuoso RGB', N'Description of Corsair Virtuoso RGB Wireless', N'/accessories/Corsair-Virtuoso-RGB-Wireless.png', 8)
 GO
-INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (63, 4, 19, N'Sennheiser GSP300', N'Description of Sennheiser GSP300', N'/accessories/Sennheiser-GSP300.png', 15)
+INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (63, 4, 19, N'Sennheiser GSP300', N'Description of Sennheiser GSP300', N'/accessories/Sennheiser-GSP300.png', 9)
 GO
 INSERT [dbo].[Product] ([ID], [CateID], [BrandID], [Name], [Description], [Image], [Sold]) VALUES (64, 4, 19, N'Sennheiser GSP500', N'Description of Sennheiser GSP500', N'/accessories/Sennheiser-GSP500.png', 10)
 GO
@@ -541,9 +577,9 @@ INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Col
 GO
 INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (39, 16, 9, 900, N'/laptops/Dell-Vostro-3420/Dell-Vostro-3420-White.png', N'white')
 GO
-INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (40, 17, 15, 950, N'/laptops/Acer-Aspire-7/Acer-Aspire-7-Black.png', N'black')
+INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (40, 17, 15, 950.6, N'/laptops/Acer-Aspire-7/Acer-Aspire-7-Black.png', N'black')
 GO
-INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (41, 17, 10, 920, N'/laptops/Acer-Aspire-7/Acer-Aspire-7-Grey.png', N'grey')
+INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (41, 17, 10, 920.25, N'/laptops/Acer-Aspire-7/Acer-Aspire-7-Grey.png', N'grey')
 GO
 INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (42, 17, 10, 890, N'/laptops/Acer-Aspire-7/Acer-Aspire-7-White.png', N'white')
 GO
@@ -721,12 +757,6 @@ INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Col
 GO
 INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (129, 50, 5, 600, N'/tablets/Samsung-Galaxy-Tab-S8-Ultra-5G/Samsung-Galaxy-Tab-S8-Ultra-5G-White.png', N'white')
 GO
-INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (130, 51, 7, 700, N'/tablets/Samsung-Galaxy-Tab-A8/Samsung-Galaxy-Tab-A8-Black.png', N'black')
-GO
-INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (131, 51, 9, 750, N'/tablets/Samsung-Galaxy-Tab-A8/Samsung-Galaxy-Tab-A8-Grey.png', N'grey')
-GO
-INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (132, 51, 4, 750, N'/tablets/Samsung-Galaxy-Tab-A8/Samsung-Galaxy-Tab-A8-White.png', N'white')
-GO
 INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (133, 52, 5, 1200, N'/tablets/Samsung-Galaxy-Tab-A7-Lite-LTE/Samsung-Galaxy-Tab-A7-Lite-LTE-Black.png', N'black')
 GO
 INSERT [dbo].[Product_Detail] ([ID], [ProID], [Quantity], [Price], [Image], [Color]) VALUES (134, 52, 8, 1250, N'/tablets/Samsung-Galaxy-Tab-A7-Lite-LTE/Samsung-Galaxy-Tab-A7-Lite-LTE-Grey.png', N'grey')
@@ -837,19 +867,41 @@ INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Na
 GO
 INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (4, N'user3', N'user3', 0, 1, NULL, NULL, NULL)
 GO
-INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (5, N'user1', N'user1', 0, 1, NULL, N'0943218394', N'chacaidoseve@gmail.com')
+INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (5, N'user1', N'user1', 0, 1, N'UserOne', N'113123123', N'congan@congan.com')
 GO
-INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (6, N'duyduc94', N'duy', 0, 1, N'Duy Đức', N'0943218394', N'duyduc.luonghuu@gmail.com')
+INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (6, N'duyduc94', N'duy', 0, 1, N'Đức Duy', N'012301234567', N'duyduc.luonghuu@gmail.com')
+GO
+INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (7, N'hoang', N'123456789', 0, 1, N'doanz', N'0947142668', N'duyancut@gmail.com')
+GO
+INSERT [dbo].[User_Account] ([ID], [Username], [Password], [Role], [Status], [Name], [Phone], [Email]) VALUES (8, N'test1', N'test1', 0, 1, N'Tester', N'01231231234', N'asd@asd.asd')
 GO
 SET IDENTITY_INSERT [dbo].[User_Account] OFF
+GO
+SET IDENTITY_INSERT [dbo].[User_Address] ON 
+GO
+INSERT [dbo].[User_Address] ([ID], [UserID], [AddressID], [IsDefault]) VALUES (41, 8, 39, 1)
+GO
+INSERT [dbo].[User_Address] ([ID], [UserID], [AddressID], [IsDefault]) VALUES (43, 8, 41, 0)
+GO
+INSERT [dbo].[User_Address] ([ID], [UserID], [AddressID], [IsDefault]) VALUES (44, 8, 42, 0)
+GO
+SET IDENTITY_INSERT [dbo].[User_Address] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Wishlist] ON 
 GO
 INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (9, 6, 24)
 GO
-INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (10, 6, 51)
-GO
 INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (12, 6, 23)
+GO
+INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (19, 6, 17)
+GO
+INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (20, 5, 23)
+GO
+INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (23, 8, 23)
+GO
+INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (24, 8, 17)
+GO
+INSERT [dbo].[Wishlist] ([ID], [UserID], [ProID]) VALUES (25, 8, 50)
 GO
 SET IDENTITY_INSERT [dbo].[Wishlist] OFF
 GO
@@ -876,25 +928,25 @@ REFERENCES [dbo].[User_Account] ([ID])
 GO
 ALTER TABLE [dbo].[Cart_Item] CHECK CONSTRAINT [FK_Cart_Item_User_Account]
 GO
-ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Address] FOREIGN KEY([ShippingAddress])
-REFERENCES [dbo].[Address] ([ID])
-GO
-ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Address]
-GO
 ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Order_Status] FOREIGN KEY([Status])
 REFERENCES [dbo].[Order_Status] ([ID])
 GO
 ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Order_Status]
 GO
-ALTER TABLE [dbo].[Order_Detail]  WITH CHECK ADD  CONSTRAINT [FK_Order_Detail_Cart_Item] FOREIGN KEY([CartItemID])
-REFERENCES [dbo].[Cart_Item] ([ID])
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_User_Account] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_Account] ([ID])
 GO
-ALTER TABLE [dbo].[Order_Detail] CHECK CONSTRAINT [FK_Order_Detail_Cart_Item]
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_User_Account]
 GO
-ALTER TABLE [dbo].[Order_Detail]  WITH CHECK ADD  CONSTRAINT [FK_Order_Detail_Order] FOREIGN KEY([OrderID])
+ALTER TABLE [dbo].[Order_Detail]  WITH CHECK ADD  CONSTRAINT [FK_Order_Detail_Order1] FOREIGN KEY([OrderID])
 REFERENCES [dbo].[Order] ([ID])
 GO
-ALTER TABLE [dbo].[Order_Detail] CHECK CONSTRAINT [FK_Order_Detail_Order]
+ALTER TABLE [dbo].[Order_Detail] CHECK CONSTRAINT [FK_Order_Detail_Order1]
+GO
+ALTER TABLE [dbo].[Order_Detail]  WITH CHECK ADD  CONSTRAINT [FK_Order_Detail_Product_Detail] FOREIGN KEY([ProDetailID])
+REFERENCES [dbo].[Product_Detail] ([ID])
+GO
+ALTER TABLE [dbo].[Order_Detail] CHECK CONSTRAINT [FK_Order_Detail_Product_Detail]
 GO
 ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Brand] FOREIGN KEY([BrandID])
 REFERENCES [dbo].[Brand] ([ID])
