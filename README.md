@@ -1,7 +1,8 @@
 # PRJ301-Shopping-Online-Website
-FE: JSP, HTML/CSS, Javascript, Bootstrap 3<br>
-BE: Java Servlet, SQL Server
-
-Homepage
+Front End: JSP, HTML/CSS, Javascript, Bootstrap 3<br>
+Back End: Java Servlet<br>
+Database: SQL Server<br>
+<br>
+Preview Image:<br>
 
 ![alt text](https://github.com/DuyDucLH/PRJ301-Shopping-Online-Website/blob/main/Resources/Homepage.png?raw=true)
